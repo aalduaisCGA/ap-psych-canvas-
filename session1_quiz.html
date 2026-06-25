@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 Quiz — History of Psychology and Perspectives</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s1quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 1</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">History of Psychology and Perspectives — Quiz</div>
+</div>
+
+<div id="s1-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s1-score-num">0</span> / 5 answered correctly &nbsp;|&nbsp; Attempted: <span id="s1-attempt-num">0</span> / 5
+</div>
+
+<div id="s1-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Psychodynamic perspective — repression",
+      stem: "A psychologist explains a client's social withdrawal by pointing to repressed childhood memories accessible only through dream analysis. Which perspective is this psychologist using?",
+      choices: ["Behavioral", "Psychodynamic", "Humanistic", "Sociocultural"],
+      correct: 1,
+      explain: "The psychodynamic perspective holds that the unconscious mind drives much of behavior, and that techniques like dream analysis can reveal repressed material."
+    },
+    {
+      title: "Biopsychological perspective — genetics and neurotransmitters",
+      stem: "A researcher attributes a person's outgoing personality to inherited genes that increase certain neurotransmitter levels in the brain. This explanation reflects which perspective?",
+      choices: ["Biopsychological", "Evolutionary", "Cognitive", "Psychodynamic"],
+      correct: 0,
+      explain: "The biopsychological perspective explains thought and behavior strictly in terms of biological processes such as genes, hormones, and neurotransmitters."
+    },
+    {
+      title: "Cognitive perspective — interpretation of events",
+      stem: "A therapist helps a client recognize that avoiding social events stems from interpreting invitations as threats rather than opportunities. Which perspective does this represent?",
+      choices: ["Behavioral", "Cognitive", "Biological", "Psychodynamic"],
+      correct: 1,
+      explain: "The cognitive perspective focuses on how people interpret, process, and remember events, and how those interpretations shape behavior."
+    },
+    {
+      title: "Evolutionary perspective — natural selection",
+      stem: "A psychologist argues that extraversion persisted across generations because outgoing individuals historically formed alliances that improved survival and reproduction. This is an example of which perspective?",
+      choices: ["Evolutionary", "Sociocultural", "Humanistic", "Behavioral"],
+      correct: 0,
+      explain: "The evolutionary perspective explains psychological traits in terms of natural selection — traits that aid survival and reproduction are passed on."
+    },
+    {
+      title: "Humanistic perspective — free will and choice",
+      stem: "Carl Rogers and Abraham Maslow emphasized free will and the idea that people actively choose behaviors to satisfy emotional and spiritual needs. This best describes which perspective?",
+      choices: ["Psychodynamic", "Humanistic", "Cognitive", "Biopsychological"],
+      correct: 1,
+      explain: "The humanistic perspective stresses individual choice and free will, contrasting with deterministic views like behaviorism."
+    }
+  ];
+
+  var container = document.getElementById('s1-questions');
+  var scoreNum = document.getElementById('s1-score-num');
+  var attemptNum = document.getElementById('s1-attempt-num');
+  var answered = {};
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var selected = null;
+    var locked = false;
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (locked) return;
+        selected = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var submitBtn = document.createElement('button');
+    submitBtn.textContent = 'Submit Answer';
+    submitBtn.style.marginTop = '6px';
+    submitBtn.style.padding = '8px 16px';
+    submitBtn.style.background = '#1b1f3b';
+    submitBtn.style.color = '#ffffff';
+    submitBtn.style.border = 'none';
+    submitBtn.style.borderRadius = '5px';
+    submitBtn.style.cursor = 'pointer';
+    submitBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+    submitBtn.style.fontSize = '13px';
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+
+    submitBtn.addEventListener('click', function(){
+      if (selected === null || locked) return;
+      locked = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Answer locked';
+      submitBtn.style.background = '#9a948a';
+      submitBtn.style.cursor = 'default';
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+        if (!answered[qIdx]) { scoreNum.textContent = parseInt(scoreNum.textContent) + 1; }
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+
+      if (!answered[qIdx]) {
+        answered[qIdx] = true;
+        attemptNum.textContent = parseInt(attemptNum.textContent) + 1;
+      }
+    });
+
+    card.appendChild(submitBtn);
+    card.appendChild(feedback);
+    container.appendChild(card);
+  });
+})();
+</script>
+
+</body>
+</html>

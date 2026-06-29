@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1-2 AAQ — Research Methods Application</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #2c5fa8;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+
+  body { font-family: 'Georgia','Times New Roman',serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 2rem 1rem 4rem; }
+  .wrap { max-width: 820px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .page-header { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 2px solid var(--border-strong); }
+  .eyebrow { font-family: 'Courier New',monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 26px; font-weight: normal; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 6px; }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+  .tag { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; display: inline-block; }
+  .tag-blue  { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  /* ── Score Dashboard ── */
+  .score-dash { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .score-main { display: flex; align-items: baseline; gap: 4px; }
+  .score-num  { font-family: 'Courier New',monospace; font-size: 32px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .score-denom { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 14px; color: var(--text3); }
+  .score-label { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .score-bars { flex: 1; min-width: 160px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .bar-lbl { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; color: var(--text3); min-width: 60px; }
+  .bar-track { flex: 1; height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .bar-fill  { height: 100%; border-radius: 3px; width: 0%; transition: width .4s ease; }
+  .bf-c { background: var(--correct); }
+  .bf-a { background: var(--amber); }
+  .bar-pct { font-family: 'Courier New',monospace; font-size: 11px; color: var(--text3); min-width: 34px; text-align: right; }
+  .chips { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .chip { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+  .chip-pts { background: var(--sp1-bg); color: var(--sp1); border: 1px solid rgba(26,86,160,0.25); }
+  .chip-sub { background: var(--bg2); color: var(--text2); border: 1px solid var(--border-strong); }
+
+  /* ── Scoring breakdown ── */
+  .instructions { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .inst-title { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: 10px; }
+  .inst-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 10px; }
+  .inst-item { background: var(--bg2); border-radius: 8px; padding: 10px 12px; }
+  .inst-item .ilabel { font-family: 'Courier New',monospace; font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+  .inst-item .itext  { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+  /* ── Article / Source card ── */
+  .article-wrap { margin-bottom: 24px; }
+  .article-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .article-section-label { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .10em; color: var(--text3); padding-bottom: 6px; border-bottom: 1px solid var(--border); flex: 1; }
+  .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+  .article-header { display: flex; align-items: center; gap: 12px; padding: 13px 16px; cursor: pointer; user-select: none; }
+  .article-badge { font-family: 'Courier New',monospace; font-size: 12px; font-weight: 700; background: var(--sp1-bg); color: var(--sp1); padding: 3px 10px; border-radius: 6px; white-space: nowrap; }
+  .article-name { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .article-toggle { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; color: var(--text3); white-space: nowrap; }
+  .article-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
+  .article-body.open { display: block; }
+
+  .art-section { margin-top: 14px; }
+  .art-section-label { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); margin-bottom: 6px; }
+  .art-text { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13.5px; line-height: 1.7; color: var(--text2); }
+  .art-text strong { color: var(--text); font-weight: 600; }
+
+  /* Data table */
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12.5px; }
+  .data-table th { background: var(--bg3); color: var(--text2); font-weight: 600; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border-strong); }
+  .data-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); color: var(--text2); }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* ── Section divider ── */
+  .q-section-title { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+
+  /* ── Part block ── */
+  .part-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; box-shadow: var(--shadow); overflow: hidden; transition: border-color .25s; }
+  .part-block.g-full    { border-color: var(--correct-border); }
+  .part-block.g-partial { border-color: var(--amber-border); }
+  .part-block.g-zero    { border-color: var(--wrong-border); }
+
+  .part-head { padding: 14px 16px 12px; }
+  .part-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .part-id   { font-family: 'Courier New',monospace; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--text3); background: var(--bg2); padding: 2px 8px; border-radius: 4px; }
+  .pts-badge { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; background: var(--amber-bg); color: var(--amber); }
+  .scored-badge { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; display: none; }
+  .scored-badge.show { display: inline-block; }
+  .s-full    { background: var(--correct-bg); color: var(--correct); }
+  .s-partial { background: var(--amber-bg); color: var(--amber); }
+  .s-zero    { background: var(--wrong-bg); color: var(--wrong); }
+
+  .part-prompt { font-size: 15px; line-height: 1.65; color: var(--text); margin-bottom: 8px; }
+  .part-hint   { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; color: var(--text3); font-style: italic; margin-bottom: 12px; line-height: 1.55; }
+
+  textarea { width: 100%; min-height: 88px; resize: vertical; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13.5px; line-height: 1.65; color: var(--text); background: var(--bg2); border: 1px solid var(--border-strong); border-radius: 8px; padding: 10px 12px; outline: none; transition: border-color .2s, background .2s; }
+  textarea:focus { border-color: var(--accent); background: var(--surface); }
+  textarea::placeholder { color: var(--text3); }
+  .char-count { font-family: 'Courier New',monospace; font-size: 11px; color: var(--text3); text-align: right; margin-top: 4px; }
+
+  /* Action row */
+  .action-row { padding: 10px 16px 14px; display: flex; gap: 10px; justify-content: flex-end; align-items: center; }
+  .note-text { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; color: var(--text3); flex: 1; font-style: italic; }
+  .btn { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 8px; cursor: pointer; transition: opacity .2s, transform .1s; border: none; }
+  .btn:active { transform: scale(0.97); }
+  .btn-grade { background: var(--accent); color: #fff; }
+  .btn-grade:hover { filter: brightness(1.1); }
+  .btn-grade:disabled { opacity: .4; cursor: default; }
+  .btn-retry { background: transparent; color: var(--text2); border: 1px solid var(--border-strong); display: none; }
+  .btn-retry.vis { display: inline-block; }
+  .btn-retry:hover { background: var(--bg2); }
+
+  /* Feedback */
+  .feedback { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; background: var(--bg); border-top: none; }
+  .feedback.open { max-height: 700px; padding: 14px 16px 16px; border-top: 1px solid var(--border); }
+  .fb-score { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .fb-num { font-family: 'Courier New',monospace; font-size: 22px; font-weight: 700; }
+  .fb-num.fc { color: var(--correct); }
+  .fb-num.fp { color: var(--amber); }
+  .fb-num.fz { color: var(--wrong); }
+  .fb-verdict { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text3); }
+  .fb-rubric { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; line-height: 1.65; color: var(--text2); margin-bottom: 10px; }
+  .fb-rubric em { font-style: italic; color: var(--text); }
+  .fb-model-label { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--correct); margin-bottom: 5px; }
+  .fb-model { font-family: 'Georgia',serif; font-size: 13px; line-height: 1.7; color: var(--text2); font-style: italic; background: var(--correct-bg); border-left: 3px solid var(--correct-border); padding: 9px 12px; border-radius: 0 6px 6px 0; }
+
+  /* Grade all button */
+  .grade-all-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin: 28px 0 0; box-shadow: var(--shadow); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .grade-all-text { font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 13px; color: var(--text2); flex: 1; }
+  .btn-all { background: var(--accent); color: #fff; font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 14px; font-weight: 600; padding: 10px 28px; border-radius: 8px; border: none; cursor: pointer; transition: filter .15s, transform .1s; }
+  .btn-all:hover { filter: brightness(1.1); }
+  .btn-all:active { transform: scale(.97); }
+
+  .page-footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border); font-family: 'Helvetica Neue',Arial,sans-serif; font-size: 12px; color: var(--text3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 1–2 · Science Practices</div>
+    <h1 class="page-title">Article Analysis Question — <em>Research Methods Application</em></h1>
+    <p class="page-desc">Read the research article carefully, then answer all six parts (A–F) in the text boxes below. Each part is graded against the official AP rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">7 points total</span>
+      <span class="tag tag-amber">25 min recommended (10 min reading + 15 min writing)</span>
+    </div>
+  </div>
+
+  <!-- Score Dashboard -->
+  <div class="score-dash">
+    <div>
+      <div class="score-main"><span class="score-num" id="snum">0</span><span class="score-denom"> / 7</span></div>
+      <div class="score-label">points earned</div>
+    </div>
+    <div class="score-bars">
+      <div class="bar-row"><span class="bar-lbl">Points earned</span><div class="bar-track"><div class="bar-fill bf-c" id="barc"></div></div><span class="bar-pct" id="pctc">0 / 7</span></div>
+      <div class="bar-row"><span class="bar-lbl">Parts graded</span><div class="bar-track"><div class="bar-fill bf-a" id="bara"></div></div><span class="bar-pct" id="pcta">0 / 6</span></div>
+    </div>
+    <div class="chips">
+      <span class="chip chip-pts" id="chip-pts">0 pts</span>
+      <span class="chip chip-sub" id="chip-sub">0 / 6 parts graded</span>
+    </div>
+  </div>
+
+  <!-- Scoring Breakdown -->
+  <div class="instructions">
+    <div class="inst-title">Scoring breakdown — 7 points total</div>
+    <div class="inst-grid">
+      <div class="inst-item"><div class="ilabel">Part A</div><div class="itext">1 pt — Identify the research method</div></div>
+      <div class="inst-item"><div class="ilabel">Part B</div><div class="itext">1 pt — State the operational definition of the DV</div></div>
+      <div class="inst-item"><div class="ilabel">Part C</div><div class="itext">1 pt — Interpret a key statistic from the results</div></div>
+      <div class="inst-item"><div class="ilabel">Part D</div><div class="itext">1 pt — Identify an ethical guideline from the study</div></div>
+      <div class="inst-item"><div class="ilabel">Part E</div><div class="itext">1 pt — Evaluate generalizability using participant evidence</div></div>
+      <div class="inst-item"><div class="ilabel">Part F</div><div class="itext">0–2 pts — Argue how results support or refute the hypothesis</div></div>
+    </div>
+  </div>
+
+  <!-- Article -->
+  <div class="article-wrap">
+    <div class="article-title-row">
+      <div class="article-section-label">Research Article — Read carefully before writing</div>
+    </div>
+    <div class="article-card">
+      <div class="article-header" onclick="toggleArticle()">
+        <span class="article-badge">SOURCE</span>
+        <span class="article-name">Does Sleep Duration During Adolescence Predict Academic Achievement and Well-Being? A Longitudinal Study</span>
+        <span class="article-toggle" id="art-tog">▼ expand</span>
+      </div>
+      <div class="article-body" id="art-body">
+
+        <div class="art-section">
+          <div class="art-section-label">Introduction</div>
+          <div class="art-text">Researchers have long hypothesized that chronic sleep deprivation impairs the cognitive processes necessary for academic achievement — including attention, working memory, and memory consolidation. However, most prior studies relied on self-reported sleep data, which is vulnerable to social desirability bias and inaccuracy. The present longitudinal study aimed to investigate whether <strong>objectively measured sleep duration</strong> predicts academic performance (GPA) and psychological well-being over a two-year period in high school students. Researchers hypothesized that students who averaged fewer than 7 hours of sleep per night would show significantly lower GPA and well-being scores than students who averaged 8 or more hours.</div>
+        </div>
+
+        <div class="art-section">
+          <div class="art-section-label">Participants</div>
+          <div class="art-text">Participants were <strong>412 students</strong> enrolled in grades 9–11 at two public high schools in the Pacific Northwest. Of these, <strong>51% identified as female</strong>, <strong>49% as male</strong>. Racial/ethnic composition: <strong>61% White</strong>, <strong>14% Hispanic/Latino</strong>, <strong>12% Asian</strong>, <strong>8% Black/African American</strong>, and <strong>5% other/multiracial</strong>. Students with a diagnosed sleep disorder were excluded. <strong>Parental informed consent</strong> and <strong>student informed assent</strong> were obtained before participation. All participation was voluntary, and students received no academic credit or grade penalty for participation or non-participation.</div>
+        </div>
+
+        <div class="art-section">
+          <div class="art-section-label">Method</div>
+          <div class="art-text">Students wore <strong>actigraphy wristbands</strong> (which detect movement patterns to infer sleep/wake cycles) for 21 consecutive school days at the start of each academic year. Based on average nightly sleep duration, students were classified into two naturally occurring groups: <strong>Short Sleepers (SS)</strong> — fewer than 7 hours per night (n = 178) — and <strong>Adequate Sleepers (AS)</strong> — 8 or more hours per night (n = 234). Because students were not randomly assigned to these groups (their sleep patterns occurred naturally), this study used a <strong>quasi-experimental (ex post facto) design</strong>.</div>
+          <div class="art-text" style="margin-top:8px">Academic performance was operationally defined as the student's <strong>official end-of-semester GPA</strong> (0.0–4.0 scale), collected from school administrative records at the end of each academic year. Psychological well-being was measured using the validated <strong>Warwick-Edinburgh Mental Well-Being Scale (WEMWBS)</strong>, a 14-item self-report questionnaire with scores ranging from 14 to 70; higher scores indicate greater well-being.</div>
+          <div class="art-text" style="margin-top:8px">All data were collected at two time points: <strong>Year 1</strong> (baseline) and <strong>Year 2</strong> (follow-up). Students were debriefed at the conclusion of Year 2 and informed of the study's full purpose.</div>
+        </div>
+
+        <div class="art-section">
+          <div class="art-section-label">Results &amp; Discussion</div>
+          <div class="art-text">At Year 1, Short Sleepers had significantly lower GPAs (M = 2.68, SD = 0.61) than Adequate Sleepers (M = 3.31, SD = 0.54), t(410) = 11.24, p &lt; .001, d = 1.09. This difference persisted at Year 2 (SS: M = 2.72; AS: M = 3.35), t(410) = 11.78, p &lt; .001.</div>
+          <div class="art-text" style="margin-top:8px">Short Sleepers also reported significantly lower well-being scores at Year 1 (M = 43.1) than Adequate Sleepers (M = 54.8), p &lt; .001. The GPA difference was consistent across gender and racial/ethnic subgroups within the sample.</div>
+          <div class="art-text" style="margin-top:8px">The researchers acknowledged a key limitation: because students were <strong>not randomly assigned</strong> to sleep groups, pre-existing differences (e.g., family stress, screen time habits) may explain part of the GPA difference. Causal conclusions are therefore limited. Nonetheless, the researchers concluded that the data are <strong>consistent with the hypothesis</strong> that inadequate sleep is associated with lower academic achievement and well-being in adolescents.</div>
+        </div>
+
+        <div class="art-section">
+          <div class="art-section-label">Key Data Table</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Measure</th>
+                <th>Short Sleepers (&lt;7 hrs)</th>
+                <th>Adequate Sleepers (≥8 hrs)</th>
+                <th>Significance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Year 1 GPA (mean)</td><td>2.68</td><td>3.31</td><td>p &lt; .001, d = 1.09</td></tr>
+              <tr><td>Year 2 GPA (mean)</td><td>2.72</td><td>3.35</td><td>p &lt; .001</td></tr>
+              <tr><td>Year 1 WEMWBS (mean)</td><td>43.1</td><td>54.8</td><td>p &lt; .001</td></tr>
+              <tr><td>Sample size</td><td>n = 178</td><td>n = 234</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ QUESTIONS ═══════════ -->
+  <div class="q-section-title">Your Responses — Answer all 6 parts</div>
+
+  <!-- Part A -->
+  <div class="part-block" id="blk-A">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part A</span>
+        <span class="pts-badge">1 point — Research Method</span>
+        <span class="scored-badge" id="sb-A"></span>
+      </div>
+      <div class="part-prompt"><strong>(A)</strong> Identify the research method used in this study.</div>
+      <div class="part-hint">Name the method and briefly justify your identification with one feature of the study. Note: the method here is more nuanced than a simple "experiment" — read carefully.</div>
+      <textarea id="ta-A" placeholder="State the research method and explain how you identified it from the article…" oninput="cc('A')"></textarea>
+      <div class="char-count" id="cc-A">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-A"></span>
+      <button class="btn btn-retry" id="retry-A" onclick="retry('A')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-A" onclick="gradeA()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-A"></div>
+  </div>
+
+  <!-- Part B -->
+  <div class="part-block" id="blk-B">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part B</span>
+        <span class="pts-badge">1 point — Operational Definition</span>
+        <span class="scored-badge" id="sb-B"></span>
+      </div>
+      <div class="part-prompt"><strong>(B)</strong> State the operational definition of <em>academic performance</em> as used in this study.</div>
+      <div class="part-hint">An operational definition is how the variable is <em>measured</em> in this specific study — not what it means conceptually. Find the exact measurement tool or procedure described in the article.</div>
+      <textarea id="ta-B" placeholder="Describe exactly how academic performance was measured in this study…" oninput="cc('B')"></textarea>
+      <div class="char-count" id="cc-B">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-B"></span>
+      <button class="btn btn-retry" id="retry-B" onclick="retry('B')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-B" onclick="gradeB()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-B"></div>
+  </div>
+
+  <!-- Part C -->
+  <div class="part-block" id="blk-C">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part C</span>
+        <span class="pts-badge">1 point — Statistic Interpretation</span>
+        <span class="scored-badge" id="sb-C"></span>
+      </div>
+      <div class="part-prompt"><strong>(C)</strong> Describe the meaning of the difference in Year 1 GPA means between the Short Sleepers (M = 2.68) and Adequate Sleepers (M = 3.31) in relation to this study.</div>
+      <div class="part-hint">Don't just restate the numbers — explain what the difference <em>means</em> in the context of the study's research question. A response that only repeats the means without interpretation earns 0 points.</div>
+      <textarea id="ta-C" placeholder="Explain what the difference between the two means tells us about the study's findings…" oninput="cc('C')"></textarea>
+      <div class="char-count" id="cc-C">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-C"></span>
+      <button class="btn btn-retry" id="retry-C" onclick="retry('C')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-C" onclick="gradeC()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-C"></div>
+  </div>
+
+  <!-- Part D -->
+  <div class="part-block" id="blk-D">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part D</span>
+        <span class="pts-badge">1 point — Ethical Guidelines</span>
+        <span class="scored-badge" id="sb-D"></span>
+      </div>
+      <div class="part-prompt"><strong>(D)</strong> Identify at least one ethical guideline that the researchers applied in this study.</div>
+      <div class="part-hint">The ethical guideline must be one that is explicitly mentioned or clearly evidenced in the article — not one you think they should have applied but didn't. Name the principle and cite where in the article it appears.</div>
+      <textarea id="ta-D" placeholder="Name an APA ethical principle and explain where/how it appears in the article…" oninput="cc('D')"></textarea>
+      <div class="char-count" id="cc-D">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-D"></span>
+      <button class="btn btn-retry" id="retry-D" onclick="retry('D')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-D" onclick="gradeD()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-D"></div>
+  </div>
+
+  <!-- Part E -->
+  <div class="part-block" id="blk-E">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part E</span>
+        <span class="pts-badge">1 point — Generalizability</span>
+        <span class="scored-badge" id="sb-E"></span>
+      </div>
+      <div class="part-prompt"><strong>(E)</strong> Explain the extent to which the research findings may or may not be generalizable, using specific and relevant evidence from the participant information in the article.</div>
+      <div class="part-hint">Your answer must: (1) take a clear position on generalizability, (2) reference a specific population, and (3) cite specific participant-related evidence from the article. Simply saying "the sample was large" without linking it to a population earns 0 points.</div>
+      <textarea id="ta-E" placeholder="State your generalizability position and support it with specific participant details from the article…" oninput="cc('E')" style="min-height:100px"></textarea>
+      <div class="char-count" id="cc-E">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-E"></span>
+      <button class="btn btn-retry" id="retry-E" onclick="retry('E')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-E" onclick="gradeE()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-E"></div>
+  </div>
+
+  <!-- Part F -->
+  <div class="part-block" id="blk-F">
+    <div class="part-head">
+      <div class="part-meta">
+        <span class="part-id">Part F</span>
+        <span class="pts-badge">0–2 points — Argumentation</span>
+        <span class="scored-badge" id="sb-F"></span>
+      </div>
+      <div class="part-prompt"><strong>(F)</strong> Explain how at least one of the research findings supports or refutes the researchers' hypothesis that <em>students who averaged fewer than 7 hours of sleep per night would show significantly lower GPA and well-being scores than students who averaged 8 or more hours.</em></div>
+      <div class="part-hint">1 point: Uses a result from the study without a complete explanation. 2 points: Uses a specific result AND provides an accurate, complete explanation of how that result supports or refutes the hypothesis. Simply stating "the results support the hypothesis" without evidence earns 0 points.</div>
+      <textarea id="ta-F" placeholder="Use at least one specific result from the study and explain how it supports or refutes the hypothesis…" style="min-height:120px" oninput="cc('F')"></textarea>
+      <div class="char-count" id="cc-F">0 characters</div>
+    </div>
+    <div class="action-row">
+      <span class="note-text" id="note-F"></span>
+      <button class="btn btn-retry" id="retry-F" onclick="retry('F')" style="display:none">Revise &amp; resubmit</button>
+      <button class="btn btn-grade" id="grade-F" onclick="gradeF()">Grade this part</button>
+    </div>
+    <div class="feedback" id="fb-F"></div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all six parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 1–2 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  // ── State ──
+  const scores = { A: null, B: null, C: null, D: null, E: null, F: null };
+  const maxPts = { A: 1, B: 1, C: 1, D: 1, E: 1, F: 2 };
+
+  function totalScore()  { return Object.values(scores).reduce((a,v) => a + (v !== null ? v : 0), 0); }
+  function gradedCount() { return Object.values(scores).filter(v => v !== null).length; }
+
+  // ── Article toggle ──
+  function toggleArticle() {
+    const body = document.getElementById('art-body');
+    const tog  = document.getElementById('art-tog');
+    const open = body.classList.toggle('open');
+    tog.textContent = open ? '▲ collapse' : '▼ expand';
+  }
+
+  // ── Char counter ──
+  function cc(p) {
+    const ta = document.getElementById('ta-' + p);
+    document.getElementById('cc-' + p).textContent = ta.value.length + ' characters';
+  }
+
+  // ── Retry ──
+  function retry(p) {
+    scores[p] = null;
+    ['fb-','blk-','sb-'].forEach(() => {});
+    const fb    = document.getElementById('fb-' + p);
+    const sb    = document.getElementById('sb-' + p);
+    const blk   = document.getElementById('blk-' + p);
+    const retBtn = document.getElementById('retry-' + p);
+    const grdBtn = document.getElementById('grade-' + p);
+    const note  = document.getElementById('note-' + p);
+    fb.classList.remove('open'); fb.innerHTML = '';
+    sb.classList.remove('show','s-full','s-partial','s-zero');
+    blk.classList.remove('g-full','g-partial','g-zero');
+    retBtn.style.display = 'none';
+    grdBtn.disabled = false;
+    note.textContent = '';
+    updateDash();
+  }
+
+  // ── Render feedback ──
+  function render(p, pts, max, reasoning, model) {
+    scores[p] = pts;
+    const fb    = document.getElementById('fb-' + p);
+    const sb    = document.getElementById('sb-' + p);
+    const blk   = document.getElementById('blk-' + p);
+    const retBtn = document.getElementById('retry-' + p);
+    const grdBtn = document.getElementById('grade-' + p);
+    const note  = document.getElementById('note-' + p);
+
+    const numCls  = pts === max ? 'fc' : pts > 0 ? 'fp' : 'fz';
+    const sBadge  = pts === max ? 's-full' : pts > 0 ? 's-partial' : 's-zero';
+    const blkCls  = pts === max ? 'g-full' : pts > 0 ? 'g-partial' : 'g-zero';
+    const verdict = pts === max ? '✓ Full marks' : pts > 0 ? '◑ Partial credit' : '✗ No credit';
+
+    sb.textContent = pts + '/' + max + ' pts';
+    sb.className = 'scored-badge show ' + sBadge;
+    blk.className = 'part-block ' + blkCls;
+
+    fb.innerHTML = `
+      <div class="fb-score">
+        <span class="fb-num ${numCls}">${pts} / ${max}</span>
+        <span class="fb-verdict">${verdict}</span>
+      </div>
+      <div class="fb-rubric">${reasoning}</div>
+      <div class="fb-model-label">Model answer</div>
+      <div class="fb-model">${model}</div>
+    `;
+    fb.classList.add('open');
+    grdBtn.disabled = true;
+    retBtn.style.display = 'inline-block';
+    note.textContent = 'Revise your answer and resubmit to update your score.';
+    updateDash();
+  }
+
+  function updateDash() {
+    const pts = totalScore(), grd = gradedCount();
+    document.getElementById('snum').textContent      = pts;
+    document.getElementById('chip-pts').textContent  = pts + ' pts';
+    document.getElementById('chip-sub').textContent  = grd + ' / 6 parts graded';
+    const cp = Math.round(pts / 7 * 100), ap = Math.round(grd / 6 * 100);
+    document.getElementById('barc').style.width = cp + '%';
+    document.getElementById('bara').style.width = ap + '%';
+    document.getElementById('pctc').textContent = pts + ' / 7';
+    document.getElementById('pcta').textContent = grd + ' / 6';
+  }
+
+  function gradeAll() {
+    ['A','B','C','D','E','F'].forEach(p => {
+      if (scores[p] === null) {
+        const fns = { A: gradeA, B: gradeB, C: gradeC, D: gradeD, E: gradeE, F: gradeF };
+        fns[p]();
+      }
+    });
+  }
+
+  // ════════════════════════════════════════
+  // GRADING FUNCTIONS
+  // ════════════════════════════════════════
+
+  function gradeA() {
+    const text = document.getElementById('ta-A').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Key concepts: quasi-experimental, ex post facto, NOT a true experiment (no random assignment)
+    const hasQE    = low.includes('quasi') || low.includes('ex post facto') || low.includes('ex-post');
+    const hasExpWrong = (low.includes('experiment') && !low.includes('quasi') && !low.includes('ex post') && !low.includes('not') && !low.includes('correlat'));
+    const hasCorrelat = low.includes('correlat') || low.includes('survey');
+    const hasNatObs   = low.includes('naturalistic');
+    const noRandom    = low.includes('not random') || low.includes('no random') || low.includes('were not randomly') || low.includes('did not randomly') || low.includes('naturally occurring') || low.includes('pre-existing');
+
+    if (hasQE) {
+      pts = 1;
+      reasoning = 'Correct — this study used a <em>quasi-experimental (ex post facto)</em> design. The researchers measured an independent variable (sleep group) and a dependent variable (GPA/well-being), but students were NOT randomly assigned to groups — they were classified based on their natural sleep patterns. This prevents it from being a true experiment.';
+    } else if (hasExpWrong && !noRandom) {
+      pts = 0;
+      reasoning = 'A true experiment requires <em>random assignment</em> of participants to conditions. In this study, students were classified based on their <em>existing</em> sleep habits — they were not assigned to a short-sleep or adequate-sleep condition. The correct method is a <em>quasi-experimental</em> or <em>ex post facto</em> design.';
+    } else if (hasCorrelat || hasNatObs) {
+      pts = 0;
+      reasoning = 'This is not a pure correlational or naturalistic observation study — the researchers are comparing two groups (Short Sleepers vs. Adequate Sleepers) on measured outcomes, which is closer to a quasi-experimental design. The correct method is <em>quasi-experimental (ex post facto)</em>: it resembles an experiment but lacks random assignment.';
+    } else if (noRandom && !hasQE) {
+      pts = 1;
+      reasoning = 'You correctly noted the key feature — participants were not randomly assigned, which distinguishes this from a true experiment. The precise term for this design is <em>quasi-experimental</em> or <em>ex post facto</em>. You would earn full credit; naming the method precisely strengthens your answer.';
+    } else {
+      pts = 0;
+      reasoning = 'The response does not accurately identify the research method. This study used a <em>quasi-experimental (ex post facto) design</em> — it resembles an experiment (two groups, measured outcomes) but lacks random assignment because sleep groups were based on natural behavior, not manipulation.';
+    }
+
+    model = 'This study used a quasi-experimental (ex post facto) design. I know this because the researchers compared two groups (Short Sleepers vs. Adequate Sleepers) on GPA and well-being, but students were NOT randomly assigned to these groups — they were classified based on their naturally occurring sleep patterns, which is the defining feature of a quasi-experimental design.';
+    render('A', pts, 1, reasoning, model);
+  }
+
+  function gradeB() {
+    const text = document.getElementById('ta-B').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Correct: official end-of-semester GPA, 0.0–4.0 scale, from administrative records
+    const hasGPA    = low.includes('gpa') || low.includes('grade point') || low.includes('grades');
+    const hasSpecific = low.includes('official') || low.includes('semester') || low.includes('administrative') || low.includes('record') || low.includes('0.0') || low.includes('4.0') || low.includes('scale') || low.includes('end of') || low.includes('school record');
+    const isVague   = !hasGPA || (!hasSpecific && text.split(' ').length < 12);
+    const hasConcept = low.includes('academic performance means') || low.includes('ability to') || (low.includes('gpa') && text.split(' ').length < 8);
+
+    if (hasGPA && hasSpecific) {
+      pts = 1;
+      reasoning = 'Correct — you identified the specific, measurable definition of academic performance used in this study: the official end-of-semester GPA on a 0.0–4.0 scale collected from school administrative records. This is a precise operational definition because it names the measurement instrument and procedure.';
+    } else if (hasGPA && !hasSpecific) {
+      pts = 0;
+      reasoning = 'You identified GPA, but the operational definition requires more specificity — namely, that it was the <em>official end-of-semester GPA</em> on a <em>0.0–4.0 scale</em> collected from <em>school administrative records</em>. A response that just says "GPA" without specifying how it was measured and collected is not a complete operational definition.';
+    } else if (hasConcept) {
+      pts = 0;
+      reasoning = 'The response offers a conceptual definition of academic performance rather than an operational one. An operational definition specifies exactly <em>how the variable is measured</em> in this particular study — not what the concept means generally.';
+    } else {
+      pts = 0;
+      reasoning = 'The response does not state a measurable or quantifiable definition of the variable. The operational definition of academic performance in this study is: the student\'s <em>official end-of-semester GPA</em> on a 0.0–4.0 scale, collected from school administrative records at the end of each academic year.';
+    }
+
+    model = 'In this study, academic performance was operationally defined as the student\'s official end-of-semester GPA on a 0.0–4.0 scale, collected from school administrative records at the end of each academic year.';
+    render('B', pts, 1, reasoning, model);
+  }
+
+  function gradeC() {
+    const text = document.getElementById('ta-C').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Must explain what the difference means — not just restate the numbers
+    const restatesOnly = (low.includes('2.68') || low.includes('2.7')) && (low.includes('3.31') || low.includes('3.3')) && !low.includes('means that') && !low.includes('shows that') && !low.includes('indicates') && !low.includes('higher') && !low.includes('lower') && !low.includes('better') && !low.includes('worse') && !low.includes('performed') && !low.includes('scored') && text.split(' ').length < 20;
+    const hasInterpretation = low.includes('higher') || low.includes('lower') || low.includes('better') || low.includes('worse') || low.includes('outperform') || low.includes('performed better') || low.includes('performed worse') || low.includes('adequate sleeper') || low.includes('short sleeper') || low.includes('scored higher') || low.includes('scored lower') || low.includes('academic') || low.includes('achieve');
+    const linksToStudy = low.includes('sleep') || low.includes('hypothesis') || low.includes('study') || low.includes('research') || low.includes('finding') || low.includes('result') || low.includes('suggests') || low.includes('indicates');
+
+    if (!restatesOnly && hasInterpretation && linksToStudy) {
+      pts = 1;
+      reasoning = 'Correct — you accurately described what the difference in means tells us in relation to the study: that Adequate Sleepers achieved meaningfully higher GPAs than Short Sleepers, which is the key finding relevant to the hypothesis.';
+    } else if (restatesOnly) {
+      pts = 0;
+      reasoning = 'The response restates the mean values but does not explain what the difference <em>means</em> in relation to the study. The AP rubric requires you to interpret the statistic — e.g., "Adequate Sleepers had higher GPAs than Short Sleepers, suggesting that more sleep is associated with better academic performance."';
+    } else if (!hasInterpretation) {
+      pts = 0;
+      reasoning = 'The response does not accurately describe the meaning of the difference. You need to explain what the difference between the two group means tells us — specifically, that students who got adequate sleep achieved substantially higher GPAs (M = 3.31 vs. M = 2.68) than those who were sleep-deprived.';
+    } else {
+      pts = 1;
+      reasoning = 'Your interpretation is accurate — the means show a clear academic performance advantage for Adequate Sleepers.';
+    }
+
+    model = 'The means show that Adequate Sleepers achieved substantially higher GPAs (M = 3.31) than Short Sleepers (M = 2.68), meaning that students who regularly obtained 8 or more hours of sleep performed better academically than those who slept fewer than 7 hours per night.';
+    render('C', pts, 1, reasoning, model);
+  }
+
+  function gradeD() {
+    const text = document.getElementById('ta-D').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Principles evidenced in the article: informed consent, informed assent, voluntary participation (no coercion), protection from harm (no sleep manipulation), debriefing
+    const hasConsent   = low.includes('consent') || low.includes('assent');
+    const hasVoluntary = low.includes('voluntar') || low.includes('coercion') || low.includes('no penalty') || low.includes('no credit') || low.includes('no grade');
+    const hasDebrief   = low.includes('debrief');
+    const hasHarm      = low.includes('harm') || low.includes('no manipulation') || low.includes('not manipulate') || low.includes('naturalistic') || low.includes('existing');
+    const hasNotInArticle = low.includes('anonymity') || low.includes('confidentiali') || (low.includes('deception') && !hasDebrief);
+
+    const validPrinciple = hasConsent || hasVoluntary || hasDebrief || hasHarm;
+
+    if (validPrinciple && !hasNotInArticle) {
+      pts = 1;
+      if (hasConsent) reasoning = 'Correct — the article explicitly states that <em>parental informed consent</em> and <em>student informed assent</em> were obtained before participation. This is a clearly evidenced APA ethical guideline. Informed assent for minors plus parental consent is required under APA guidelines.';
+      else if (hasVoluntary) reasoning = 'Correct — the article states that participation was voluntary and that students received "no academic credit or grade penalty for participation or non-participation," which demonstrates the APA principle of <em>no coercion</em>.';
+      else if (hasDebrief) reasoning = 'Correct — the article states that students were <em>debriefed</em> at the conclusion of Year 2, which is an APA ethical requirement. Debriefing informs participants of the study\'s true purpose after completion.';
+      else reasoning = 'Correct — students were not manipulated into sleeping less (their natural sleep patterns were observed), which reflects <em>protection from harm</em>. This is a valid ethical consideration evidenced by the study design.';
+    } else if (hasNotInArticle) {
+      pts = 0;
+      reasoning = 'The ethical principle you identified (confidentiality/anonymity or deception) is not explicitly evidenced in this article. The AP rubric requires you to identify a guideline that is <em>applied in this study</em> — meaning it must be mentioned or clearly evidenced in the article. Ethical principles that should have been applied but are not mentioned do not earn credit.';
+    } else {
+      pts = 0;
+      reasoning = 'No valid APA ethical guideline was identified from this study. The article clearly states: (1) <em>parental informed consent</em> and <em>student informed assent</em> were obtained; (2) participation was <em>voluntary</em> with no grade penalties; (3) students were <em>debriefed</em> at Year 2\'s end. Any of these would earn the point.';
+    }
+
+    model = 'The researchers applied the ethical guideline of informed consent and informed assent — the article states that parental informed consent and student informed assent were obtained before participation. Because participants were minors, both the students\' assent and their parents\' consent were required under APA guidelines.';
+    render('D', pts, 1, reasoning, model);
+  }
+
+  function gradeE() {
+    const text = document.getElementById('ta-E').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Rubric: must (1) make a claim about generalizability, (2) reference a specific population, (3) use specific participant evidence
+    const hasClaim = low.includes('generaliz') || low.includes('can be applied') || low.includes('cannot be applied') || low.includes('may not') || low.includes('can apply') || low.includes('limited');
+    const hasPopulation = low.includes('high school') || low.includes('adolescent') || low.includes('student') || low.includes('pacific northwest') || low.includes('grade 9') || low.includes('grade 10') || low.includes('grade 11') || low.includes('all students') || low.includes('us students') || low.includes('teenagers') || low.includes('9th') || low.includes('10th') || low.includes('11th');
+    const hasEvidence  = low.includes('51%') || low.includes('49%') || low.includes('412') || low.includes('pacific northwest') || low.includes('two school') || low.includes('61%') || low.includes('white') || low.includes('both school') || low.includes('gender') || low.includes('racial') || low.includes('diverse') || low.includes('male') || low.includes('female') || low.includes('grade') || low.includes('two public');
+    const hasVagueClaim = hasClaim && !hasPopulation && !hasEvidence;
+
+    if (hasClaim && hasPopulation && hasEvidence) {
+      pts = 1;
+      reasoning = 'Correct — you made a clear generalizability claim, referenced a specific population, and supported it with participant evidence from the article. The rubric requires all three elements: a position, a named population, and specific participant details.';
+    } else if (hasClaim && (hasPopulation || hasEvidence) && !hasVagueClaim) {
+      pts = 0;
+      reasoning = 'Your response makes a generalizability claim and references a population or evidence, but does not include both. To earn the point, the response must: (1) take a clear position on generalizability, (2) name a specific population, and (3) use specific participant evidence from the article (e.g., demographic breakdown, grade levels, school location, sample size).';
+    } else if (hasVagueClaim) {
+      pts = 0;
+      reasoning = 'The claim is too vague — "the study is generalizable to the larger population" without specifying which population and citing participant evidence earns 0 points. The rubric requires a specific population AND evidence from the participant section.';
+    } else {
+      pts = 0;
+      reasoning = 'No generalizability claim with supporting participant evidence was found. You must: (1) state whether the study is or is not generalizable, (2) name the specific population (e.g., "high school students in the Pacific Northwest" or "all U.S. adolescents"), and (3) cite specific participant details from the article to justify your position.';
+    }
+
+    model = 'The findings may be generalizable to high school students in grades 9–11 in the Pacific Northwest, as the sample consisted of 412 students from two public schools in that region, with a relatively diverse racial/ethnic composition (61% White, 14% Hispanic, 12% Asian, 8% Black) and a near-equal gender split (51% female, 49% male). However, the results may have limited generalizability to high school students in other regions of the United States or in private schools, since both schools were public and located in the same geographic area.';
+    render('E', pts, 1, reasoning, model);
+  }
+
+  function gradeF() {
+    const text = document.getElementById('ta-F').value.trim();
+    if (!text) { alert('Please write a response before grading.'); return; }
+    const low = text.toLowerCase();
+    let pts = 0, reasoning = '', model = '';
+
+    // Rubric: 0 = no result used, no explanation; 1 = uses result but no complete explanation; 2 = uses result AND complete explanation
+    const hasResult = /2\.6|2\.7|3\.3|3\.1|43\.1|54\.8|p\s*<|significant|d\s*=|mean|gpa|well.being|wemwbs/.test(low) || low.includes('year 1') || low.includes('year 2') || low.includes('adequate sleeper') || low.includes('short sleeper') || low.includes('higher gpa') || low.includes('lower gpa') || low.includes('lower well-being') || low.includes('higher well-being');
+    const hasExplanation = (low.includes('because') || low.includes('therefore') || low.includes('this shows') || low.includes('this means') || low.includes('this supports') || low.includes('this refutes') || low.includes('which supports') || low.includes('demonstrat') || low.includes('thus') || low.includes('consistent with') || low.includes('explains')) && text.split(' ').length > 25;
+    const hasHypothesisLink = low.includes('hypothesis') || low.includes('fewer than 7') || low.includes('8 or more') || low.includes('prediction') || low.includes('predicted') || low.includes('proposed') || low.includes('expected') || low.includes('support') || low.includes('refute') || low.includes('confirm');
+
+    if (hasResult && hasExplanation && hasHypothesisLink) {
+      pts = 2;
+      reasoning = 'Full credit — you used at least one specific result from the study AND provided a complete, accurate explanation of how that result supports or refutes the researchers\' hypothesis. This is exactly what earns 2 points on the AP rubric.';
+    } else if (hasResult && !hasExplanation) {
+      pts = 1;
+      reasoning = '1 point — you used a result from the study, but the explanation of how it supports or refutes the hypothesis is incomplete or missing. To earn the second point, you need to explain <em>why</em> the result supports (or refutes) the hypothesis — not just state that it does.';
+    } else if (!hasResult && hasExplanation) {
+      pts = 1;
+      reasoning = '1 point — you provided an explanation but did not cite a specific result from the study. To earn the second point, include at least one specific finding (e.g., mean GPA values, well-being scores, effect size) and explain how it connects to the hypothesis.';
+    } else if (!hasResult && !hasExplanation) {
+      pts = 0;
+      reasoning = 'No credit — the response does not use any specific result from the study, and does not provide an explanation of how findings relate to the hypothesis. Stating "the results support the hypothesis" without evidence or explanation earns 0 points on the AP rubric.';
+    } else {
+      pts = 1;
+      reasoning = 'Partial credit — you have some elements of a good response. To earn full marks, make sure you: (1) cite a specific statistic or finding (e.g., Year 1 GPA means), and (2) explicitly explain how that finding supports or refutes the hypothesis that &lt;7 hours of sleep predicts lower GPA and well-being.';
+    }
+
+    model = 'The results support the researchers\' hypothesis. The hypothesis predicted that Short Sleepers (fewer than 7 hrs) would show significantly lower GPA and well-being than Adequate Sleepers (8+ hrs). At Year 1, Short Sleepers had a mean GPA of 2.68 compared to 3.31 for Adequate Sleepers — a large, statistically significant difference (p &lt; .001, d = 1.09). Well-being scores followed the same pattern (43.1 vs. 54.8, p &lt; .001). Both findings are in exactly the direction the hypothesis predicted, providing consistent support for the claim that inadequate sleep is associated with lower academic achievement and psychological well-being in adolescents.';
+    render('F', pts, 2, reasoning, model);
+  }
+</script>
+</body>
+</html>

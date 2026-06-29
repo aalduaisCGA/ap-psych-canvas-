@@ -23,7 +23,7 @@
 </div>
 
 <div id="s1-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
-Score: <span id="s1-score-num">0</span> / 5 answered correctly &nbsp;|&nbsp; Attempted: <span id="s1-attempt-num">0</span> / 5
+Score: <span id="s1-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s1-attempt-num">0</span> / 10
 </div>
 
 <div id="s1-questions"></div>
@@ -71,13 +71,56 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
       choices: ["Psychodynamic", "Humanistic", "Cognitive", "Biopsychological"],
       correct: 1,
       explain: "The humanistic perspective stresses individual choice and free will, contrasting with deterministic views like behaviorism."
+    },
+    {
+      title: "Behavioral perspective — learned responses",
+      stem: "A psychologist explains a child's fear of dogs entirely as the result of a past incident in which a loud noise occurred every time a dog was nearby, with no reference to thoughts, feelings, or biology. Which perspective is being used?",
+      choices: ["Behavioral", "Cognitive", "Humanistic", "Psychodynamic"],
+      correct: 0,
+      explain: "The behavioral perspective explains behavior strictly through learning and conditioning — associations between stimuli and responses — without appealing to internal mental states."
+    },
+    {
+      title: "Sociocultural perspective — cultural norms",
+      stem: "A researcher studying personal space notices that people from different cultures maintain different distances during conversation, and explains the behavior in terms of each culture's norms and expectations. Which perspective is this?",
+      choices: ["Biopsychosocial", "Sociocultural", "Evolutionary", "Psychodynamic"],
+      correct: 1,
+      explain: "The sociocultural perspective explains behavior in terms of the social and cultural context a person is embedded in, including norms, customs, and group expectations."
+    },
+    {
+      title: "Biopsychosocial perspective — multiple factors at once",
+      stem: "A clinician treating a patient's anxiety considers the patient's genetic predisposition, learned thought patterns, and the support available from family and community, combining all three rather than focusing on just one cause. This approach best reflects which perspective?",
+      choices: ["Eclectic", "Biopsychosocial", "Evolutionary", "Sociocultural"],
+      correct: 1,
+      explain: "The biopsychosocial perspective explicitly integrates biological, psychological, and social factors together to explain behavior, rather than treating them as separate competing explanations."
+    },
+    {
+      title: "Eclectic approach — combining perspectives as needed",
+      stem: "A psychologist freely draws on cognitive, biological, and behavioral explanations depending on which best fits a given case, without committing permanently to one school of thought. This psychologist is best described as",
+      choices: ["Reductionistic", "Eclectic", "Deterministic", "Sociocultural"],
+      correct: 1,
+      explain: "Psychologists who are eclectic are not committed to one single perspective; instead, they select whichever perspective or combination of perspectives best explains the case at hand."
+    },
+    {
+      title: "Matching perspectives to core assumptions",
+      stem: "Which pairing of perspective and core assumption is correctly matched?",
+      choices: [
+        "Behavioral — unconscious conflicts drive behavior",
+        "Cognitive — behavior is shaped strictly by reinforcement history",
+        "Evolutionary — traits that aided survival and reproduction are passed to offspring",
+        "Humanistic — thought and behavior are explained by neurotransmitter activity"
+      ],
+      correct: 2,
+      explain: "The evolutionary perspective's core assumption is that psychological traits persist across generations because they historically improved survival and reproductive success. The other pairings mismatch the perspective with an assumption belonging to a different one."
     }
   ];
 
   var container = document.getElementById('s1-questions');
   var scoreNum = document.getElementById('s1-score-num');
   var attemptNum = document.getElementById('s1-attempt-num');
-  var answered = {};
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
 
   qs.forEach(function(q, qIdx){
     var card = document.createElement('div');
@@ -97,8 +140,6 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
     card.appendChild(stemEl);
 
     var choiceWrap = document.createElement('div');
-    var selected = null;
-    var locked = false;
     var letters = ['A','B','C','D'];
     var choiceEls = [];
 
@@ -116,8 +157,8 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
       btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
 
       btn.addEventListener('click', function(){
-        if (locked) return;
-        selected = cIdx;
+        if (submitted) return;
+        selections[qIdx] = cIdx;
         choiceEls.forEach(function(el, idx){
           if (idx === cIdx){
             el.style.background = '#e8f0fb';
@@ -135,18 +176,6 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
 
     card.appendChild(choiceWrap);
 
-    var submitBtn = document.createElement('button');
-    submitBtn.textContent = 'Submit Answer';
-    submitBtn.style.marginTop = '6px';
-    submitBtn.style.padding = '8px 16px';
-    submitBtn.style.background = '#1b1f3b';
-    submitBtn.style.color = '#ffffff';
-    submitBtn.style.border = 'none';
-    submitBtn.style.borderRadius = '5px';
-    submitBtn.style.cursor = 'pointer';
-    submitBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
-    submitBtn.style.fontSize = '13px';
-
     var feedback = document.createElement('div');
     feedback.style.marginTop = '10px';
     feedback.style.padding = '10px 12px';
@@ -154,14 +183,52 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
     feedback.style.fontSize = '13px';
     feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
     feedback.style.display = 'none';
+    card.appendChild(feedback);
 
-    submitBtn.addEventListener('click', function(){
-      if (selected === null || locked) return;
-      locked = true;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Answer locked';
-      submitBtn.style.background = '#9a948a';
-      submitBtn.style.cursor = 'default';
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
 
       choiceEls.forEach(function(el, idx){
         el.style.cursor = 'default';
@@ -177,26 +244,27 @@ AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; 
 
       feedback.style.display = 'block';
       if (selected === q.correct){
+        correctCount++;
         feedback.style.background = '#e6f5ea';
         feedback.style.color = '#1a5c2a';
         feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
-        if (!answered[qIdx]) { scoreNum.textContent = parseInt(scoreNum.textContent) + 1; }
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
       } else {
         feedback.style.background = '#fbe7e7';
         feedback.style.color = '#8a2020';
         feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
       }
-
-      if (!answered[qIdx]) {
-        answered[qIdx] = true;
-        attemptNum.textContent = parseInt(attemptNum.textContent) + 1;
-      }
     });
 
-    card.appendChild(submitBtn);
-    card.appendChild(feedback);
-    container.appendChild(card);
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
   });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
 })();
 </script>
 

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 2 Quiz — Research Methods I: Experimental Design</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s2quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 2</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Research Methods I: Experimental Design — Quiz</div>
+</div>
+
+<div id="s2-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s2-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s2-attempt-num">0</span> / 10
+</div>
+
+<div id="s2-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Independent vs dependent variable",
+      stem: "A researcher wants to know whether listening to music while studying affects test scores. Participants are randomly assigned to study with music or in silence, then take the same test. What is the independent variable?",
+      choices: ["Test scores", "Whether participants studied with music or in silence", "The participants' prior knowledge", "The room used for testing"],
+      correct: 1,
+      explain: "The independent variable is what the researcher manipulates — here, whether participants studied with music or in silence. Test scores are the dependent variable, the outcome being measured."
+    },
+    {
+      title: "Confounding variable",
+      stem: "In the music-and-studying experiment, the music group studies in a warm, bright room while the silence group studies in a cold, dim room. Room temperature and lighting are best described as",
+      choices: ["The dependent variable", "A confounding variable", "The hypothesis", "An operational definition"],
+      correct: 1,
+      explain: "A confounding variable is any difference between conditions, other than the independent variable, that could affect the dependent variable. Here, room conditions differ alongside the music manipulation, muddying the results."
+    },
+    {
+      title: "Random assignment vs random sampling",
+      stem: "A researcher recruits participants using a random sample from the school directory, then lets each participant choose whether to be in the music or silence group. What is the key methodological problem here?",
+      choices: ["The sample was not random", "There was no operational definition", "Participants were not randomly assigned to conditions", "The hypothesis was not falsifiable"],
+      correct: 2,
+      explain: "Random sampling (how participants were recruited) is separate from random assignment (how they're placed into groups). Letting participants choose their own group opens the door to participant-relevant confounding variables — for example, more motivated students might prefer studying in silence."
+    },
+    {
+      title: "Experimenter bias and double-blind design",
+      stem: "A researcher who strongly expects the music group to perform worse unconsciously gives that group less encouragement during the study session. This is an example of",
+      choices: ["The placebo effect", "Experimenter bias", "The Hawthorne effect", "Confirmation bias in the participants"],
+      correct: 1,
+      explain: "Experimenter bias is the unconscious tendency for researchers to treat groups differently in ways that increase the chance of confirming their hypothesis. It is not intentional — if it were intentional, it would be fraud, not experimenter bias. A double-blind design, where neither participants nor the researcher administering the study know group assignments, helps eliminate this."
+    },
+    {
+      title: "Placebo method",
+      stem: "In a drug trial, participants in the control group are given a pill identical in appearance to the real drug but containing no active ingredient. This technique is called",
+      choices: ["Counterbalancing", "Group matching", "The placebo method", "Naturalistic observation"],
+      correct: 2,
+      explain: "The placebo method gives control group participants an inert but identical-looking substance, allowing researchers to separate the physiological effects of a drug from the psychological effects of simply believing one took a drug (the placebo effect)."
+    },
+    {
+      title: "Operational definitions",
+      stem: "A researcher studying 'academic performance' decides to measure it specifically as a student's official end-of-semester GPA on a 0.0–4.0 scale, taken from school records. This precise, measurable definition is called",
+      choices: ["A hypothesis", "An operational definition", "A confounding variable", "A correlation coefficient"],
+      correct: 1,
+      explain: "An operational definition specifies exactly how a variable will be measured in a particular study, allowing the study to be replicated. Simply saying 'academic performance' without specifying how it's measured would be too vague."
+    },
+    {
+      title: "Group matching as a control technique",
+      stem: "A researcher wants the experimental and control groups to have equal numbers of males and females, so she divides participants by sex first, then randomly assigns half of each sex group to each condition. This technique is called",
+      choices: ["Counterbalancing", "Group matching", "Stratified sampling", "Single-blind design"],
+      correct: 1,
+      explain: "Group matching ensures the experimental and control groups are equivalent on a specific criterion (here, sex) before random assignment occurs within each subgroup. This differs from stratified sampling, which concerns how participants are selected, not how they're assigned to conditions."
+    },
+    {
+      title: "Order effects and counterbalancing",
+      stem: "A researcher has participants complete a frustrating task and then a non-frustrating task, always in that order, to compare performance. A possible problem is that participants might perform differently on the second task simply because they already practiced the first one. This is called",
+      choices: ["An order effect", "Experimenter bias", "A confounding variable in sampling", "The placebo effect"],
+      correct: 0,
+      explain: "Order effects occur when the sequence of tasks influences performance, independent of the actual manipulation. Counterbalancing — having half the participants complete the tasks in one order and half in the reverse order — controls for this."
+    },
+    {
+      title: "Field experiment vs naturalistic observation",
+      stem: "A psychologist manipulates whether a confederate holds a door open for strangers, then records whether each stranger says 'thank you,' all conducted in a real shopping mall. This is best classified as a",
+      choices: ["Naturalistic observation", "Field experiment", "Case study", "Correlational survey"],
+      correct: 1,
+      explain: "Because the researcher manipulates an independent variable (whether the door is held open) while observing behavior in a real-world setting, this is a field experiment — not naturalistic observation, where researchers do not influence participants' behavior at all."
+    },
+    {
+      title: "Identifying the strongest experimental design",
+      stem: "Which of the following research designs would allow a psychologist to draw the strongest causal conclusion about whether sleep duration affects memory?",
+      choices: [
+        "Surveying people about their typical sleep hours and memory complaints",
+        "Observing students in a library and recording how tired they look",
+        "Randomly assigning participants to either 4 or 8 hours of sleep, then testing memory under controlled conditions",
+        "Asking participants to estimate their own memory ability after a single night's sleep"
+      ],
+      correct: 2,
+      explain: "Only true experiments — with manipulation of the independent variable and random assignment to conditions — allow researchers to draw causal conclusions. The other options are correlational, observational, or based on self-report, none of which can establish cause and effect."
+    }
+  ];
+
+  var container = document.getElementById('s2-questions');
+  var scoreNum = document.getElementById('s2-score-num');
+  var attemptNum = document.getElementById('s2-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

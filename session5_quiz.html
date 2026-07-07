@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5 Quiz — Research Methods IV: Ethics and APA Guidelines</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s5quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 5</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Research Methods IV: Ethics and APA Guidelines — Quiz</div>
+</div>
+
+<div id="s5-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s5-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s5-attempt-num">0</span> / 10
+</div>
+
+<div id="s5-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Institutional Review Board (IRB)",
+      stem: "Before any psychological study involving human participants can begin, the researcher must submit their proposal for review. Which body is responsible for approving or rejecting the study on ethical grounds?",
+      choices: ["The APA national office", "The Institutional Review Board (IRB)", "The participant's parents only", "The journal that will publish the results"],
+      correct: 1,
+      explain: "The Institutional Review Board (IRB) reviews research proposals at an institution for ethical violations or procedural errors before granting permission for the study to proceed."
+    },
+    {
+      title: "Informed consent",
+      stem: "A researcher explains the general nature of a study to adult participants and has them sign a form agreeing to take part before any data collection begins. This process is called",
+      choices: ["Debriefing", "Informed consent", "Informed assent", "Confidentiality"],
+      correct: 1,
+      explain: "Informed consent means participants are told they are involved in research and agree to participate, understanding enough about the study for their agreement to be meaningful."
+    },
+    {
+      title: "Informed assent for minors",
+      stem: "A researcher wants to include 12-year-olds in a study. Since minors cannot legally give informed consent, what must the researcher obtain instead from the children themselves?",
+      choices: ["Nothing — parental consent alone is sufficient", "Informed assent from the children, in addition to parental consent", "A signed contract with the school", "Debriefing before the study begins"],
+      correct: 1,
+      explain: "Minors cannot give full informed consent, so researchers must obtain informed assent from the child alongside informed consent from a parent or guardian."
+    },
+    {
+      title: "Confidentiality vs anonymity",
+      stem: "In an interview study, a researcher cannot promise that no data will ever be linked to a name, since she conducts the interviews face-to-face. Instead, she promises never to reveal who said what. This is best described as",
+      choices: ["Anonymity", "Confidentiality", "Debriefing", "Informed assent"],
+      correct: 1,
+      explain: "Anonymity means researchers never collect any identifying information at all. When identities are known but promised not to be revealed, that is confidentiality instead."
+    },
+    {
+      title: "Protection from harm",
+      stem: "An ethics board rejects a proposed study because it could cause participants significant long-term psychological damage, even though the researcher believes the results would be valuable. This decision reflects the ethical guideline of",
+      choices: ["Debriefing", "No coercion", "Protection from harm", "Confidentiality"],
+      correct: 2,
+      explain: "Protection from harm requires that participants not be placed at significant mental or physical risk. Temporary discomfort may be acceptable, but long-term harm must be avoided."
+    },
+    {
+      title: "Debriefing",
+      stem: "After a study involving deception ends, researchers explain the true purpose of the study to participants and provide contact information for follow-up questions. This step is called",
+      choices: ["Informed consent", "Debriefing", "Random assignment", "Peer review"],
+      correct: 1,
+      explain: "Debriefing occurs after a study, especially one involving deception, to inform participants of the study's true purpose and to address any concerns."
+    },
+    {
+      title: "Deception in research",
+      stem: "A study tells participants they are testing a memory drug, when the real purpose is to observe how believing you took a drug affects performance. For this deception to be ethical, which condition must be met?",
+      choices: [
+        "The deception must be as extreme as possible to prevent guessing",
+        "The deception must not be so extreme that it invalidates informed consent, and must be minimized",
+        "No debriefing is required if deception was used",
+        "Participants must never be told the truth, even afterward"
+      ],
+      correct: 1,
+      explain: "Deception is only ethical when kept to a minimum and when it does not undermine the meaning of informed consent — participants must have agreed to something reasonably similar to what they actually experienced."
+    },
+    {
+      title: "Statistical significance (p-value)",
+      stem: "A study reports a p-value of 0.03 for the difference between two groups. What does this p-value indicate?",
+      choices: [
+        "There is a 3% chance the result occurred by chance, meeting the standard for statistical significance",
+        "The two groups are 97% identical",
+        "The effect size is very large",
+        "The study should be considered invalid"
+      ],
+      correct: 0,
+      explain: "A p-value represents the probability the result occurred purely by chance. Since 0.03 is below the standard 0.05 cutoff, this result would be considered statistically significant."
+    },
+    {
+      title: "Statistical significance vs effect size",
+      stem: "A very large study finds a statistically significant difference between two groups (p < .001), but the actual difference in scores is tiny and has little real-world impact. This illustrates the difference between",
+      choices: [
+        "Reliability and validity",
+        "Statistical significance and practical (effect size) significance",
+        "Correlation and causation",
+        "Random sampling and random assignment"
+      ],
+      correct: 1,
+      explain: "A result can be statistically significant (unlikely due to chance) while still having a small effect size (little practical importance) — especially common with very large sample sizes."
+    },
+    {
+      title: "Replication and the replication crisis",
+      stem: "Why do psychologists consider it important to replicate a study's findings before fully trusting them?",
+      choices: [
+        "Replication guarantees a study is ethical",
+        "Replication helps confirm that results were not simply due to chance in one sample",
+        "Replication removes the need for informed consent",
+        "Replication always increases a study's effect size"
+      ],
+      correct: 1,
+      explain: "Replicating a study — repeating it with the same methodology — helps confirm whether original findings hold up, rather than being one-time flukes caused by sampling error or chance. Many failed replications have led to what's called a replication crisis in psychology."
+    }
+  ];
+
+  var container = document.getElementById('s5-questions');
+  var scoreNum = document.getElementById('s5-score-num');
+  var attemptNum = document.getElementById('s5-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

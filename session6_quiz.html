@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 6 Quiz — Statistics: Descriptive, Correlation, and Inferential</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s6quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 6</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Statistics: Descriptive, Correlation, and Inferential — Quiz</div>
+</div>
+
+<div id="s6-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s6-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s6-attempt-num">0</span> / 10
+</div>
+
+<div id="s6-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Mean vs median with outliers",
+      stem: "Nineteen of your classmates own bikes worth about $150 each, but one classmate owns a custom bike worth $3,000. Which measure of central tendency will be most distorted by this outlier?",
+      choices: ["The mode", "The median", "The mean", "The range"],
+      correct: 2,
+      explain: "The mean is calculated by adding all values and dividing by the count, so a single extreme outlier can pull it far from where most of the data actually sits. The median, which is the middle value, is much less affected by outliers."
+    },
+    {
+      title: "Identifying the mode",
+      stem: "In a set of quiz scores — 78, 82, 82, 85, 90, 82, 95 — what is the mode?",
+      choices: ["78", "82", "85", "90"],
+      correct: 1,
+      explain: "The mode is the value that appears most frequently in a data set. Here, 82 appears three times, more than any other score."
+    },
+    {
+      title: "Positively vs negatively skewed distributions",
+      stem: "A distribution of household incomes has a small number of extremely high earners, pulling the mean well above where most people's incomes actually fall. This distribution is described as",
+      choices: ["Negatively skewed", "Positively skewed", "Bimodal", "Normally distributed"],
+      correct: 1,
+      explain: "A positively skewed distribution has a small number of unusually high scores that pull the mean upward, above the median. The 'tail' of the distribution points toward the higher values."
+    },
+    {
+      title: "Standard deviation as a measure of variability",
+      stem: "Class A's test scores have a standard deviation of 3, while Class B's test scores have a standard deviation of 15, even though both classes have the same mean score. What does this tell us?",
+      choices: [
+        "Class A performed better on average than Class B",
+        "Class B's scores are more spread out around the mean than Class A's",
+        "Class A has more students than Class B",
+        "The scores in both classes are identical"
+      ],
+      correct: 1,
+      explain: "Standard deviation measures how spread out scores are around the mean. A higher standard deviation means greater variability — Class B's scores are more spread out, even with an identical average to Class A."
+    },
+    {
+      title: "The normal curve and percentages",
+      stem: "In a normal distribution, approximately what percentage of scores fall within 1 standard deviation of the mean?",
+      choices: ["50%", "68%", "95%", "99%"],
+      correct: 1,
+      explain: "In a normal distribution, about 68% of scores fall within 1 standard deviation of the mean, about 95% fall within 2 standard deviations, and almost 99% fall within 3 standard deviations."
+    },
+    {
+      title: "Interpreting percentile rank",
+      stem: "A student scores at the 82nd percentile on a standardized test. What does this mean?",
+      choices: [
+        "The student answered 82% of questions correctly",
+        "The student scored better than approximately 82% of other test-takers",
+        "The student's z-score is 82",
+        "82% of students scored better than this student"
+      ],
+      correct: 1,
+      explain: "A percentile rank indicates the percentage of people in the comparison group who scored at or below that score. An 82nd percentile means this student outperformed about 82% of other test-takers."
+    },
+    {
+      title: "Correlation coefficient strength and direction",
+      stem: "Which correlation coefficient represents the strongest relationship between two variables?",
+      choices: ["+0.10", "-0.85", "+0.40", "0.00"],
+      correct: 1,
+      explain: "Correlation strength is judged by how close the coefficient is to -1 or +1, regardless of sign. A coefficient of -0.85 is much closer to -1 than +0.40 is to +1, making it the strongest relationship listed, even though it is negative."
+    },
+    {
+      title: "Statistical significance and p-values",
+      stem: "A study reports a p-value of 0.20 for the difference between two treatment groups. What should researchers conclude?",
+      choices: [
+        "The result is statistically significant since it's a low number",
+        "The result is not statistically significant, since it exceeds the standard 0.05 cutoff",
+        "The effect size must be very large",
+        "The study should be published immediately as groundbreaking"
+      ],
+      correct: 1,
+      explain: "A p-value of 0.05 or lower is the conventional cutoff for statistical significance. A p-value of 0.20 means there's a 20% probability the result occurred by chance — too high to be considered statistically significant."
+    },
+    {
+      title: "Effect size vs statistical significance",
+      stem: "Why might a psychologist care about effect size in addition to statistical significance?",
+      choices: [
+        "Effect size determines whether a study was ethical",
+        "A statistically significant result can still have a very small, practically unimportant effect size",
+        "Effect size replaces the need for a p-value entirely",
+        "Effect size only matters in correlational research, never in experiments"
+      ],
+      correct: 1,
+      explain: "With a large enough sample, even a tiny, practically meaningless difference can become statistically significant. Effect size tells researchers how large and practically meaningful that difference actually is."
+    },
+    {
+      title: "Replication and meta-analysis",
+      stem: "A research team combines the results of 40 separate studies on the same topic to calculate an overall average effect. This process is called",
+      choices: ["Peer review", "Replication", "Meta-analysis", "Stratified sampling"],
+      correct: 2,
+      explain: "A meta-analysis combines results from many studies on the same topic to estimate an overall, more reliable average effect than any single study could provide on its own."
+    }
+  ];
+
+  var container = document.getElementById('s6-questions');
+  var scoreNum = document.getElementById('s6-score-num');
+  var attemptNum = document.getElementById('s6-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

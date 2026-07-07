@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 5-6 EBQ — Evidence-Based Question on Debriefing</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #1b6b6b;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .claim-box { background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; padding: 18px 22px; margin: 20px 0; box-shadow: var(--shadow); }
+  .claim-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .claim-text { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.5; }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 5–6 · Science Practices</div>
+    <h1 class="page-title">Evidence-Based Question — <em>Evaluating Debriefing Effectiveness</em></h1>
+    <p class="page-desc">Read all three source summaries carefully, then answer Parts A through C(ii) in the text boxes below. Each part is graded against the official rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">6 points total</span>
+      <span class="tag tag-amber">30 min recommended</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 6 points</span>
+  </div>
+
+  <!-- Claim -->
+  <div class="claim-box">
+    <div class="claim-label">Claim to evaluate</div>
+    <div class="claim-text">Debriefing fully removes any harm caused by deception in psychological research.</div>
+  </div>
+
+  <!-- SOURCE 1 -->
+  <div class="article-box">
+    <div class="article-title">Source 1: Immediate Distress Reduction Following Debriefing</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Researchers investigated whether standard debriefing procedures reduce the psychological distress caused by deception-based studies. Prior research suggested that deception, even when mild, can produce measurable anxiety or discomfort in participants during a study, and the researchers hypothesized that a thorough debriefing session immediately following the study would significantly reduce this distress.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 96 undergraduate psychology students (61 female, 35 male) aged 18 to 22, recruited via convenience sampling from an introductory psychology course. All participants provided informed consent, were informed that some aspect of the study procedure would involve mild deception, and were told they could withdraw at any time.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Participants completed a rigged group task in which they were falsely told their performance was far below average compared to other participants, a mild form of deception designed to induce brief social comparison distress. Immediately after the task, before debriefing, participants completed the State-Trait Anxiety Inventory (STAI-State subscale), a 20-item instrument with scores ranging from 20 to 80, where higher scores indicate greater momentary anxiety. Participants then received a full debriefing explaining the true purpose of the study and were told their actual performance had not been evaluated at all. Ten minutes after debriefing, participants completed the STAI-State subscale a second time.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Mean STAI-State scores dropped significantly from immediately after the deception (M = 52.4, SD = 8.1) to ten minutes after debriefing (M = 34.7, SD = 6.3), a paired-samples t-test showing this difference was statistically significant, t(95) = 14.2, p &lt; .001, with a large effect size (Cohen's d = 1.45). The researchers concluded that debriefing produced a rapid and substantial reduction in measured anxiety following mild deception.</div>
+      <table class="art-table">
+        <thead><tr><th>Timepoint</th><th>Mean STAI-State</th><th>SD</th></tr></thead>
+        <tbody>
+          <tr><td>Immediately after deception</td><td>52.4</td><td>8.1</td></tr>
+          <tr><td>10 minutes after debriefing</td><td>34.7</td><td>6.3</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SOURCE 2 -->
+  <div class="article-box">
+    <div class="article-title">Source 2: Belief Perseverance After Debriefing</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">While prior research has shown that debriefing reduces immediate emotional distress, this study examined whether debriefing also fully corrects false beliefs created by deception. The researchers hypothesized that some participants might continue to hold onto the false information even after being told the truth, a phenomenon known as belief perseverance.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 140 adults (ages 19–45, M = 27.3, SD = 6.8) recruited from a community research pool using random sampling from a volunteer registry. All participants gave informed consent prior to the study.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Participants were falsely told, through fabricated feedback, that they possessed unusually low social sensitivity based on a personality questionnaire. After completing several follow-up tasks, participants were fully debriefed and told the feedback had been entirely fabricated and randomly assigned, unrelated to their actual questionnaire answers. One week later, participants completed a follow-up survey asking them to rate, on a scale from 1 (not at all) to 7 (very much), how socially sensitive they believed themselves to be.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Despite the debriefing, a significant negative correlation was found between the duration of exposure to the false feedback during the study and self-rated social sensitivity one week later, r = -.41, p &lt; .01. Participants who had spent more time believing the false feedback rated themselves as less socially sensitive a full week later, even after being clearly told the feedback was fabricated. The researchers concluded that debriefing reduces but does not always fully eliminate the lingering effects of deception, a pattern consistent with belief perseverance.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 3 -->
+  <div class="article-box">
+    <div class="article-title">Source 3: Age Differences in Debriefing Comprehension</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">This study examined whether debriefing is equally effective across different age groups, given that comprehension of complex verbal explanations may vary developmentally. Researchers hypothesized that younger participants would show weaker correction of false beliefs following debriefing compared to older participants.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants included 60 children (ages 9–11, M = 10.1, SD = 0.7) and 60 adults (ages 25–40, M = 31.4, SD = 4.5), recruited from a local school and a community center respectively, using stratified sampling to ensure equal representation of each age group. Parental consent and child assent were obtained for the younger group; informed consent was obtained from adult participants.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Both groups were told a mild cover story before completing a simple game, then were debriefed using a standardized, age-appropriate script explaining the true purpose of the study. Immediately after debriefing, participants completed a short comprehension check (5 items, scored 0–5) assessing whether they correctly understood that the original cover story had been false.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Adults scored significantly higher on the comprehension check (M = 4.7, SD = 0.5) than children (M = 3.2, SD = 1.1), an independent-samples t-test showing this difference was statistically significant, t(118) = 9.8, p &lt; .001, with a large effect size (Cohen's d = 1.79). The researchers concluded that standard debriefing procedures may be substantially less effective at correcting false beliefs in younger participants, raising concerns about relying on a single standardized debriefing approach across all age groups.</div>
+      <table class="art-table">
+        <thead><tr><th>Group</th><th>Mean comprehension score (0–5)</th><th>SD</th></tr></thead>
+        <tbody>
+          <tr><td>Children (9–11)</td><td>3.2</td><td>1.1</td></tr>
+          <tr><td>Adults (25–40)</td><td>4.7</td><td>0.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">State whether the claim ("debriefing fully removes any harm caused by deception") is well supported, partially supported, or not supported when considering all three sources together.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> The claim is only partially supported. Source 1 shows debriefing sharply reduces immediate distress, but Sources 2 and 3 show it does not always fully correct false beliefs, particularly with longer exposure to deception (Source 2) or with younger participants (Source 3). Taken together, debriefing is effective but not complete.
+    </div>
+  </div>
+
+  <!-- PART B(i) -->
+  <div class="part-box" id="partBi">
+    <span class="part-label">Part B(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 1 that supports the claim that debriefing effectively addresses harm from deception.</div>
+    <textarea id="taBi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bi')">Grade this part</button>
+      <span class="points-display" id="ptsBi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBi"></div>
+    <div class="model-answer" id="maBi" style="display:none;">
+      <strong>Model answer:</strong> Mean STAI-State anxiety scores dropped significantly from 52.4 (SD = 8.1) immediately after deception to 34.7 (SD = 6.3) just ten minutes after debriefing, t(95) = 14.2, p &lt; .001, with a large effect size (d = 1.45) — showing debriefing rapidly reduced measured distress.
+    </div>
+  </div>
+
+  <!-- PART B(ii) -->
+  <div class="part-box" id="partBii">
+    <span class="part-label">Part B(ii) — 1 point</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part B(i) connects to and supports the claim.</div>
+    <textarea id="taBii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bii')">Grade this part</button>
+      <span class="points-display" id="ptsBii">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBii"></div>
+    <div class="model-answer" id="maBii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the ethical guideline of protection from harm. Debriefing is the mechanism researchers use to address any psychological harm caused during a study. The large, statistically significant drop in anxiety (a large effect size of d = 1.45) demonstrates that debriefing did more than just formally happen — it produced a real, measurable reduction in participants' distress, directly fulfilling the ethical requirement to protect participants from lasting harm after mild deception was used.
+    </div>
+  </div>
+
+  <!-- PART C(i) -->
+  <div class="part-box" id="partCi">
+    <span class="part-label">Part C(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 2 or Source 3 that complicates or challenges the claim.</div>
+    <textarea id="taCi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Ci')">Grade this part</button>
+      <span class="points-display" id="ptsCi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbCi"></div>
+    <div class="model-answer" id="maCi" style="display:none;">
+      <strong>Model answer:</strong> In Source 2, a significant negative correlation (r = -.41, p &lt; .01) was found between how long participants were exposed to false feedback and their self-rated social sensitivity a full week later — even after being clearly debriefed. This shows the false belief persisted despite debriefing. Alternatively, Source 3 shows children scored significantly lower (M = 3.2) than adults (M = 4.7) on a post-debriefing comprehension check, t(118) = 9.8, p &lt; .001, d = 1.79.
+    </div>
+  </div>
+
+  <!-- PART C(ii) -->
+  <div class="part-box" id="partCii">
+    <span class="part-label">Part C(ii) — 2 points</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part C(i) connects to and challenges the claim.</div>
+    <textarea id="taCii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Cii')">Grade this part</button>
+      <span class="points-display" id="ptsCii">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbCii"></div>
+    <div class="model-answer" id="maCii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the concept of belief perseverance — the tendency for a belief to persist even after the original evidence supporting it has been discredited. In Source 2, participants continued to rate themselves as less socially sensitive a full week after being clearly told the negative feedback was fabricated, and this effect was stronger the longer they had believed the false information. This directly challenges the claim, because it shows debriefing does not always fully undo the psychological impact of deception — some harm (a distorted self-belief) persisted well beyond the debriefing session itself, meaning debriefing addressed immediate distress (as in Source 1) but not necessarily every lasting effect of the deception.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 5–6 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, Bi: 0, Bii: 0, Ci: 0, Cii: 0 };
+  var maxScores = { A: 1, Bi: 1, Bii: 1, Ci: 1, Cii: 2 };
+  var graded = { A: false, Bi: false, Bii: false, Ci: false, Cii: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasPartial = countKeywords(text, ['partial', 'partly', 'mixed', 'not fully', 'not completely']) >= 1;
+      var hasBoth = countKeywords(text, ['source 1', 'source 2', 'source 3']) >= 2;
+      if (hasPartial && hasBoth) {
+        points = 1; message = 'You correctly identified the claim as only partially supported and referenced multiple sources to justify this.';
+      } else if (hasPartial) {
+        points = 1; message = 'You correctly identified the claim as partially supported. Strengthen your answer by explicitly referencing at least two of the three sources.';
+      } else {
+        message = 'Your answer should conclude that the claim is only PARTIALLY supported, since Source 1 supports it but Sources 2 and 3 complicate it.';
+      }
+    }
+
+    if (part === 'Bi') {
+      var hasNumbers = countKeywords(text, ['52.4', '34.7', 'stai', 'anxiety']) >= 1;
+      var hasStat = countKeywords(text, ['significant', 'p <', 'effect size', 'd =']) >= 1;
+      if (hasNumbers && hasStat) {
+        points = 1; message = 'You cited specific evidence from Source 1 including the statistical results.';
+      } else if (hasNumbers) {
+        points = 1; message = 'You referenced the right evidence. For full credit, also cite the statistical significance or effect size reported.';
+      } else {
+        message = 'Your answer should cite the specific STAI anxiety scores from Source 1 (52.4 before, 34.7 after debriefing) and the statistical significance of that drop.';
+      }
+    }
+
+    if (part === 'Bii') {
+      var hasConcept = countKeywords(text, ['protection from harm', 'debriefing']) >= 1;
+      var hasExplain = countKeywords(text, ['effect size', 'measurable', 'real', 'reduc']) >= 1;
+      if (hasConcept && hasExplain && text.length > 120) {
+        points = 1; message = 'You named the correct concept and fully explained the evidence-to-claim connection.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain HOW the large effect size demonstrates real protection from harm, not just that it happened.';
+      } else {
+        message = 'Your answer should name the ethical concept of protection from harm and explain how the statistically significant, large effect size shows debriefing produced a genuine reduction in distress.';
+      }
+    }
+
+    if (part === 'Ci') {
+      var hasEvidence = countKeywords(text, ['-.41', 'belief', 'children', '3.2', '4.7', 'correlation']) >= 1;
+      var hasStat = countKeywords(text, ['significant', 'p <', 'effect size', 'd =']) >= 1;
+      if (hasEvidence && hasStat) {
+        points = 1; message = 'You cited specific complicating evidence with the relevant statistics.';
+      } else if (hasEvidence) {
+        points = 1; message = 'You referenced the right evidence. For full credit, also include the specific statistic reported.';
+      } else {
+        message = 'Your answer should cite specific evidence from Source 2 (the r = -.41 correlation with lingering false beliefs) or Source 3 (the significant age difference in comprehension).';
+      }
+    }
+
+    if (part === 'Cii') {
+      var hasConcept = countKeywords(text, ['belief perseverance', 'developmental', 'comprehension']) >= 1;
+      var hasFullExplain = text.length > 150;
+      var hasConnection = countKeywords(text, ['persist', 'lingering', 'not fully', 'despite']) >= 1;
+      if (hasConcept && hasFullExplain && hasConnection) {
+        points = 2; message = 'Excellent — you named a specific concept and fully explained how the evidence challenges the claim.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain how this evidence shows debriefing\'s limits despite being administered correctly.';
+      } else {
+        message = 'Your answer should name the concept of belief perseverance (or discuss developmental differences in comprehension) and fully explain how the evidence shows debriefing does not always fully undo the effects of deception.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','Bi','Bii','Ci','Cii'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

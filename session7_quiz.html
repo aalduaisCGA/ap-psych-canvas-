@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 7 Quiz — Heredity and Environment</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s7quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 7</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 1.1: Heredity and Environment — Quiz</div>
+</div>
+
+<div id="s7-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s7-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s7-attempt-num">0</span> / 10
+</div>
+
+<div id="s7-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Heredity vs environment",
+      stem: "A psychologist explains that a child's musical talent results partly from inherited traits and partly from years of piano lessons and family encouragement. This explanation reflects which core idea?",
+      choices: ["Heredity and environment interact to shape behavior", "Only heredity shapes behavior", "Only environment shapes behavior", "Behavior is entirely random"],
+      correct: 0,
+      explain: "Heredity ('nature') and environment ('nurture') interact together to shape behavior and mental processes — most traits cannot be attributed to just one or the other alone."
+    },
+    {
+      title: "Defining heredity",
+      stem: "In psychology, the term 'heredity' or 'nature' refers to",
+      choices: [
+        "External factors a person experiences, like family or education",
+        "Genetic or predisposed characteristics that influence traits and processes",
+        "A person's conscious choices about how to behave",
+        "The culture a person grows up in"
+      ],
+      correct: 1,
+      explain: "Heredity, or nature, refers to genetic or predisposed characteristics that influence physical, behavioral, and mental traits and processes."
+    },
+    {
+      title: "Defining environment",
+      stem: "A researcher studying 'nurture' would most likely focus on which of the following?",
+      choices: ["Inherited predispositions", "Family interactions and education", "Natural selection", "Reflexes present at birth"],
+      correct: 1,
+      explain: "Environmental factors, or nurture, refer to external factors a person experiences, such as family interactions, education, and other life experiences."
+    },
+    {
+      title: "Twin studies and heredity",
+      stem: "Researchers compare identical twins raised in different households to see how similar their IQ scores are, in order to estimate the influence of genetics on intelligence. This type of research is called",
+      choices: ["A field experiment", "A twin study", "A case study", "The survey method"],
+      correct: 1,
+      explain: "Twin studies compare identical twins, who share the same genetic material, to help researchers estimate how much genetics versus environment contributes to specific traits."
+    },
+    {
+      title: "Interpreting twin study correlations",
+      stem: "A twin study finds a correlation of 0.69 for IQ scores among identical twins raised in different households, and a correlation of 0.88 for identical twins raised in the same household. What does the difference between these two correlations suggest?",
+      choices: [
+        "Genetics has no effect on IQ at all",
+        "Environment also has some influence on IQ, since twins raised together are more similar",
+        "The study must have been conducted incorrectly",
+        "IQ is not a measurable trait"
+      ],
+      correct: 1,
+      explain: "Since twins raised together show a higher correlation than twins raised apart, this suggests environment plays some role — even though the strong correlation for twins raised apart shows genetics still matters a great deal."
+    },
+    {
+      title: "A limitation of twin studies",
+      stem: "Critics point out that even identical twins raised in separate households often look extremely similar, which might cause other people to treat them in comparable ways. Why does this matter for interpreting twin study results?",
+      choices: [
+        "It means twin studies are completely worthless",
+        "It suggests some 'genetic' similarities could actually be partly explained by similar environmental treatment",
+        "It proves environment has no effect on behavior",
+        "It shows twins should never be studied together"
+      ],
+      correct: 1,
+      explain: "If people treat similar-looking twins in similar ways, some of what looks like a genetic effect might actually reflect a shared environmental influence caused by their physical similarity — a key criticism of twin study interpretations."
+    },
+    {
+      title: "Family and adoption studies",
+      stem: "Besides twin studies, researchers also study the effects of genes on behavior using which other research approaches?",
+      choices: ["Naturalistic observation and case studies only", "Family studies and adoption studies", "Only laboratory experiments with random assignment", "Surveys of unrelated strangers"],
+      correct: 1,
+      explain: "Research on genetic effects on behavior commonly uses twin studies, family studies, and adoption studies — each offering a different way to separate genetic influence from environmental influence."
+    },
+    {
+      title: "The evolutionary perspective and natural selection",
+      stem: "The evolutionary perspective explains certain behaviors and mental processes by pointing to how they historically helped humans do what?",
+      choices: [
+        "Avoid all forms of stress",
+        "Increase survival and reproductive success",
+        "Develop advanced technology",
+        "Reduce genetic diversity within a population"
+      ],
+      correct: 1,
+      explain: "The evolutionary perspective explores how natural selection affects the expression of behavior and mental processes specifically to increase survival and reproductive success."
+    },
+    {
+      title: "Eugenics as a historical misuse of evolutionary ideas",
+      stem: "Some historical theorists misapplied evolutionary principles in ways that were used to discriminate against certain groups of people. This misuse is known as",
+      choices: ["Heritability", "Eugenics", "Natural selection", "Genetic predisposition"],
+      correct: 1,
+      explain: "Eugenics refers to attempts to apply evolutionary principles in discriminatory ways, historically used to justify harmful and unethical treatment of certain groups. It represents a misuse of evolutionary theory, not a legitimate scientific application."
+    },
+    {
+      title: "Applying heredity-environment interaction",
+      stem: "A student who has a family history of anxiety disorders grows up in a highly stressful household and later develops an anxiety disorder herself. Which explanation best reflects how psychologists would describe this outcome?",
+      choices: [
+        "Her anxiety disorder was caused entirely by her genetics, with no role for her environment",
+        "Her anxiety disorder was caused entirely by her environment, with no role for genetics",
+        "Both her genetic predisposition and her stressful environment likely interacted to contribute to her anxiety disorder",
+        "Anxiety disorders have no connection to either heredity or environment"
+      ],
+      correct: 2,
+      explain: "Consistent with the core principle that heredity and environment interact, a genetic predisposition combined with environmental stressors is a much more accurate explanation than attributing the outcome to only one factor."
+    }
+  ];
+
+  var container = document.getElementById('s7-questions');
+  var scoreNum = document.getElementById('s7-score-num');
+  var attemptNum = document.getElementById('s7-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

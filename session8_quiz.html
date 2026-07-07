@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 8 Quiz — Overview of the Nervous System</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s8quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 8</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 1.2: Overview of the Nervous System — Quiz</div>
+</div>
+
+<div id="s8-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s8-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s8-attempt-num">0</span> / 10
+</div>
+
+<div id="s8-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Central nervous system",
+      stem: "Which structures make up the central nervous system (CNS)?",
+      choices: ["The brain and spinal cord", "All nerves outside the skull and spine", "Only the brain", "The sympathetic and parasympathetic systems"],
+      correct: 0,
+      explain: "The central nervous system includes the brain and the spinal cord, and it interacts with all processes in the body."
+    },
+    {
+      title: "Peripheral nervous system",
+      stem: "The peripheral nervous system's main job is to",
+      choices: [
+        "Store long-term memories",
+        "Relay messages between the central nervous system and the rest of the body",
+        "Control only involuntary breathing",
+        "Regulate hormone levels directly"
+      ],
+      correct: 1,
+      explain: "The peripheral nervous system relays messages from the central nervous system to the rest of the body, and includes both the autonomic and somatic nervous systems."
+    },
+    {
+      title: "Somatic nervous system",
+      stem: "A student consciously decides to raise her hand in class, and her arm moves accordingly. Which part of the nervous system directly controls this voluntary movement?",
+      choices: ["The sympathetic nervous system", "The parasympathetic nervous system", "The somatic nervous system", "The endocrine system"],
+      correct: 2,
+      explain: "The somatic nervous system governs voluntary processes, such as consciously choosing to move a muscle like raising a hand."
+    },
+    {
+      title: "Autonomic nervous system",
+      stem: "Which part of the nervous system governs involuntary processes, such as heart rate and digestion, without conscious control?",
+      choices: ["The somatic nervous system", "The autonomic nervous system", "The motor cortex directly", "The reflex arc only"],
+      correct: 1,
+      explain: "The autonomic nervous system governs involuntary bodily processes and includes the sympathetic and parasympathetic nervous systems."
+    },
+    {
+      title: "Sympathetic nervous system",
+      stem: "A hiker suddenly encounters a bear, and her heart rate spikes, her breathing quickens, and her digestion slows. Which system is responsible for this response?",
+      choices: ["The parasympathetic nervous system", "The sympathetic nervous system", "The somatic nervous system", "The central nervous system alone"],
+      correct: 1,
+      explain: "The sympathetic nervous system mobilizes the body's fight-or-flight response to a perceived threat, accelerating functions like heart rate while slowing down others like digestion."
+    },
+    {
+      title: "Parasympathetic nervous system",
+      stem: "After the threat has passed, the hiker's heart rate and breathing gradually return to normal. Which system is primarily responsible for this calming effect?",
+      choices: ["The sympathetic nervous system", "The parasympathetic nervous system", "The somatic nervous system", "The peripheral nervous system as a whole, with no specific subdivision"],
+      correct: 1,
+      explain: "The parasympathetic nervous system works in opposition to the sympathetic nervous system, returning the body to a calm, resting state (homeostasis) after a stress response has occurred."
+    },
+    {
+      title: "Sensory (afferent) neurons",
+      stem: "When you touch a hot stove, neurons carry that sensory information from your hand toward your spinal cord and brain. This type of neuron is called a",
+      choices: ["Motor neuron", "Interneuron", "Sensory neuron (afferent neuron)", "Efferent neuron"],
+      correct: 2,
+      explain: "Sensory neurons, also called afferent neurons, carry information from the senses toward the brain and spinal cord."
+    },
+    {
+      title: "Motor (efferent) neurons",
+      stem: "After your brain registers pain from touching a hot stove, neurons carry the instruction to pull your hand away. This type of neuron is called a",
+      choices: ["Sensory neuron", "Interneuron", "Motor neuron (efferent neuron)", "Glial cell"],
+      correct: 2,
+      explain: "Motor neurons, also called efferent neurons, carry instructions from the brain and spinal cord out to the muscles of the body."
+    },
+    {
+      title: "The reflex arc",
+      stem: "When a doctor taps just below your kneecap and your leg jerks before you consciously register anything happened, this fast, automatic response is best explained by",
+      choices: [
+        "The reflex arc, where sensory and motor neurons interact directly at the level of the spinal cord",
+        "The endocrine system releasing hormones",
+        "Conscious decision-making in the motor cortex",
+        "The parasympathetic nervous system alone"
+      ],
+      correct: 0,
+      explain: "The reflex arc demonstrates how sensory neurons, interneurons, and motor neurons in the spinal cord can produce an immediate, automatic response, without needing to wait for the signal to travel all the way to the brain first."
+    },
+    {
+      title: "Interneurons",
+      stem: "Once sensory information reaches the spinal cord or brain, which type of neuron is responsible for relaying that message to other neurons within the brain or on to motor neurons?",
+      choices: ["Sensory neurons", "Interneurons (association neurons)", "Motor neurons", "Glial cells"],
+      correct: 1,
+      explain: "Interneurons, also called association neurons, take messages that have arrived in the brain or spinal cord and relay them onward — either elsewhere in the brain or out to motor neurons."
+    }
+  ];
+
+  var container = document.getElementById('s8-questions');
+  var scoreNum = document.getElementById('s8-score-num');
+  var attemptNum = document.getElementById('s8-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

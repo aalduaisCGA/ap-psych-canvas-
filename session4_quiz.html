@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 4 Quiz — Research Methods III: Validity, Reliability, and Bias</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s4quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 4</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Research Methods III: Validity, Reliability, and Bias — Quiz</div>
+</div>
+
+<div id="s4-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s4-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s4-attempt-num">0</span> / 10
+</div>
+
+<div id="s4-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Validity — measuring the right thing",
+      stem: "A new test claims to measure 'creativity,' but it actually only measures how quickly someone can solve math problems. This test lacks",
+      choices: ["Reliability", "Validity", "Random sampling", "A representative sample"],
+      correct: 1,
+      explain: "Validity means a test measures what it claims to measure. A math-speed test does not accurately capture creativity, so it is not a valid measure of that trait, even if it produces consistent scores."
+    },
+    {
+      title: "Reliability — consistency of measurement",
+      stem: "A student takes the same IQ test three times in one month and receives scores of 90, 145, and 110. This wide variation suggests the test has poor",
+      choices: ["Validity", "Reliability", "Operational definition", "Generalizability"],
+      correct: 1,
+      explain: "Reliability refers to the consistency of a measurement. If the same test produces wildly different results for the same person under similar conditions, it is not reliable, regardless of what it claims to measure."
+    },
+    {
+      title: "Reliability without validity",
+      stem: "A career test consistently tells the same person they should become a chef every time they take it, but that person has no interest in cooking and does poorly in culinary classes. This test is",
+      choices: ["Valid but not reliable", "Reliable but not valid", "Both valid and reliable", "Neither valid nor reliable"],
+      correct: 1,
+      explain: "The test is reliable because it produces consistent results each time. However, it is not valid, because it does not accurately measure what it claims to measure — this person's actual career fit."
+    },
+    {
+      title: "Test-retest reliability",
+      stem: "A researcher gives the same personality test to the same group of people twice, one month apart, and compares the two sets of scores. This method of checking reliability is called",
+      choices: ["Split-half reliability", "Equivalent-form reliability", "Test-retest reliability", "Random sampling"],
+      correct: 2,
+      explain: "Test-retest reliability compares a person's scores from two administrations of the same test over time. A strong positive correlation between the two sets of scores indicates good reliability."
+    },
+    {
+      title: "Split-half reliability",
+      stem: "A researcher divides a 100-item test into two 50-item halves and checks whether people's scores on both halves are similar. This method is called",
+      choices: ["Split-half reliability", "Test-retest reliability", "Equivalent-form reliability", "Stratified sampling"],
+      correct: 0,
+      explain: "Split-half reliability involves dividing a single test into two sections and correlating performance across both halves. A high correlation suggests the test is internally consistent."
+    },
+    {
+      title: "Social desirability bias",
+      stem: "A participant in a survey about drug use under-reports how often they actually use drugs because they want to appear responsible to the researcher. This is an example of",
+      choices: ["Experimenter bias", "Social desirability bias", "The placebo effect", "Confirmation bias"],
+      correct: 1,
+      explain: "Social desirability bias occurs when participants answer in a way they believe is more socially acceptable, rather than answering honestly — a common problem in self-report surveys on sensitive topics."
+    },
+    {
+      title: "Hindsight bias",
+      stem: "After hearing about a psychology study's surprising results, a student says, 'I knew that would happen all along,' even though they had never actually predicted it beforehand. This is called",
+      choices: ["Confirmation bias", "Overconfidence", "Hindsight bias", "Sampling bias"],
+      correct: 2,
+      explain: "Hindsight bias is the tendency to believe, after learning an outcome, that one could have predicted it easily — even when no such prediction was actually made in advance."
+    },
+    {
+      title: "Confirmation bias",
+      stem: "A researcher who believes meditation reduces stress pays close attention to studies supporting that idea, while dismissing or ignoring studies that find no effect. This is an example of",
+      choices: ["Confirmation bias", "Hindsight bias", "Social desirability bias", "The directionality problem"],
+      correct: 0,
+      explain: "Confirmation bias is the tendency to notice, favor, and remember information that supports existing beliefs while overlooking evidence that contradicts them."
+    },
+    {
+      title: "Falsifiability of a hypothesis",
+      stem: "A hypothesis states, 'Some people have an invisible energy field that cannot be detected by any instrument, but which influences their mood.' Why is this hypothesis scientifically weak?",
+      choices: [
+        "It is not falsifiable, since there's no way to test or disprove it",
+        "It uses a convenience sample",
+        "It lacks an independent variable",
+        "It suffers from social desirability bias"
+      ],
+      correct: 0,
+      explain: "A good scientific hypothesis must be falsifiable — there must be some possible observation that could prove it wrong. A claim that can never be tested or disproven, by definition, fails this requirement."
+    },
+    {
+      title: "Operational definitions and replication",
+      stem: "Why must researchers create precise operational definitions of their variables before starting a study?",
+      choices: [
+        "So the study can be replicated and other researchers know exactly what was measured",
+        "So participants cannot guess the hypothesis",
+        "So the sample will automatically become more representative",
+        "So random assignment becomes unnecessary"
+      ],
+      correct: 0,
+      explain: "An operational definition specifies precisely how a variable is measured. Without one, no one — including the original researcher — could replicate the study exactly, since it would be unclear what was actually tested."
+    }
+  ];
+
+  var container = document.getElementById('s4-questions');
+  var scoreNum = document.getElementById('s4-score-num');
+  var attemptNum = document.getElementById('s4-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

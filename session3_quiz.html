@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3 Quiz — Research Methods II: Correlational and Survey Methods</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s3quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 3</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Research Methods II: Correlational and Survey Methods — Quiz</div>
+</div>
+
+<div id="s3-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s3-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s3-attempt-num">0</span> / 10
+</div>
+
+<div id="s3-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 0 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Correlational method — no manipulation",
+      stem: "A researcher measures both the number of hours teenagers spend on social media and their self-reported anxiety levels, without changing anything about their lives. This is an example of",
+      choices: ["The experimental method", "The correlational method", "A case study", "Naturalistic observation"],
+      correct: 1,
+      explain: "In the correlational method, the researcher measures two variables as they naturally occur without manipulating either one. No independent variable exists, so no cause-and-effect conclusion can be drawn."
+    },
+    {
+      title: "Directionality problem",
+      stem: "A study finds that students who eat breakfast have higher grades than students who skip breakfast. A researcher cannot tell whether eating breakfast improves grades, or whether doing well in school makes students more likely to eat breakfast. This uncertainty is called",
+      choices: ["A spurious correlation", "The directionality problem", "Sampling bias", "The placebo effect"],
+      correct: 1,
+      explain: "The directionality problem refers to not knowing which variable came first, or whether one variable actually causes changes in the other. Correlational data alone cannot resolve this."
+    },
+    {
+      title: "Third variable / spurious correlation",
+      stem: "Ice cream sales and drowning deaths both increase in the summer. Eating ice cream does not cause drowning; hot weather increases both. This is best described as",
+      choices: ["A directionality problem", "A spurious correlation caused by a third variable", "A confounding variable in an experiment", "A stratified sample"],
+      correct: 1,
+      explain: "A spurious correlation occurs when an outside third variable — here, hot weather — causes both variables to rise together, even though they have no real causal connection to each other."
+    },
+    {
+      title: "Survey method and Likert scales",
+      stem: "A researcher asks participants to respond to the statement 'I feel confident in social situations' using options from 'strongly disagree' to 'strongly agree.' This type of survey item is called a",
+      choices: ["Structured interview", "Likert scale", "Operational definition", "Stratified sample"],
+      correct: 1,
+      explain: "A Likert scale presents a statement and asks respondents to indicate their level of agreement or disagreement, typically using a numbered range of response options."
+    },
+    {
+      title: "Limits of the survey method",
+      stem: "Why can the survey method never establish that one variable causes another?",
+      choices: [
+        "Surveys always have low response rates",
+        "Neither variable is manipulated, so there is no independent variable",
+        "Surveys can only collect qualitative data",
+        "Participants always lie on surveys"
+      ],
+      correct: 1,
+      explain: "Because the survey method measures variables as they naturally exist without manipulating anything, there is no independent variable — and without one, causal conclusions are never possible, no matter how strong the relationship appears."
+    },
+    {
+      title: "Naturalistic observation vs field experiment",
+      stem: "A psychologist watches children on a playground without interacting with them, simply recording how often they share toys. This is best classified as",
+      choices: ["A field experiment", "Naturalistic observation", "A case study", "The survey method"],
+      correct: 1,
+      explain: "In naturalistic observation, researchers observe behavior in a real-world setting without influencing it in any way. This differs from a field experiment, where the researcher manipulates a variable while observing behavior in the real world."
+    },
+    {
+      title: "Case study method",
+      stem: "A clinical psychologist writes a detailed report describing the unique symptoms, history, and treatment of a single patient with a rare disorder. This research approach is called a",
+      choices: ["Case study", "Stratified sample", "Naturalistic observation", "Correlational study"],
+      correct: 0,
+      explain: "A case study provides an in-depth picture of one participant or a small group. It offers rich detail but cannot be generalized to a larger population, since it focuses on so few individuals."
+    },
+    {
+      title: "Convenience sampling vs random sampling",
+      stem: "A researcher wants to study study habits and simply surveys the students in her own AP Psychology class, since they are easy to access. This is an example of",
+      choices: ["Random sampling", "Stratified sampling", "Convenience sampling", "Group matching"],
+      correct: 2,
+      explain: "Convenience sampling means using participants who are easy to reach rather than randomly selecting them from the full population. This risks producing a sample that is not representative of the broader group the researcher wants to study."
+    },
+    {
+      title: "Stratified sampling",
+      stem: "A school is 60% freshmen and 40% seniors. A researcher wants her sample of 50 students to reflect that same ratio, so she selects 30 freshmen and 20 seniors at random from each group. This technique is called",
+      choices: ["Convenience sampling", "Stratified sampling", "Random assignment", "Group matching"],
+      correct: 1,
+      explain: "Stratified sampling ensures that specific subgroups are represented in the sample in the same proportion they appear in the population, improving how well the sample generalizes to that population."
+    },
+    {
+      title: "Choosing the right non-experimental method",
+      stem: "A researcher wants to know whether working adults are more stressed than retired adults, but cannot randomly assign people to be 'working' or 'retired.' Which research method is most appropriate here?",
+      choices: [
+        "A true experiment, since only experiments give valid results",
+        "A correlational or ex post facto (quasi-experimental) study, since the independent variable cannot be manipulated",
+        "A case study of one retired person",
+        "Naturalistic observation of a workplace"
+      ],
+      correct: 1,
+      explain: "When a variable like employment status cannot be manipulated or randomly assigned, researchers use correlational or quasi-experimental designs instead. These allow researchers to examine relationships between variables, but not to draw firm cause-and-effect conclusions."
+    }
+  ];
+
+  var container = document.getElementById('s3-questions');
+  var scoreNum = document.getElementById('s3-score-num');
+  var attemptNum = document.getElementById('s3-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

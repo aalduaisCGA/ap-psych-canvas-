@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 3-4 AAQ — Correlational Research Application</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #1b6b6b;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 3–4 · Science Practices</div>
+    <h1 class="page-title">Article Analysis Question — <em>Correlational Research Application</em></h1>
+    <p class="page-desc">Read the research article carefully, then answer all six parts (A–F) in the text boxes below. Each part is graded against the official AP rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">7 points total</span>
+      <span class="tag tag-amber">25 min recommended (10 min reading + 15 min writing)</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 7 points</span>
+  </div>
+
+  <!-- Article -->
+  <div class="article-box">
+    <div class="article-title">Social Media Use and Self-Esteem in Adolescents: A Correlational Study</div>
+    <div class="article-meta">Research article for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Adolescence is a developmental period marked by heightened sensitivity to peer feedback and social comparison. Social comparison theory proposes that individuals evaluate their own worth by comparing themselves to others, and researchers have increasingly questioned whether the curated, idealized content typical of social media platforms intensifies these comparisons among teenagers. Prior survey-based research has reported inconsistent associations between social media use and psychological well-being, with some studies finding negative associations and others finding none. The researchers hypothesized that greater daily social media use would be associated with lower self-esteem among high school students.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 245 high school students (128 female, 117 male) aged 14 to 18 (M = 16.1, SD = 1.2), recruited from three suburban high schools within the same school district. To ensure the sample reflected the district's overall grade-level composition, researchers used stratified sampling, dividing the eligible student population by grade (9th through 12th) and then randomly selecting participants from each grade in proportion to that grade's share of the total student population. Parental informed consent and student informed assent were obtained prior to participation, and all responses were collected anonymously.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Social media use was measured using the Daily Media Use Questionnaire (DMUQ), on which participants self-reported their average daily minutes spent on Instagram, TikTok, and Snapchat combined, logged across the seven days prior to the study session. Self-esteem was measured using the Rosenberg Self-Esteem Scale (RSES), a widely used 10-item instrument with total scores ranging from 10 to 40, where higher scores indicate higher self-esteem. Prior research cited by the study authors reported a test-retest reliability of r = .85 for the RSES over a two-week interval. Both measures were completed anonymously in a single classroom sitting, supervised by a research assistant not affiliated with the students' regular teachers. No manipulation of any variable occurred; both social media use and self-esteem were measured as they naturally existed in each participant.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">A significant negative correlation was found between daily social media use and RSES scores, r = -.34, p &lt; .01, representing a medium effect size by conventional standards. Students who reported higher average daily social media use tended to report lower self-esteem scores, and vice versa.</div>
+      <table class="art-table">
+        <thead><tr><th>Variable</th><th>Mean</th><th>SD</th><th>Correlation with RSES</th></tr></thead>
+        <tbody>
+          <tr><td>Daily social media use (minutes)</td><td>187.4</td><td>62.8</td><td>r = -.34, p &lt; .01</td></tr>
+          <tr><td>RSES score (10–40)</td><td>27.3</td><td>5.9</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="art-text" style="margin-top:12px;">The authors note that, because no variable was manipulated, the direction of this relationship cannot be determined from these data alone — lower self-esteem could lead teens to use social media more, greater use could lower self-esteem, or an unmeasured third variable (such as sleep quality or in-person social support) could influence both. The authors also acknowledge that self-reported media use may be affected by social desirability bias, and that despite stratified sampling by grade, the sample was limited to three schools within a single suburban district, which may limit how well the findings generalize to other populations.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">Identify the two variables measured in this study and state whether this is a correlational or experimental design. Justify your answer using a specific detail from the Method section.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> The two variables are daily social media use (minutes per day on Instagram, TikTok, and Snapchat) and self-esteem (measured by RSES score). This is a correlational design, not an experiment, because the researchers did not manipulate either variable — both were measured exactly as they naturally occurred in participants, as stated in the Method section ("No manipulation of any variable occurred").
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-box" id="partB">
+    <span class="part-label">Part B — 1 point</span>
+    <div class="part-prompt">Describe the sampling method used in this study and explain one strength of this approach for generalizing the findings.</div>
+    <textarea id="taB" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('B')">Grade this part</button>
+      <span class="points-display" id="ptsB">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbB"></div>
+    <div class="model-answer" id="maB" style="display:none;">
+      <strong>Model answer:</strong> The researchers used stratified sampling, dividing the student population by grade level and then randomly selecting participants from each grade in proportion to that grade's share of the population. A strength of this approach is that it ensures the sample's grade composition closely matches the actual district population, which increases confidence that the results can be generalized to students across all four grades, rather than over-representing one grade.
+    </div>
+  </div>
+
+  <!-- PART C -->
+  <div class="part-box" id="partC">
+    <span class="part-label">Part C — 1 point</span>
+    <div class="part-prompt">Evaluate the reliability of the Rosenberg Self-Esteem Scale (RSES) as used in this study, using a specific piece of evidence from the article.</div>
+    <textarea id="taC" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('C')">Grade this part</button>
+      <span class="points-display" id="ptsC">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbC"></div>
+    <div class="model-answer" id="maC" style="display:none;">
+      <strong>Model answer:</strong> The RSES appears reliable, since prior research cited in the article reported a test-retest reliability of r = .85 over a two-week interval. Because this correlation is strong and close to +1, it suggests the scale produces consistent scores when the same people take it more than once, which supports its reliability as a measurement tool.
+    </div>
+  </div>
+
+  <!-- PART D -->
+  <div class="part-box" id="partD">
+    <span class="part-label">Part D — 1 point</span>
+    <div class="part-prompt">Identify one limitation of this study related to the measurement of social media use, and explain how it could affect the results.</div>
+    <textarea id="taD" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('D')">Grade this part</button>
+      <span class="points-display" id="ptsD">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbD"></div>
+    <div class="model-answer" id="maD" style="display:none;">
+      <strong>Model answer:</strong> Social media use was measured through self-report, which may be affected by social desirability bias — participants might underreport how much time they actually spend on social media if they believe high usage will be judged negatively. This could artificially weaken or distort the true relationship between social media use and self-esteem.
+    </div>
+  </div>
+
+  <!-- PART E -->
+  <div class="part-box" id="partE">
+    <span class="part-label">Part E — 1 point</span>
+    <div class="part-prompt">Explain the directionality problem as it applies to this specific study's findings.</div>
+    <textarea id="taE" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('E')">Grade this part</button>
+      <span class="points-display" id="ptsE">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbE"></div>
+    <div class="model-answer" id="maE" style="display:none;">
+      <strong>Model answer:</strong> The directionality problem means we cannot tell which variable caused the other. It is possible that spending more time on social media lowers self-esteem, but it is equally possible that having lower self-esteem causes teens to spend more time on social media, perhaps seeking validation or distraction. Because neither variable was manipulated, the data cannot tell us which explanation is correct.
+    </div>
+  </div>
+
+  <!-- PART F -->
+  <div class="part-box" id="partF">
+    <span class="part-label">Part F — 2 points</span>
+    <div class="part-prompt">Name one specific third variable that could explain the correlation found in this study, and fully explain how it could independently affect both social media use and self-esteem.</div>
+    <textarea id="taF" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('F')">Grade this part</button>
+      <span class="points-display" id="ptsF">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbF"></div>
+    <div class="model-answer" id="maF" style="display:none;">
+      <strong>Model answer:</strong> Sleep quality could be a third variable explaining this correlation. Poor sleep is known to negatively affect mood and self-perception, which could independently lower self-esteem. At the same time, teens who sleep poorly may stay awake longer at night, during which time they are more likely to browse social media out of boredom or difficulty falling asleep. In this scenario, sleep quality — not social media use itself — would be the true underlying cause of both the higher social media use and the lower self-esteem scores, making the correlation between them spurious rather than causal.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all six parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 3–4 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+  var maxScores = { A: 1, B: 1, C: 1, D: 1, E: 1, F: 2 };
+  var graded = { A: false, B: false, C: false, D: false, E: false, F: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasVars = countKeywords(text, ['social media', 'self-esteem', 'self esteem']) >= 1;
+      var hasCorrelational = countKeywords(text, ['correlational', 'correlation']) >= 1;
+      var hasJustify = countKeywords(text, ['no manipulation', 'not manipulate', 'manipulated', 'naturally']) >= 1;
+      if (hasVars && hasCorrelational && hasJustify) {
+        points = 1; message = 'You correctly identified both variables, named the correlational design, and justified it with evidence that no variable was manipulated.';
+      } else if (hasVars && hasCorrelational) {
+        points = 1; message = 'You identified the variables and design correctly. For full credit next time, be sure to explicitly cite the "no manipulation" detail from the Method section as justification.';
+      } else {
+        message = 'Your answer is missing key elements. Be sure to name both variables (social media use and self-esteem), identify this as correlational (not experimental), and justify using the fact that neither variable was manipulated.';
+      }
+    }
+
+    if (part === 'B') {
+      var hasStratified = countKeywords(text, ['stratified']) >= 1;
+      var hasGrade = countKeywords(text, ['grade', 'proportion']) >= 1;
+      var hasStrength = countKeywords(text, ['generaliz', 'represent']) >= 1;
+      if (hasStratified && hasGrade && hasStrength) {
+        points = 1; message = 'You correctly named stratified sampling, described how it was applied by grade level, and explained the generalization benefit.';
+      } else if (hasStratified) {
+        points = 1; message = 'You correctly identified stratified sampling. To strengthen your answer, explain specifically how sampling proportionally by grade helps the sample better represent the whole population.';
+      } else {
+        message = 'Your answer should name the specific sampling method used — stratified sampling — and explain how sampling proportionally by grade level improves how well the results generalize.';
+      }
+    }
+
+    if (part === 'C') {
+      var hasReliability = countKeywords(text, ['reliab']) >= 1;
+      var hasEvidence = countKeywords(text, ['.85', 'test-retest', 'test retest']) >= 1;
+      if (hasReliability && hasEvidence) {
+        points = 1; message = 'You correctly evaluated reliability and cited the specific test-retest correlation of r = .85 as supporting evidence.';
+      } else if (hasReliability) {
+        points = 1; message = 'You addressed reliability correctly. For full credit, always cite the specific number from the article (r = .85 test-retest reliability) as your evidence.';
+      } else {
+        message = 'Your answer should focus on reliability (not validity) and cite the specific evidence: the test-retest reliability of r = .85 reported in the article.';
+      }
+    }
+
+    if (part === 'D') {
+      var hasSelfReport = countKeywords(text, ['self-report', 'self report', 'social desirability']) >= 1;
+      var hasEffect = countKeywords(text, ['underreport', 'distort', 'affect', 'bias']) >= 1;
+      if (hasSelfReport && hasEffect) {
+        points = 1; message = 'You correctly identified the self-report/social desirability bias limitation and explained its effect on the results.';
+      } else if (hasSelfReport) {
+        points = 1; message = 'You identified the right limitation. Try to also explicitly explain how it could distort the results (e.g., underreporting usage).';
+      } else {
+        message = 'Your answer should focus on the fact that social media use was self-reported, which opens the door to social desirability bias — participants may underreport their real usage.';
+      }
+    }
+
+    if (part === 'E') {
+      var hasDirection = countKeywords(text, ['direction', 'which came first', 'either way', 'both ways']) >= 1;
+      var hasBothWays = countKeywords(text, ['lower self-esteem', 'lower self esteem', 'seeking validation', 'cause each other']) >= 1;
+      if (hasDirection && hasBothWays) {
+        points = 1; message = 'You clearly explained the directionality problem and applied it correctly to the variables in this study.';
+      } else if (hasDirection) {
+        points = 1; message = 'You correctly identified the directionality problem. Strengthen your answer by explaining both possible directions specifically (social media lowering self-esteem, OR low self-esteem increasing social media use).';
+      } else {
+        message = 'Your answer should explain that we cannot tell which variable caused the other — social media use could lower self-esteem, or low self-esteem could increase social media use.';
+      }
+    }
+
+    if (part === 'F') {
+      var hasThirdVar = countKeywords(text, ['sleep', 'third variable', 'family', 'in-person', 'support']) >= 1;
+      var hasIndependent = countKeywords(text, ['independently', 'both', 'cause both', 'affect both']) >= 1;
+      var hasFullExplain = text.length > 150;
+      if (hasThirdVar && hasIndependent && hasFullExplain) {
+        points = 2; message = 'Excellent — you named a plausible third variable and fully explained how it could independently affect both variables in the study.';
+      } else if (hasThirdVar) {
+        points = 1; message = 'You named a reasonable third variable. For full credit, fully explain the mechanism: how does this variable affect social media use AND separately affect self-esteem?';
+      } else {
+        message = 'Your answer should name a specific third variable (such as sleep quality or family support) and explain how it could independently cause both higher social media use and lower self-esteem, making the original correlation spurious.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','B','C','D','E','F'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

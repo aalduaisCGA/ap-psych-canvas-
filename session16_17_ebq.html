@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 16-17 EBQ — Evaluating Heuristics vs Algorithms</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #1b6b6b;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .claim-box { background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; padding: 18px 22px; margin: 20px 0; box-shadow: var(--shadow); }
+  .claim-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .claim-text { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.5; }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .chart-wrap { margin-top: 14px; background: var(--bg2); border-radius: 8px; padding: 16px; }
+  .chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px; text-align: center; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
+  .bar-label { width: 170px; font-size: 12px; color: var(--text2); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill { background: var(--accent); height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .bar-value { color: #fff; font-size: 11px; font-weight: 700; }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 16–17 · Unit 2 — Cognition</div>
+    <h1 class="page-title">Evidence-Based Question — <em>Heuristics vs Algorithmic Thinking</em></h1>
+    <p class="page-desc">Read all three source summaries carefully, then answer Parts A through C(ii) in the text boxes below. Each part is graded against the official rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">6 points total</span>
+      <span class="tag tag-amber">30 min recommended</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 6 points</span>
+  </div>
+
+  <!-- Claim -->
+  <div class="claim-box">
+    <div class="claim-label">Claim to evaluate</div>
+    <div class="claim-text">Using heuristics always leads to worse decisions than using systematic, algorithmic thinking.</div>
+  </div>
+
+  <!-- SOURCE 1 -->
+  <div class="article-box">
+    <div class="article-title">Source 1: The Availability Heuristic and Perceived Risk</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Researchers examined whether media coverage of rare but vivid events distorts public risk perception through the availability heuristic, comparing perceived risk to actual statistical risk for two causes of death.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 150 adults recruited via an online survey platform using random sampling from a national panel. Informed consent was obtained from all participants before beginning the survey.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Participants rated, on a scale of 1 (very unlikely) to 10 (very likely), how likely they believed the average person was to die from a shark attack versus a car accident in a given year. These ratings were then compared to actual national statistical death rates for each cause.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Participants rated shark attack risk significantly higher (M = 5.8, SD = 1.4) relative to its actual statistical rarity than car accident risk (M = 4.2, SD = 1.6) relative to its actual statistical frequency, despite car accidents being thousands of times more statistically common, t(149) = 8.9, p &lt; .001.</div>
+      <div class="chart-wrap">
+        <div class="chart-title">Perceived risk rating vs actual statistical frequency</div>
+        <div class="bar-row">
+          <div class="bar-label">Shark attack (perceived)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:58%;"><span class="bar-value">5.8 / 10</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Car accident (perceived)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:42%; background:#c98a2e;"><span class="bar-value">4.2 / 10</span></div></div>
+        </div>
+      </div>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that vivid, heavily publicized events like shark attacks are overestimated in likelihood due to the availability heuristic, while far more statistically common risks like car accidents are underestimated by comparison.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 2 -->
+  <div class="article-box">
+    <div class="article-title">Source 2: Heuristic vs Algorithmic Decision Speed and Accuracy Under Time Pressure</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">This study examined whether heuristic-based decisions are always inferior to algorithmic decisions, or whether heuristics may actually perform comparably well under realistic time constraints.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 80 emergency room physicians recruited from four hospitals using stratified sampling to balance years of experience across groups. Informed consent was obtained, and confidentiality was maintained using coded participant IDs.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Physicians were given simulated patient cases requiring rapid triage decisions under a strict 60-second time limit (heuristic condition, using quick pattern-recognition judgment) or given the same cases with no time limit and access to a full diagnostic checklist (algorithmic condition). Diagnostic accuracy was operationally defined as the percentage of cases correctly triaged according to expert consensus.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Under the 60-second time limit, heuristic-based diagnostic accuracy (M = 87.3%, SD = 6.1) was not significantly different from unlimited-time algorithmic accuracy (M = 89.1%, SD = 5.4), t(78) = 1.42, p = .16, a non-significant difference. However, the algorithmic approach took an average of 14 minutes per case, compared to under 1 minute for the heuristic approach.</div>
+      <table class="art-table">
+        <thead><tr><th>Condition</th><th>Mean accuracy (%)</th><th>Mean time per case</th></tr></thead>
+        <tbody>
+          <tr><td>Heuristic (60-second limit)</td><td>87.3%</td><td>&lt; 1 minute</td></tr>
+          <tr><td>Algorithmic (unlimited time)</td><td>89.1%</td><td>14 minutes</td></tr>
+        </tbody>
+      </table>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that in time-sensitive real-world contexts, experienced professionals' heuristic judgments can perform nearly as accurately as slower algorithmic methods, challenging the assumption that heuristics are always inferior.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 3 -->
+  <div class="article-box">
+    <div class="article-title">Source 3: Framing Effects in Medical Treatment Decisions</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Researchers examined whether framing the identical medical statistic in terms of survival rate versus mortality rate would change patients' treatment preferences, even though the underlying facts were mathematically identical.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 200 adults recruited from community health clinics using consecutive sampling of patients attending routine appointments. All participants provided informed consent.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Participants were randomly assigned to read a description of a surgical treatment's outcome framed either as "90% survival rate" or the mathematically identical "10% mortality rate," then rated their willingness to choose the surgery on a scale from 1 to 10.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Participants given the "90% survival rate" framing rated their willingness to choose surgery significantly higher (M = 7.6, SD = 1.5) than participants given the "10% mortality rate" framing (M = 5.4, SD = 1.8), despite both statements describing identical outcomes, t(198) = 9.3, p &lt; .001, d = 1.31.</div>
+      <div class="chart-wrap">
+        <div class="chart-title">Willingness to choose surgery (1-10 scale)</div>
+        <div class="bar-row">
+          <div class="bar-label">"90% survival" framing</div>
+          <div class="bar-track"><div class="bar-fill" style="width:76%;"><span class="bar-value">7.6</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">"10% mortality" framing</div>
+          <div class="bar-track"><div class="bar-fill" style="width:54%; background:#c98a2e;"><span class="bar-value">5.4</span></div></div>
+        </div>
+      </div>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that framing effects can systematically distort decision-making even on identical factual information, a bias that operates regardless of how much time or analytical effort a person applies to the decision.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">State whether the claim ("using heuristics always leads to worse decisions than algorithmic thinking") is well supported, partially supported, or not supported when considering all three sources together.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> The claim is not well supported. While Source 1 and Source 3 show heuristics and framing can lead to distorted judgments, Source 2 directly shows that heuristic-based decisions were not significantly less accurate than algorithmic ones under real-world time pressure — meaning heuristics do not "always" lead to worse decisions.
+    </div>
+  </div>
+
+  <!-- PART B(i) -->
+  <div class="part-box" id="partBi">
+    <span class="part-label">Part B(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 1 or Source 3 that supports the claim that heuristic-based thinking leads to worse decisions.</div>
+    <textarea id="taBi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bi')">Grade this part</button>
+      <span class="points-display" id="ptsBi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBi"></div>
+    <div class="model-answer" id="maBi" style="display:none;">
+      <strong>Model answer:</strong> In Source 1, participants rated shark attack risk (M = 5.8) as comparable to car accident risk (M = 4.2), despite car accidents being statistically far more common, t(149) = 8.9, p &lt; .001 — showing the availability heuristic distorted accurate risk judgment. Alternatively, Source 3 shows framing changed willingness to choose surgery from 7.6 to 5.4 for identical statistics, t(198) = 9.3, p &lt; .001.
+    </div>
+  </div>
+
+  <!-- PART B(ii) -->
+  <div class="part-box" id="partBii">
+    <span class="part-label">Part B(ii) — 1 point</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part B(i) connects to and supports the claim.</div>
+    <textarea id="taBii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bii')">Grade this part</button>
+      <span class="points-display" id="ptsBii">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBii"></div>
+    <div class="model-answer" id="maBii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the availability heuristic — judging likelihood based on how easily examples come to mind rather than actual statistics. Because shark attacks are vivid and heavily publicized, they come to mind easily, causing participants to rate their risk far higher than warranted by actual frequency. This shows the heuristic led directly to an inaccurate, non-algorithmic judgment that a systematic look at real statistics would have avoided.
+    </div>
+  </div>
+
+  <!-- PART C(i) -->
+  <div class="part-box" id="partCi">
+    <span class="part-label">Part C(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 2 that challenges the claim.</div>
+    <textarea id="taCi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Ci')">Grade this part</button>
+      <span class="points-display" id="ptsCi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbCi"></div>
+    <div class="model-answer" id="maCi" style="display:none;">
+      <strong>Model answer:</strong> Source 2 shows that heuristic-based diagnostic accuracy under a 60-second time limit (87.3%) was not significantly different from algorithmic accuracy with unlimited time (89.1%), t(78) = 1.42, p = .16 — a non-significant difference, meaning the heuristic approach was not meaningfully worse.
+    </div>
+  </div>
+
+  <!-- PART C(ii) -->
+  <div class="part-box" id="partCii">
+    <span class="part-label">Part C(ii) — 2 points</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part C(i) challenges the claim.</div>
+    <textarea id="taCii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Cii')">Grade this part</button>
+      <span class="points-display" id="ptsCii">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbCii"></div>
+    <div class="model-answer" id="maCii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the concept of heuristics as adaptive, expertise-based shortcuts rather than simply flawed reasoning. Experienced physicians using rapid pattern-recognition heuristics achieved accuracy statistically indistinguishable from a much slower algorithmic checklist process. This directly challenges the claim that heuristics "always" produce worse decisions, because in this real-world, time-pressured context, the heuristic approach achieved comparable accuracy in a fraction of the time — showing that heuristics can be a reasonable, even superior, choice when speed matters and expertise is present, not an inherently inferior method of thinking.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 16–17 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, Bi: 0, Bii: 0, Ci: 0, Cii: 0 };
+  var maxScores = { A: 1, Bi: 1, Bii: 1, Ci: 1, Cii: 2 };
+  var graded = { A: false, Bi: false, Bii: false, Ci: false, Cii: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasNotSupported = countKeywords(text, ['not well supported', 'not supported', 'not fully supported', 'partially']) >= 1;
+      var hasMultiple = countKeywords(text, ['source 1', 'source 2', 'source 3']) >= 2;
+      if (hasNotSupported && hasMultiple) {
+        points = 1; message = 'You correctly identified the claim as not well supported and referenced multiple sources.';
+      } else if (hasNotSupported) {
+        points = 1; message = 'You correctly identified the claim as not well supported. Strengthen your answer by referencing at least two sources explicitly.';
+      } else {
+        message = 'Your answer should conclude the claim is NOT well supported (or only partially), since Source 2 shows heuristics were not significantly less accurate than algorithms under time pressure.';
+      }
+    }
+
+    if (part === 'Bi') {
+      var hasEvidence = countKeywords(text, ['5.8', '4.2', '7.6', '5.4', 'shark', 'framing']) >= 1;
+      var hasStat = countKeywords(text, ['significant', 'p <', 't(']) >= 1;
+      if (hasEvidence && hasStat) {
+        points = 1; message = 'You cited specific evidence with the relevant statistics.';
+      } else if (hasEvidence) {
+        points = 1; message = 'You referenced the right evidence. For full credit, note the statistical significance too.';
+      } else {
+        message = 'Your answer should cite specific evidence from Source 1 (shark vs. car accident risk ratings) or Source 3 (framing effect on surgery willingness).';
+      }
+    }
+
+    if (part === 'Bii') {
+      var hasConcept = countKeywords(text, ['availability heuristic', 'framing']) >= 1;
+      var hasExplain = text.length > 120;
+      if (hasConcept && hasExplain) {
+        points = 1; message = 'You named a relevant concept and explained the connection well.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. Expand your explanation for full credit.';
+      } else {
+        message = 'Your answer should name the availability heuristic (or framing) and explain how it distorted judgment away from an accurate, systematic conclusion.';
+      }
+    }
+
+    if (part === 'Ci') {
+      var hasEvidence = countKeywords(text, ['87.3', '89.1', 'not significant', 'p = .16']) >= 1;
+      if (hasEvidence) {
+        points = 1; message = 'You correctly cited the non-significant difference evidence from Source 2.';
+      } else {
+        message = 'Your answer should cite the specific accuracy percentages from Source 2 (87.3% heuristic vs 89.1% algorithmic) and note the difference was not statistically significant.';
+      }
+    }
+
+    if (part === 'Cii') {
+      var hasConcept = countKeywords(text, ['heuristic', 'expertise', 'adaptive']) >= 1;
+      var hasFullExplain = text.length > 150;
+      var hasConnection = countKeywords(text, ['not always', 'comparable', 'similar accuracy', 'faster']) >= 1;
+      if (hasConcept && hasFullExplain && hasConnection) {
+        points = 2; message = 'Excellent — you named a specific concept and fully explained how the evidence challenges the claim.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain why comparable accuracy at much greater speed challenges the "always worse" claim.';
+      } else {
+        message = 'Your answer should discuss heuristics as adaptive expertise-based judgments and explain why comparable accuracy in far less time challenges the claim that heuristics are always worse.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','Bi','Bii','Ci','Cii'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

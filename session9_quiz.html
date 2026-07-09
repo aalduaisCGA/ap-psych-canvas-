@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 9 Quiz — The Neuron and Neural Firing</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s9quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 9</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 1.3: The Neuron and Neural Firing — Quiz</div>
+</div>
+
+<div id="s9-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s9-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s9-attempt-num">0</span> / 10
+</div>
+
+<div id="s9-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Neurons vs glial cells",
+      stem: "Which statement correctly distinguishes neurons from glial cells?",
+      choices: [
+        "Neurons transmit information; glial cells provide structure, insulation, and support",
+        "Glial cells transmit information; neurons provide structure and support",
+        "Neurons and glial cells perform identical functions",
+        "Only glial cells are found in the brain"
+      ],
+      correct: 0,
+      explain: "Neurons are the neural cells that transmit information, while glial cells provide structure, insulation, communication support, and waste transport for the nervous system."
+    },
+    {
+      title: "The reflex arc",
+      stem: "Which three types of neurons work together to create a reflex arc in the spinal cord?",
+      choices: [
+        "Sensory neurons, motor neurons, and interneurons",
+        "Only sensory neurons",
+        "Glial cells and motor neurons",
+        "Only interneurons"
+      ],
+      correct: 0,
+      explain: "The reflex arc demonstrates how sensory neurons, motor neurons, and interneurons within the central and peripheral nervous systems work together to produce a fast, automatic response to a stimulus."
+    },
+    {
+      title: "Resting potential",
+      stem: "Before a neuron fires, it sits in a state where the inside of the cell carries a slightly negative charge relative to the outside. This state is called",
+      choices: ["The action potential", "The resting potential", "The refractory period", "Reuptake"],
+      correct: 1,
+      explain: "Resting potential describes a neuron's state before firing, when the inside of the cell holds a slightly negative charge compared to the surrounding fluid."
+    },
+    {
+      title: "Threshold and the all-or-none principle",
+      stem: "A neuron receives enough stimulation to cross a certain minimum level required to trigger a full electrical impulse. This minimum level is called the",
+      choices: ["Refractory period", "Resting potential", "Threshold", "Reuptake point"],
+      correct: 2,
+      explain: "The threshold is the minimum level of stimulation a neuron must receive before it will fire. Once the threshold is crossed, the all-or-none principle means the neuron fires completely every time — never partially."
+    },
+    {
+      title: "Depolarization and action potential",
+      stem: "Once a neuron crosses its threshold, an electrical impulse travels down the length of the cell. This impulse is called the",
+      choices: ["Resting potential", "Action potential", "Synapse", "Reuptake"],
+      correct: 1,
+      explain: "The action potential is the electrical impulse that travels down a neuron once it has been sufficiently stimulated to cross its threshold — this process is also called depolarization."
+    },
+    {
+      title: "Refractory period",
+      stem: "Immediately after a neuron fires, there is a brief period during which it cannot fire again, no matter how much stimulation it receives. This is called the",
+      choices: ["Threshold", "Refractory period", "Resting potential", "Reuptake"],
+      correct: 1,
+      explain: "The refractory period is a brief recovery window immediately after a neuron fires, during which the neuron cannot fire again regardless of additional stimulation."
+    },
+    {
+      title: "Neurotransmitters and the synapse",
+      stem: "Chemical messengers released from one neuron travel across the synapse and bind to receptor sites on the next neuron. What are these chemical messengers called?",
+      choices: ["Hormones", "Neurotransmitters", "Glial cells", "Action potentials"],
+      correct: 1,
+      explain: "Neurotransmitters are chemical messengers released into the synapse that bind to receptor sites on the next neuron, allowing communication between neurons."
+    },
+    {
+      title: "Excitatory vs inhibitory neurotransmitters",
+      stem: "A neurotransmitter that makes it more likely the next neuron will fire is described as",
+      choices: ["Inhibitory", "Excitatory", "Reuptake-based", "Refractory"],
+      correct: 1,
+      explain: "Excitatory neurotransmitters increase the likelihood that the next neuron will fire, while inhibitory neurotransmitters decrease that likelihood."
+    },
+    {
+      title: "Dopamine and serotonin functions",
+      stem: "A researcher notes that a patient has unusually low serotonin activity and separately, unusually low dopamine activity. Based on typical neurotransmitter functions, which two conditions might this be associated with, respectively?",
+      choices: [
+        "Low serotonin — mood problems; low dopamine — movement and alertness problems",
+        "Low serotonin — memory loss; low dopamine — pain reduction",
+        "Low serotonin — improved sleep; low dopamine — improved memory",
+        "Neither neurotransmitter has any known behavioral association"
+      ],
+      correct: 0,
+      explain: "Serotonin is closely associated with mood control (low levels linked to depression), while dopamine is associated with motor movement and alertness (low levels linked to Parkinson's disease)."
+    },
+    {
+      title: "GABA and glutamate",
+      stem: "Which of these correctly describes the general roles of GABA and glutamate?",
+      choices: [
+        "GABA is an important inhibitory neurotransmitter; glutamate is an excitatory neurotransmitter involved in memory",
+        "GABA is excitatory and causes seizures; glutamate is inhibitory and causes sleep",
+        "Both GABA and glutamate are hormones, not neurotransmitters",
+        "GABA and glutamate have identical functions"
+      ],
+      correct: 0,
+      explain: "GABA is one of the brain's most important inhibitory neurotransmitters, while glutamate is an excitatory neurotransmitter involved in memory — though in excess, glutamate can trigger migraines or seizures."
+    }
+  ];
+
+  var container = document.getElementById('s9-questions');
+  var scoreNum = document.getElementById('s9-score-num');
+  var attemptNum = document.getElementById('s9-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

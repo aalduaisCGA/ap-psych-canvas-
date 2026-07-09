@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 20 Quiz — Storing Memories</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s20quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 20</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.5: Storing Memories — Quiz</div>
+</div>
+
+<div id="s20-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s20-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s20-attempt-num">0</span> / 10
+</div>
+
+<div id="s20-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Storage duration and capacity differences",
+      stem: "Sensory memory, short-term memory, working memory, and long-term memory all differ from one another primarily in terms of",
+      choices: [
+        "Storage duration, capacity, and content",
+        "The country in which the memory research was conducted",
+        "Whether they involve neurotransmitters at all",
+        "How many senses are involved"
+      ],
+      correct: 0,
+      explain: "These four memory systems are distinguished by how long information is stored (duration), how much information can be held (capacity), and what type of content each system handles."
+    },
+    {
+      title: "Maintenance rehearsal for storage",
+      stem: "Repeating a new acquaintance's name silently to yourself several times right after meeting them, just to keep it available for the next few minutes, illustrates",
+      choices: ["Elaborative rehearsal", "Maintenance rehearsal", "Long-term potentiation", "Chunking"],
+      correct: 1,
+      explain: "Maintenance rehearsal involves simple repetition of information over time, which can prolong storage in short-term memory but is less effective than elaborative rehearsal for long-term storage."
+    },
+    {
+      title: "Elaborative rehearsal and meaning",
+      stem: "A student trying to remember a new acquaintance's name links it to a friend who has the same name, creating a more meaningful connection. This storage-enhancing strategy is called",
+      choices: ["Maintenance rehearsal", "Elaborative rehearsal", "Retroactive interference", "Source amnesia"],
+      correct: 1,
+      explain: "Elaborative rehearsal involves rehearsing information in ways that promote meaning and connection to existing knowledge, which helps strengthen memory retention more effectively than simple repetition."
+    },
+    {
+      title: "Highly superior autobiographical memory",
+      stem: "A small number of documented individuals can recall the exact details of nearly every day of their lives with extraordinary accuracy. This rare condition is called",
+      choices: ["Anterograde amnesia", "Highly superior autobiographical memory", "Source amnesia", "Infantile amnesia"],
+      correct: 1,
+      explain: "Highly superior autobiographical memory describes a rare condition where individuals demonstrate an extraordinary ability to recall personal life events in vivid detail, suggesting possible biological differences in memory storage."
+    },
+    {
+      title: "Autobiographical memory and self-relevance",
+      stem: "People tend to remember events connected to their own lives and personal identity more easily than unrelated facts. This pattern is best explained by the concept of",
+      choices: ["Autobiographical memory", "Retrograde amnesia", "The misinformation effect", "Chunking"],
+      correct: 0,
+      explain: "Autobiographical memory refers to memories connected to one's own life and sense of self, which tend to be more memorable than information with no personal relevance."
+    },
+    {
+      title: "Retrograde amnesia",
+      stem: "After a severe head injury, a patient cannot recall any events from the six months leading up to the accident, although they can still form new memories going forward. This condition is called",
+      choices: ["Anterograde amnesia", "Retrograde amnesia", "Infantile amnesia", "Source amnesia"],
+      correct: 1,
+      explain: "Retrograde amnesia involves the inability to recall memories formed before a brain injury or trauma, while the ability to form new memories afterward often remains intact."
+    },
+    {
+      title: "Anterograde amnesia",
+      stem: "A different patient with hippocampus damage can recall their entire life before the injury perfectly, but is completely unable to form any new long-term memories afterward. This condition is called",
+      choices: ["Anterograde amnesia", "Retrograde amnesia", "Highly superior autobiographical memory", "The misinformation effect"],
+      correct: 0,
+      explain: "Anterograde amnesia is the inability to form new long-term memories following a brain injury, even though memories formed before the injury typically remain accessible."
+    },
+    {
+      title: "Alzheimer's disease and memory storage",
+      stem: "A progressive brain disease that gradually impairs memory storage and cognitive function, particularly affecting older adults, is called",
+      choices: ["Infantile amnesia", "Alzheimer's disease", "Retroactive interference", "Source amnesia"],
+      correct: 1,
+      explain: "Alzheimer's disease is a progressive condition that negatively affects memory storage processes, along with broader cognitive decline, and disproportionately affects older adults."
+    },
+    {
+      title: "Infantile amnesia",
+      stem: "Most adults cannot recall specific personal memories from their first two or three years of life, despite clearly having experienced and learned a great deal during that time. This phenomenon is called",
+      choices: ["Retrograde amnesia", "Infantile amnesia", "Anterograde amnesia", "The misinformation effect"],
+      correct: 1,
+      explain: "Infantile amnesia refers to the common inability of adults to recall specific autobiographical memories from very early childhood, despite significant learning and development occurring during that period."
+    },
+    {
+      title: "Applying storage concepts",
+      stem: "A researcher wants to help elderly patients with early memory impairment retain new important information, such as medication schedules. Based on storage research, which strategy would likely be most effective?",
+      choices: [
+        "Having patients simply repeat the information once without further engagement",
+        "Encouraging elaborative rehearsal that connects the new information to personally meaningful details in the patient's life",
+        "Presenting the information only once, quickly, to avoid overwhelming them",
+        "Avoiding any connection between new information and the patient's personal history"
+      ],
+      correct: 1,
+      explain: "Elaborative rehearsal, which connects new information to personally meaningful details, is consistently shown to produce stronger memory storage than simple repetition, especially valuable when supporting memory in vulnerable populations."
+    }
+  ];
+
+  var container = document.getElementById('s20-questions');
+  var scoreNum = document.getElementById('s20-score-num');
+  var attemptNum = document.getElementById('s20-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

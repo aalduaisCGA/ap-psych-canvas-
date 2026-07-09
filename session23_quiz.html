@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 23 Quiz — Intelligence and Achievement</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s23quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 23</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.8: Intelligence and Achievement — Quiz</div>
+</div>
+
+<div id="s23-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s23-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s23-attempt-num">0</span> / 10
+</div>
+
+<div id="s23-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Defining intelligence: an ongoing debate",
+      stem: "Despite intelligence being a widely used term, psychologists have never reached full agreement on how to define or measure it. What does this reflect about the concept of intelligence?",
+      choices: [
+        "Intelligence is not studied by psychologists at all",
+        "Consensus on defining and measuring intelligence remains elusive and can be subject to bias",
+        "There is only one universally accepted definition of intelligence",
+        "Intelligence cannot be measured under any circumstances"
+      ],
+      correct: 1,
+      explain: "Throughout psychology's history, consensus about how to define and measure intelligence has remained elusive, and definitions and tests can be subject to cultural or other forms of bias."
+    },
+    {
+      title: "Spearman's g factor",
+      stem: "Charles Spearman used a statistical technique to argue that a single underlying factor could account for the many specific abilities people call 'intelligence.' What did Spearman name this general factor?",
+      choices: ["Fluid intelligence", "The factor g", "Crystallized intelligence", "The Flynn effect"],
+      correct: 1,
+      explain: "Spearman used factor analysis to argue that a single general factor, which he called g, underlies the many specific abilities associated with intelligence."
+    },
+    {
+      title: "Fluid vs crystallized intelligence",
+      stem: "A 65-year-old performs better than a 20-year-old on a vocabulary and general knowledge test, but worse on a test requiring them to quickly learn a brand-new abstract puzzle system. This pattern reflects the distinction between",
+      choices: [
+        "General intelligence (g) and multiple intelligences",
+        "Crystallized intelligence (strong in the older adult) and fluid intelligence (stronger in the younger adult)",
+        "Standardization and norms",
+        "Reliability and validity"
+      ],
+      correct: 1,
+      explain: "Crystallized intelligence, which involves accumulated knowledge, often remains stable or even improves with age. Fluid intelligence, the ability to solve novel abstract problems, tends to decline somewhat with age."
+    },
+    {
+      title: "Multiple intelligences (Gardner)",
+      stem: "Unlike psychologists who argue for a single general intelligence factor, Howard Gardner proposed that intelligence actually consists of several distinct types, such as linguistic, logical-mathematical, and spatial intelligence. This theory is called",
+      choices: ["The g factor theory", "The theory of multiple intelligences", "The triarchic theory exclusively", "Crystallized intelligence theory"],
+      correct: 1,
+      explain: "Gardner's theory of multiple intelligences proposes that intelligence is not one single general ability, but rather a collection of distinct types of intelligence, such as linguistic, logical-mathematical, and spatial."
+    },
+    {
+      title: "The original IQ formula",
+      stem: "Early formal intelligence tests calculated an intelligence quotient (IQ) score using which formula?",
+      choices: [
+        "Chronological age divided by mental age",
+        "Mental age divided by chronological age (multiplied by 100)",
+        "Raw score divided by the total number of test items",
+        "Mental age multiplied by chronological age"
+      ],
+      correct: 1,
+      explain: "Early intelligence tests calculated IQ by dividing a person's mental age by their chronological age, then multiplying by 100 to produce a standardized score."
+    },
+    {
+      title: "Standardization",
+      stem: "Before a new intelligence test can be widely used, it must first be given to a large, representative sample of people so that meaningful comparison norms can be established. This process is called",
+      choices: ["Validity testing only", "Standardization", "The Flynn effect", "Factor analysis"],
+      correct: 1,
+      explain: "Standardization involves piloting test items on a representative sample of the population and establishing norms, so that scores can be meaningfully compared across everyone who later takes the test."
+    },
+    {
+      title: "Group tests vs individual tests",
+      stem: "A school administers an intelligence test to an entire classroom of 30 students simultaneously, with minimal interaction between the examiner and each individual student. This type of test is called a",
+      choices: ["Individual test", "Group test", "Power test exclusively", "Achievement test exclusively"],
+      correct: 1,
+      explain: "Group tests are administered to many people at once with minimal individual interaction between examiner and examinee, making them less expensive to administer than individual tests."
+    },
+    {
+      title: "Power tests",
+      stem: "A test is designed to determine the most difficult level of problems a person can successfully solve, giving them ample time to attempt as many problems as possible rather than timing how quickly they work. This type of test is called a",
+      choices: ["Speed test", "Power test", "Group test exclusively", "Achievement test exclusively"],
+      correct: 1,
+      explain: "A power test aims to identify the ceiling difficulty level a person can solve, giving sufficient time to work through problems rather than measuring how quickly they can complete them."
+    },
+    {
+      title: "Aptitude vs achievement tests",
+      stem: "A college entrance exam designed to predict future academic potential is best classified as an aptitude test, while a final exam testing what a student has already learned in a specific course is best classified as an achievement test. What is the key difference between these two test types?",
+      choices: [
+        "Aptitude tests measure potential for future performance; achievement tests measure what has already been learned",
+        "There is no meaningful difference between the two",
+        "Achievement tests always take longer to complete than aptitude tests",
+        "Aptitude tests can only be given to children"
+      ],
+      correct: 0,
+      explain: "Aptitude tests are designed to predict future performance or potential, while achievement tests measure knowledge or skills a person has already acquired."
+    },
+    {
+      title: "Applying theories of intelligence",
+      stem: "A student excels at composing music and expressing emotion through art, but performs only average on traditional logical-mathematical and verbal intelligence tests. Which perspective on intelligence would most directly validate this student's musical and artistic strengths as a genuine form of intelligence?",
+      choices: [
+        "Spearman's g factor theory alone",
+        "Gardner's theory of multiple intelligences",
+        "The original IQ formula (mental age divided by chronological age)",
+        "Standardization and norming procedures alone"
+      ],
+      correct: 1,
+      explain: "Gardner's theory of multiple intelligences recognizes distinct types of intelligence beyond traditional logical-mathematical and linguistic abilities, potentially including musical or artistic ability as legitimate forms of intelligence — a view that a strict single-factor (g) theory would not accommodate."
+    }
+  ];
+
+  var container = document.getElementById('s23-questions');
+  var scoreNum = document.getElementById('s23-score-num');
+  var attemptNum = document.getElementById('s23-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

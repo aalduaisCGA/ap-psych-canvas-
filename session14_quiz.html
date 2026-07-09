@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 14 Quiz — Sensation</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s14quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 14</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 1.6: Sensation — Quiz</div>
+</div>
+
+<div id="s14-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s14-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s14-attempt-num">0</span> / 10
+</div>
+
+<div id="s14-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Defining sensation and transduction",
+      stem: "A person's ear converts sound waves into neural signals sent to the brain. This conversion process is called",
+      choices: ["Perception", "Transduction", "Sensory adaptation", "Signal detection"],
+      correct: 1,
+      explain: "Transduction is the process of converting incoming stimuli into neurochemical (neural) messages that can be processed by the brain."
+    },
+    {
+      title: "Absolute threshold",
+      stem: "Researchers determine the minimum amount of light a person can detect 50% of the time under controlled conditions. This measurement is called the",
+      choices: ["Difference threshold", "Absolute threshold", "Just-noticeable difference", "Weber's constant"],
+      correct: 1,
+      explain: "The absolute threshold is the minimum amount of a stimulus that can be detected 50 percent of the time."
+    },
+    {
+      title: "Just-noticeable difference and Weber's law",
+      stem: "A person can easily notice one extra candle added to a dim room with 5 candles, but does not notice one extra candle added to a bright room with 100 candles. This illustrates",
+      choices: ["Sensory adaptation", "Weber's law — the change needed is proportional to the original stimulus intensity", "The absolute threshold", "Synesthesia"],
+      correct: 1,
+      explain: "Weber's law states that the amount of change needed to detect a difference (the just-noticeable difference) is proportional to the original stimulus intensity — more intense stimuli require larger changes to be noticed."
+    },
+    {
+      title: "Sensory adaptation",
+      stem: "After putting on a shirt in the morning, a person stops noticing the feeling of the fabric on their skin within a few minutes. This is best explained by",
+      choices: ["Weber's law", "Sensory adaptation", "The absolute threshold", "Sensory interaction"],
+      correct: 1,
+      explain: "Sensory adaptation refers to decreasing responsiveness to a stimulus due to constant, unchanging stimulation over time."
+    },
+    {
+      title: "Sensory interaction and synesthesia",
+      stem: "A person reports that hearing certain musical notes causes them to automatically perceive specific colors. This unusual blending of senses is called",
+      choices: ["Sensory adaptation", "Weber's law", "Synesthesia", "Signal detection theory"],
+      correct: 2,
+      explain: "Synesthesia is an experience of sensation in which one sensory system is experienced through another — such as perceiving colors when hearing sounds."
+    },
+    {
+      title: "The retina and the blind spot",
+      stem: "Why does the eye have a 'blind spot'?",
+      choices: [
+        "Because rods and cones are absent where the optic nerve exits the eye",
+        "Because the fovea contains no photoreceptors",
+        "Because the lens cannot focus light properly",
+        "Because of color vision deficiency"
+      ],
+      correct: 0,
+      explain: "The blind spot occurs at the point where the optic nerve exits the eye, since there are no rods or cones present at that specific location on the retina."
+    },
+    {
+      title: "Accommodation and vision problems",
+      stem: "The lens of the eye changes shape to focus light properly onto the retina. When this process doesn't work correctly, what can result?",
+      choices: ["Synesthesia", "Nearsightedness or farsightedness", "Sensory adaptation", "The absolute threshold shifting"],
+      correct: 1,
+      explain: "Accommodation is the process by which the lens focuses visual stimuli onto the retina. When this process is altered, nearsightedness or farsightedness can result."
+    },
+    {
+      title: "Rods",
+      stem: "Which photoreceptor cells are primarily responsible for detecting shapes and movement in low-light conditions, without detecting color?",
+      choices: ["Cones", "Rods", "Ganglion cells", "Bipolar cells"],
+      correct: 1,
+      explain: "Rods detect shapes and movement, especially in low-light environments, and play a role in light and dark adaptation, but do not detect color."
+    },
+    {
+      title: "Trichromatic theory and cones",
+      stem: "Trichromatic theory explains color vision based on three types of cone cells sensitive to which wavelengths?",
+      choices: [
+        "Short (blue), medium (green), and long (red) wavelengths",
+        "Only black and white wavelengths",
+        "Ultraviolet, infrared, and visible wavelengths",
+        "A single wavelength shared by all cones"
+      ],
+      correct: 0,
+      explain: "Trichromatic theory identifies three types of cones: blue cones detecting short wavelengths, green cones detecting medium wavelengths, and red cones detecting long wavelengths."
+    },
+    {
+      title: "Opponent-process theory and afterimages",
+      stem: "After staring at a bright red image for a while and then looking at a blank white wall, a person sees a green afterimage. This phenomenon is best explained by",
+      choices: ["Trichromatic theory", "Opponent-process theory", "Weber's law", "Sensory adaptation alone"],
+      correct: 1,
+      explain: "Opponent-process theory explains afterimages through paired ganglion cells (red/green, blue/yellow, black/white) — when one color in a pair is activated and then stops, the opposing color is perceived instead."
+    }
+  ];
+
+  var container = document.getElementById('s14-questions');
+  var scoreNum = document.getElementById('s14-score-num');
+  var attemptNum = document.getElementById('s14-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

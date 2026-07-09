@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 19 Quiz — Encoding Memories</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s19quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 19</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.4: Encoding Memories — Quiz</div>
+</div>
+
+<div id="s19-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s19-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s19-attempt-num">0</span> / 10
+</div>
+
+<div id="s19-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Defining encoding",
+      stem: "The process of transforming information into a form that can be stored in memory is called",
+      choices: ["Retrieval", "Encoding", "Recognition", "The serial position effect"],
+      correct: 1,
+      explain: "Encoding involves the processes and strategies used to get information into memory. How well information is encoded affects how easily it can later be stored and retrieved."
+    },
+    {
+      title: "The method of loci",
+      stem: "A student memorizes a speech by mentally placing each part of the speech at a different location along a familiar walking route through their house. This mnemonic technique is called",
+      choices: ["Chunking", "The method of loci", "Maintenance rehearsal", "The spacing effect"],
+      correct: 1,
+      explain: "The method of loci is a mnemonic device where information is mentally associated with specific locations along a familiar path, aiding recall by using spatial memory."
+    },
+    {
+      title: "Chunking",
+      stem: "A person trying to remember a 10-digit phone number groups the digits into three smaller sets (like 555-123-4567) rather than trying to remember 10 separate digits. This encoding strategy is called",
+      choices: ["Chunking", "The method of loci", "The serial position effect", "Elaborative rehearsal"],
+      correct: 0,
+      explain: "Chunking involves grouping individual pieces of information into larger, more meaningful units, making the information easier to encode and remember."
+    },
+    {
+      title: "Massed vs distributed practice (spacing effect)",
+      stem: "A student who studies for an exam in one long six-hour cramming session the night before typically retains less information than a student who studies the same material in six one-hour sessions spread across two weeks. This difference illustrates",
+      choices: [
+        "The spacing effect, favoring distributed practice over massed practice",
+        "The serial position effect",
+        "Chunking",
+        "Maintenance rehearsal"
+      ],
+      correct: 0,
+      explain: "The spacing effect shows that distributed practice (studying spread out over time) generally produces better long-term retention and encoding than massed practice (cramming all at once)."
+    },
+    {
+      title: "The serial position effect: primacy",
+      stem: "When asked to recall a list of 20 words, a person remembers the first few words on the list especially well. This tendency is called the",
+      choices: ["Recency effect", "Primacy effect", "Spacing effect", "Method of loci"],
+      correct: 1,
+      explain: "The primacy effect refers to better recall of items presented at the beginning of a list, likely because there was more time and rehearsal opportunity to encode them into long-term memory."
+    },
+    {
+      title: "The serial position effect: recency",
+      stem: "The same person also remembers the last few words on the list especially well, but tends to forget words from the middle of the list. Remembering the last words is called the",
+      choices: ["Primacy effect", "Recency effect", "Chunking", "The spacing effect"],
+      correct: 1,
+      explain: "The recency effect refers to better recall of items presented at the end of a list, likely because those items are still active in short-term memory at the time of recall."
+    },
+    {
+      title: "The serial position curve",
+      stem: "When memory researchers plot how well each item in a list is recalled based on its position (first, middle, last), the resulting graph typically shows a U-shape, with better recall at the beginning and end than in the middle. This overall pattern is called the",
+      choices: ["Serial position curve", "Levels of processing model", "Working memory model", "Long-term potentiation"],
+      correct: 0,
+      explain: "The serial position curve visually represents the combined primacy and recency effects — a U-shaped pattern showing strong recall at the beginning and end of a list, with weaker recall in the middle."
+    },
+    {
+      title: "Elaborative rehearsal and effortful processing",
+      stem: "A student studying new vocabulary tries to connect each new word to a personal memory or vivid mental image, rather than simply repeating the word over and over. This deeper encoding strategy is called",
+      choices: ["Maintenance rehearsal", "Elaborative rehearsal", "The recency effect", "Chunking"],
+      correct: 1,
+      explain: "Elaborative rehearsal involves effortful processing that connects new information to existing knowledge or meaning, which typically produces stronger, longer-lasting memories than simple repetition."
+    },
+    {
+      title: "Maintenance rehearsal",
+      stem: "A person repeats a temporary confirmation code to themselves several times just long enough to type it into a form, then immediately forgets it. This simple repetition strategy is called",
+      choices: ["Elaborative rehearsal", "Maintenance rehearsal", "The method of loci", "The primacy effect"],
+      correct: 1,
+      explain: "Maintenance rehearsal is simple repetition used to hold information temporarily in short-term memory, but it is generally less effective than elaborative rehearsal for creating durable long-term memories."
+    },
+    {
+      title: "Applying encoding strategies",
+      stem: "A teacher wants students to remember course material for the final exam months later, not just for tomorrow's quiz. Based on encoding research, which combination of strategies would most effectively support this goal?",
+      choices: [
+        "Massed practice the night before each quiz, combined with maintenance rehearsal",
+        "Distributed practice over time, combined with elaborative rehearsal connecting new material to existing knowledge",
+        "Memorizing only the middle portion of each chapter, since that's hardest to recall",
+        "Repeating each fact exactly once, with no additional review"
+      ],
+      correct: 1,
+      explain: "Distributed practice (the spacing effect) combined with elaborative rehearsal (effortful, meaningful processing) together produce the strongest, most durable long-term encoding — far more effective than cramming or simple repetition."
+    }
+  ];
+
+  var container = document.getElementById('s19-questions');
+  var scoreNum = document.getElementById('s19-score-num');
+  var attemptNum = document.getElementById('s19-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

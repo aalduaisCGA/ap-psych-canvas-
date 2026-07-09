@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 12 Review Quiz — Sessions 1-11</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s12quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#9a5c00;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;">AP Psychology &middot; Session 12 &middot; Revision</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Review Quiz — Sessions 1–11 (Before Exam 1)</div>
+</div>
+
+<div id="s12-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s12-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s12-attempt-num">0</span> / 10
+</div>
+
+<div id="s12-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Units 0-1 Revision &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Perspectives (Session 1)",
+      stem: "A psychologist explains a person's aggressive behavior by pointing to unconscious childhood conflicts. Which perspective is being used?",
+      choices: ["Behavioral", "Psychodynamic", "Humanistic", "Sociocultural"],
+      correct: 1,
+      explain: "The psychodynamic perspective explains behavior through unconscious conflicts and motives, often rooted in early childhood experiences."
+    },
+    {
+      title: "Experimental design (Session 2)",
+      stem: "In an experiment testing a new memory drug, what is the purpose of random assignment?",
+      choices: [
+        "To ensure the sample is representative of the population",
+        "To control for participant-relevant confounding variables by making groups equivalent from the start",
+        "To eliminate the need for a control group",
+        "To guarantee statistical significance"
+      ],
+      correct: 1,
+      explain: "Random assignment ensures that groups don't differ in some meaningful way before the study begins, controlling for confounding variables related to who ends up in which group."
+    },
+    {
+      title: "Correlational method (Session 3)",
+      stem: "A researcher finds that ice cream sales and crime rates rise together each summer. What does this best illustrate?",
+      choices: ["A true experiment", "A spurious correlation caused by a third variable (heat)", "Random assignment", "The placebo effect"],
+      correct: 1,
+      explain: "This is a classic example of a spurious correlation — hot weather (a third variable) independently increases both ice cream sales and outdoor activity linked to crime."
+    },
+    {
+      title: "Validity and reliability (Session 4)",
+      stem: "A scale gives the same weight reading every time a person steps on it, but the reading is always 10 pounds too high. This scale is",
+      choices: ["Valid but not reliable", "Reliable but not valid", "Both valid and reliable", "Neither valid nor reliable"],
+      correct: 1,
+      explain: "The scale is reliable because it's consistent, but not valid because it doesn't accurately measure the true weight."
+    },
+    {
+      title: "Ethics (Session 5)",
+      stem: "After a study involving deception, researchers explain the true purpose of the study to participants. This step is called",
+      choices: ["Informed consent", "Debriefing", "Random sampling", "Peer review"],
+      correct: 1,
+      explain: "Debriefing occurs after a study to inform participants of its true purpose, especially important when deception was used."
+    },
+    {
+      title: "Statistics (Session 6)",
+      stem: "A study reports a correlation of r = -.75 between stress and sleep quality. What does this indicate?",
+      choices: [
+        "A weak relationship between the variables",
+        "A strong negative relationship — higher stress is associated with lower sleep quality",
+        "No relationship exists between the variables",
+        "The study must be invalid"
+      ],
+      correct: 1,
+      explain: "A correlation of -.75 is close to -1, indicating a strong negative relationship: as one variable increases, the other tends to decrease."
+    },
+    {
+      title: "Heredity and environment (Session 7)",
+      stem: "Twin studies comparing identical twins raised apart help researchers estimate the influence of",
+      choices: ["Only environment", "Only genetics", "Both genetics and environment", "Neither genetics nor environment"],
+      correct: 2,
+      explain: "Twin studies help estimate the relative contributions of both genetics (nature) and environment (nurture) by comparing outcomes across different rearing conditions."
+    },
+    {
+      title: "Nervous system (Session 8)",
+      stem: "A hiker's heart races and breathing quickens after spotting a bear. Which system produces this response?",
+      choices: ["The parasympathetic nervous system", "The sympathetic nervous system", "The somatic nervous system", "The central nervous system alone"],
+      correct: 1,
+      explain: "The sympathetic nervous system mobilizes the fight-or-flight response, accelerating heart rate and breathing when a threat is perceived."
+    },
+    {
+      title: "Neural firing and the brain (Sessions 9-10)",
+      stem: "A patient shows impulsive behavior and poor judgment after a head injury. Which brain region was most likely affected, and what principle explains how the damaged neurons initially responded to stimulation before the injury?",
+      choices: [
+        "Occipital lobe; the all-or-none principle",
+        "Frontal lobe; the all-or-none principle",
+        "Frontal lobe; sensory adaptation",
+        "Temporal lobe; the placebo effect"
+      ],
+      correct: 1,
+      explain: "The frontal lobe, especially the prefrontal cortex, governs judgment and impulse control. Neurons throughout the brain, including in the frontal lobe, follow the all-or-none principle when firing."
+    },
+    {
+      title: "Sleep (Session 11)",
+      stem: "A person deprived of REM sleep for several nights experiences unusually long REM periods once allowed to sleep normally. This is called",
+      choices: ["Sleep apnea", "REM rebound", "Somnambulism", "Hypnogogic sensation"],
+      correct: 1,
+      explain: "REM rebound occurs when someone deprived of REM sleep experiences longer-than-normal REM periods the next opportunity to sleep uninterrupted."
+    }
+  ];
+
+  var container = document.getElementById('s12-questions');
+  var scoreNum = document.getElementById('s12-score-num');
+  var attemptNum = document.getElementById('s12-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#9a5c00';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

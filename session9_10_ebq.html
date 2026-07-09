@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 9-10 EBQ — Evaluating Brain Localization</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #1b6b6b;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .claim-box { background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; padding: 18px 22px; margin: 20px 0; box-shadow: var(--shadow); }
+  .claim-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .claim-text { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.5; }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 9–10 · Unit 1 — Biological Bases of Behavior</div>
+    <h1 class="page-title">Evidence-Based Question — <em>Evaluating Brain Localization</em></h1>
+    <p class="page-desc">Read all three source summaries carefully, then answer Parts A through C(ii) in the text boxes below. Each part is graded against the official rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">6 points total</span>
+      <span class="tag tag-amber">30 min recommended</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 6 points</span>
+  </div>
+
+  <!-- Claim -->
+  <div class="claim-box">
+    <div class="claim-label">Claim to evaluate</div>
+    <div class="claim-text">Specific psychological functions can be reliably and permanently localized to specific, fixed brain structures.</div>
+  </div>
+
+  <!-- SOURCE 1 -->
+  <div class="article-box">
+    <div class="article-title">Source 1: Executive Function Deficits Following Frontal Lobe Damage</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Researchers examined whether damage specifically to the frontal lobes produces measurable deficits in executive functioning, testing the idea that this cognitive ability is localized to a specific brain region. The researchers hypothesized that patients with documented frontal lobe damage would perform significantly worse on a standard executive functioning task than healthy adults without brain injury.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants included 34 adults with documented frontal lobe damage confirmed via MRI (ages 28–61) and 34 age- and education-matched healthy adults with no history of brain injury, recruited from a neurology clinic and a community volunteer pool respectively. All participants gave informed consent.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Executive functioning was operationally defined and measured using the Wisconsin Card Sorting Test (WCST), a standardized neuropsychological task scored by the number of perseverative errors made (errors where a participant continues using an incorrect sorting rule after being told it is wrong), with scores ranging from 0 to 64. Higher scores indicate poorer executive functioning. Both groups completed the identical, standardized version of the task under the same testing conditions.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">The frontal lobe damage group made significantly more perseverative errors (M = 28.4, SD = 7.2) than the healthy control group (M = 9.1, SD = 4.5), an independent-samples t-test showing this difference was statistically significant, t(66) = 13.1, p &lt; .001, with a very large effect size (Cohen's d = 3.14). The researchers concluded that this large, consistent difference strongly supports frontal lobe localization of executive functioning.</div>
+      <table class="art-table">
+        <thead><tr><th>Group</th><th>Mean perseverative errors (0–64)</th><th>SD</th></tr></thead>
+        <tbody>
+          <tr><td>Frontal lobe damage</td><td>28.4</td><td>7.2</td></tr>
+          <tr><td>Healthy controls</td><td>9.1</td><td>4.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SOURCE 2 -->
+  <div class="article-box">
+    <div class="article-title">Source 2: Age-Related Differences in Functional Recovery After Brain Injury</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">While brain damage often produces predictable deficits, this study examined whether the brain can sometimes reorganize itself and recover lost function, a process called neuroplasticity. Researchers hypothesized that younger patients, whose brains are generally more adaptable, would show greater recovery of function following localized brain injury than older patients with comparable injuries.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 50 patients who had experienced a localized brain injury affecting language-related areas, divided into a younger group (ages 6–12, n = 25) and an older adult group (ages 45–65, n = 25), matched as closely as possible on initial injury severity. Participants were recruited from three rehabilitation hospitals using consecutive sampling of eligible patients admitted during the study period.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Language function recovery was operationally defined as the percentage improvement in scores on a standardized language assessment (0–100 scale) from one month post-injury to twelve months post-injury. Functional MRI scans were also conducted at twelve months to observe whether previously uninvolved brain regions showed increased activation during language tasks, suggesting functional reorganization.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">The younger group showed significantly greater language recovery (M = 61.3% improvement, SD = 14.2) than the older group (M = 22.7% improvement, SD = 11.8), t(48) = 10.4, p &lt; .001, d = 2.98. fMRI scans additionally showed that 19 of the 25 younger patients displayed increased activation in brain regions adjacent to the original injury site during language tasks, a pattern seen in only 4 of the 25 older patients. The researchers concluded that younger brains showed substantially greater capacity for functional reorganization, suggesting that the localization of psychological functions to specific brain regions may not be as fixed or permanent as often assumed, particularly in younger, more plastic brains.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 3 -->
+  <div class="article-box">
+    <div class="article-title">Source 3: Dopamine Levels and Motor Symptom Severity in Parkinson's Disease</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">This study examined whether motor symptoms in Parkinson's disease are better explained by neurotransmitter activity (specifically dopamine levels) rather than damage to any single fixed brain structure, since Parkinson's disease involves a gradual loss of dopamine-producing cells distributed across a brain pathway rather than one isolated brain region.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 60 adults diagnosed with Parkinson's disease (ages 55–78), recruited through a movement disorders clinic using consecutive sampling of newly referred patients. All participants provided informed consent, and confidentiality was maintained through coded patient identifiers.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Motor symptom severity was operationally defined using the Unified Parkinson's Disease Rating Scale (UPDRS) motor subsection, scored from 0 to 108, with higher scores indicating more severe motor impairment. Participants were assessed before and after receiving a standardized dose of L-DOPA, a medication that increases dopamine availability in the brain.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">A significant negative correlation was found between L-DOPA dosage and UPDRS motor scores, r = -.68, p &lt; .001, meaning higher doses were associated with substantially reduced motor symptom severity. The researchers concluded that motor symptoms were more strongly tied to overall dopamine availability throughout a distributed brain pathway than to damage confined to any single, fixed brain structure, complicating a strict localization account of motor control.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">State whether the claim ("specific psychological functions can be reliably and permanently localized to specific, fixed brain structures") is well supported, partially supported, or not supported when considering all three sources together.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> The claim is only partially supported. Source 1 supports localization, showing a large, consistent link between frontal lobe damage and executive function deficits. However, Source 2 shows that function is not always permanently fixed to one location, since younger brains can reorganize and recover function elsewhere. Source 3 further complicates strict localization by showing motor symptoms tied to distributed neurotransmitter activity rather than one fixed structure.
+    </div>
+  </div>
+
+  <!-- PART B(i) -->
+  <div class="part-box" id="partBi">
+    <span class="part-label">Part B(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 1 that supports the claim of brain localization.</div>
+    <textarea id="taBi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bi')">Grade this part</button>
+      <span class="points-display" id="ptsBi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBi"></div>
+    <div class="model-answer" id="maBi" style="display:none;">
+      <strong>Model answer:</strong> The frontal lobe damage group made significantly more perseverative errors (M = 28.4, SD = 7.2) than healthy controls (M = 9.1, SD = 4.5), a statistically significant difference with a very large effect size, t(66) = 13.1, p &lt; .001, d = 3.14.
+    </div>
+  </div>
+
+  <!-- PART B(ii) -->
+  <div class="part-box" id="partBii">
+    <span class="part-label">Part B(ii) — 1 point</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part B(i) connects to and supports the claim.</div>
+    <textarea id="taBii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bii')">Grade this part</button>
+      <span class="points-display" id="ptsBii">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBii"></div>
+    <div class="model-answer" id="maBii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the concept of executive functioning and its localization to the frontal lobes. The very large effect size (d = 3.14) shows this isn't a small or coincidental difference — patients with frontal lobe damage performed dramatically worse on a task specifically designed to measure executive functioning. Because the only systematic difference between groups was the presence of frontal lobe damage, this provides strong evidence that executive functioning is tied specifically to that brain region.
+    </div>
+  </div>
+
+  <!-- PART C(i) -->
+  <div class="part-box" id="partCi">
+    <span class="part-label">Part C(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 2 or Source 3 that complicates or challenges the claim.</div>
+    <textarea id="taCi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Ci')">Grade this part</button>
+      <span class="points-display" id="ptsCi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbCi"></div>
+    <div class="model-answer" id="maCi" style="display:none;">
+      <strong>Model answer:</strong> In Source 2, younger patients showed significantly greater language recovery (61.3% improvement) than older patients (22.7% improvement), t(48) = 10.4, p &lt; .001, and 19 of 25 younger patients showed fMRI evidence of new brain regions activating during language tasks. Alternatively, Source 3 shows a strong correlation (r = -.68, p &lt; .001) between L-DOPA dosage and reduced motor symptoms, tying motor control to distributed dopamine activity rather than one fixed structure.
+    </div>
+  </div>
+
+  <!-- PART C(ii) -->
+  <div class="part-box" id="partCii">
+    <span class="part-label">Part C(ii) — 2 points</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part C(i) connects to and challenges the claim.</div>
+    <textarea id="taCii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Cii')">Grade this part</button>
+      <span class="points-display" id="ptsCii">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbCii"></div>
+    <div class="model-answer" id="maCii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the concept of neuroplasticity — the brain's ability to reorganize itself by forming new neural connections, especially in younger brains. The fact that younger patients recovered language function significantly more than older patients, and showed fMRI evidence of new brain regions taking over language-related activity, directly challenges the idea that psychological functions are permanently fixed to one specific structure. If a function can shift to a different brain region after injury, especially in a younger, more plastic brain, then localization is not as rigid or permanent as the claim suggests — brain regions can adapt and reorganize which functions they support.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 9–10 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, Bi: 0, Bii: 0, Ci: 0, Cii: 0 };
+  var maxScores = { A: 1, Bi: 1, Bii: 1, Ci: 1, Cii: 2 };
+  var graded = { A: false, Bi: false, Bii: false, Ci: false, Cii: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasPartial = countKeywords(text, ['partial', 'partly', 'mixed', 'not fully', 'not completely']) >= 1;
+      var hasMultiple = countKeywords(text, ['source 1', 'source 2', 'source 3']) >= 2;
+      if (hasPartial && hasMultiple) {
+        points = 1; message = 'You correctly identified the claim as only partially supported and referenced multiple sources.';
+      } else if (hasPartial) {
+        points = 1; message = 'You correctly identified the claim as partially supported. Strengthen your answer by explicitly referencing at least two of the three sources.';
+      } else {
+        message = 'Your answer should conclude that the claim is only PARTIALLY supported, since Source 1 supports strict localization but Sources 2 and 3 complicate it.';
+      }
+    }
+
+    if (part === 'Bi') {
+      var hasNumbers = countKeywords(text, ['28.4', '9.1', 'perseverative', 'wcst']) >= 1;
+      var hasStat = countKeywords(text, ['significant', 'p <', 'effect size', 'd =']) >= 1;
+      if (hasNumbers && hasStat) {
+        points = 1; message = 'You cited specific evidence from Source 1 including the statistical results.';
+      } else if (hasNumbers) {
+        points = 1; message = 'You referenced the right evidence. For full credit, also cite the statistical significance or effect size.';
+      } else {
+        message = 'Your answer should cite the specific WCST perseverative error scores from Source 1 (28.4 for frontal damage vs. 9.1 for controls) and the statistical significance of that difference.';
+      }
+    }
+
+    if (part === 'Bii') {
+      var hasConcept = countKeywords(text, ['executive function', 'localization']) >= 1;
+      var hasExplain = countKeywords(text, ['effect size', 'large', 'dramatically', 'systematic']) >= 1;
+      if (hasConcept && hasExplain && text.length > 120) {
+        points = 1; message = 'You named the correct concept and fully explained the evidence-to-claim connection.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain why the large effect size specifically strengthens the localization argument.';
+      } else {
+        message = 'Your answer should name the concept of executive functioning (localized to the frontal lobe) and explain how the very large effect size shows this is a real, meaningful difference, not a coincidence.';
+      }
+    }
+
+    if (part === 'Ci') {
+      var hasEvidence = countKeywords(text, ['61.3', '22.7', 'plasticity', 'younger', '-.68', 'dopamine', 'l-dopa']) >= 1;
+      var hasStat = countKeywords(text, ['significant', 'p <', 'effect size', 'd =', 'r =']) >= 1;
+      if (hasEvidence && hasStat) {
+        points = 1; message = 'You cited specific complicating evidence with the relevant statistics.';
+      } else if (hasEvidence) {
+        points = 1; message = 'You referenced the right evidence. For full credit, also include the specific statistic reported.';
+      } else {
+        message = 'Your answer should cite specific evidence from Source 2 (greater recovery and fMRI reorganization in younger patients) or Source 3 (the r = -.68 correlation between dopamine and motor symptoms).';
+      }
+    }
+
+    if (part === 'Cii') {
+      var hasConcept = countKeywords(text, ['neuroplasticity', 'plastic', 'reorganiz', 'distributed']) >= 1;
+      var hasFullExplain = text.length > 150;
+      var hasConnection = countKeywords(text, ['not fixed', 'not permanent', 'adapt', 'shift']) >= 1;
+      if (hasConcept && hasFullExplain && hasConnection) {
+        points = 2; message = 'Excellent — you named a specific concept and fully explained how the evidence challenges the claim.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain how this evidence shows localization is not as fixed as claimed.';
+      } else {
+        message = 'Your answer should name the concept of neuroplasticity (or distributed neurotransmitter function) and fully explain how the evidence shows brain function can shift or isn\'t confined to one fixed structure.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','Bi','Bii','Ci','Cii'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

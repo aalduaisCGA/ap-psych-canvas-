@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 24 Review EBQ — Evaluating Cognitive Bias Reduction Training</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #9a5c00;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .claim-box { background: var(--surface); border: 2px solid var(--accent); border-radius: 10px; padding: 18px 22px; margin: 20px 0; box-shadow: var(--shadow); }
+  .claim-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .claim-text { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.5; }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .chart-wrap { margin-top: 14px; background: var(--bg2); border-radius: 8px; padding: 16px; }
+  .chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px; text-align: center; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
+  .bar-label { width: 190px; font-size: 12px; color: var(--text2); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill { background: var(--accent); height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .bar-value { color: #fff; font-size: 11px; font-weight: 700; }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Session 24 · Revision — Sessions 14–23</div>
+    <h1 class="page-title">Review Evidence-Based Question — <em>Can Training Reduce Cognitive Biases?</em></h1>
+    <p class="page-desc">This review EBQ draws on thinking/decision-making, memory, and intelligence content from Unit 2, alongside research design and statistics skills from Unit 0. Read all three sources, then answer Parts A through C(ii).</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">6 points total</span>
+      <span class="tag tag-amber">30 min recommended</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 6 points</span>
+  </div>
+
+  <!-- Claim -->
+  <div class="claim-box">
+    <div class="claim-label">Claim to evaluate</div>
+    <div class="claim-text">Brief training programs can permanently eliminate cognitive biases such as the availability heuristic and confirmation bias.</div>
+  </div>
+
+  <!-- SOURCE 1 -->
+  <div class="article-box">
+    <div class="article-title">Source 1: Short-Term Effects of Bias-Awareness Training on Heuristic Use</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Researchers examined whether a brief educational intervention explaining the availability heuristic could reduce participants' tendency to overestimate the likelihood of vivid but statistically rare events immediately after training.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 100 adults recruited through an online research platform using random assignment to conditions after screening for basic reading comprehension. Informed consent was obtained from all participants.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Participants in the training group (n = 50) watched a 10-minute video explaining the availability heuristic with concrete examples, while participants in the control group (n = 50) watched an unrelated 10-minute video on an neutral topic. Immediately afterward, all participants rated the perceived likelihood of several rare, vivid risks (such as shark attacks) relative to more common risks (such as car accidents), with bias magnitude operationally defined as the average difference between perceived and actual statistical risk rankings.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">The training group showed significantly reduced bias magnitude (M = 1.8, SD = 0.9) compared to the control group (M = 3.4, SD = 1.1) immediately after the intervention, t(98) = 7.94, p &lt; .001, d = 1.59. The researchers concluded that brief training can meaningfully reduce availability heuristic bias in the short term.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 2 -->
+  <div class="article-box">
+    <div class="article-title">Source 2: Long-Term Follow-Up on Bias Training Effectiveness</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">This study followed up on short-term bias-training research by testing whether reductions in cognitive bias persist over a longer time period, rather than only being measured immediately after training.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were the same 100 adults from a prior short-term bias-training study, recontacted six weeks later using their original contact information; 91 of the original 100 participants (91%) completed the follow-up assessment. Informed consent for the follow-up was obtained separately.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Six weeks after the original training or control video, participants completed the same bias magnitude assessment used in the original study, without any additional training or reminder in between.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">At the six-week follow-up, the difference between the original training group (M = 3.1, SD = 1.2) and control group (M = 3.3, SD = 1.1) was no longer statistically significant, t(89) = 0.84, p = .40.</div>
+      <div class="chart-wrap">
+        <div class="chart-title">Bias magnitude score over time (lower = less biased)</div>
+        <div class="bar-row">
+          <div class="bar-label">Training group, immediate</div>
+          <div class="bar-track"><div class="bar-fill" style="width:36%;"><span class="bar-value">1.8</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Training group, 6 weeks later</div>
+          <div class="bar-track"><div class="bar-fill" style="width:62%; background:#c98a2e;"><span class="bar-value">3.1</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Control group, 6 weeks later</div>
+          <div class="bar-track"><div class="bar-fill" style="width:66%; background:#7a4a1f;"><span class="bar-value">3.3</span></div></div>
+        </div>
+      </div>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that the initial bias reduction largely faded by six weeks, suggesting the original training's effects were short-lived rather than permanent.</div>
+    </div>
+  </div>
+
+  <!-- SOURCE 3 -->
+  <div class="article-box">
+    <div class="article-title">Source 3: Repeated Practice and Durable Bias Reduction</div>
+    <div class="article-meta">Research summary for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">This study examined whether repeated practice sessions, rather than a single training session, could produce more durable reductions in cognitive bias, drawing on the concept that retrieval practice and distributed learning (rather than one-time exposure) generally produce stronger, longer-lasting learning.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 60 adults recruited from a community volunteer pool using random assignment to conditions. Informed consent was obtained from all participants.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">The repeated-practice group (n = 30) completed four separate 10-minute bias-awareness training sessions spaced one week apart, while the single-session group (n = 30) completed one 40-minute training session covering identical material all at once. Bias magnitude was measured six weeks after each group's final training session.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">The repeated-practice group showed significantly lower bias magnitude at six-week follow-up (M = 2.0, SD = 0.8) than the single-session group (M = 3.2, SD = 1.0), t(58) = 5.12, p &lt; .001, d = 1.32. The researchers concluded that spacing training over multiple sessions, consistent with the spacing effect, produced more durable bias reduction than a single, longer training session.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">State whether the claim ("brief training programs can permanently eliminate cognitive biases") is well supported, partially supported, or not supported when considering all three sources together.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> The claim is not well supported. Source 1 shows brief training reduces bias immediately, but Source 2 shows this effect fades entirely within six weeks. Source 3 shows that durable reduction is possible, but only through repeated, spaced practice, not a single brief session — directly contradicting the idea that "brief" training alone can "permanently eliminate" bias.
+    </div>
+  </div>
+
+  <!-- PART B(i) -->
+  <div class="part-box" id="partBi">
+    <span class="part-label">Part B(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 1 that initially seems to support the claim.</div>
+    <textarea id="taBi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bi')">Grade this part</button>
+      <span class="points-display" id="ptsBi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBi"></div>
+    <div class="model-answer" id="maBi" style="display:none;">
+      <strong>Model answer:</strong> The training group showed significantly lower bias magnitude (M = 1.8) than the control group (M = 3.4) immediately after training, t(98) = 7.94, p &lt; .001, d = 1.59 — a large, statistically significant reduction.
+    </div>
+  </div>
+
+  <!-- PART B(ii) -->
+  <div class="part-box" id="partBii">
+    <span class="part-label">Part B(ii) — 1 point</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain why the evidence from Part B(i) alone is not sufficient to fully support the claim.</div>
+    <textarea id="taBii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Bii')">Grade this part</button>
+      <span class="points-display" id="ptsBii">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbBii"></div>
+    <div class="model-answer" id="maBii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the availability heuristic and the concept of measurement timing. Source 1 only measured bias magnitude immediately after training, providing no evidence about whether this reduction would last. The claim specifically requires "permanent" elimination, and a single immediate measurement cannot establish permanence — a longer follow-up period, as provided in Source 2, is necessary to evaluate that specific claim.
+    </div>
+  </div>
+
+  <!-- PART C(i) -->
+  <div class="part-box" id="partCi">
+    <span class="part-label">Part C(i) — 1 point</span>
+    <div class="part-prompt">Identify one specific piece of evidence from Source 2 or Source 3 that directly challenges the claim.</div>
+    <textarea id="taCi" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Ci')">Grade this part</button>
+      <span class="points-display" id="ptsCi">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbCi"></div>
+    <div class="model-answer" id="maCi" style="display:none;">
+      <strong>Model answer:</strong> Source 2 shows that at six-week follow-up, the training group (M = 3.1) was no longer significantly different from the control group (M = 3.3), t(89) = 0.84, p = .40 — showing the initial reduction from the single brief training had disappeared entirely.
+    </div>
+  </div>
+
+  <!-- PART C(ii) -->
+  <div class="part-box" id="partCii">
+    <span class="part-label">Part C(ii) — 2 points</span>
+    <div class="part-prompt">Name a specific psychological concept and fully explain how the evidence from Part C(i), combined with Source 3, provides a complete picture of what actually produces durable bias reduction.</div>
+    <textarea id="taCii" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('Cii')">Grade this part</button>
+      <span class="points-display" id="ptsCii">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbCii"></div>
+    <div class="model-answer" id="maCii" style="display:none;">
+      <strong>Model answer:</strong> This connects to the spacing effect, which shows that distributed practice over time produces more durable learning than massed, one-time exposure. Source 2 shows a single brief training session's effects faded completely within six weeks. Source 3 directly tested this by comparing repeated, spaced training sessions to one longer single session, finding that only the spaced, repeated-practice group maintained significantly lower bias magnitude at six weeks (2.0 vs. 3.2). Together, this shows that durable bias reduction is possible, but requires the same encoding principles that improve memory more broadly — namely spaced, repeated practice — rather than a single brief exposure, directly refuting the specific wording of the claim that brief training alone produces permanent change.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Session 24 Revision · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, Bi: 0, Bii: 0, Ci: 0, Cii: 0 };
+  var maxScores = { A: 1, Bi: 1, Bii: 1, Ci: 1, Cii: 2 };
+  var graded = { A: false, Bi: false, Bii: false, Ci: false, Cii: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasNotSupported = countKeywords(text, ['not well supported', 'not supported', 'not fully supported', 'partially']) >= 1;
+      var hasMultiple = countKeywords(text, ['source 1', 'source 2', 'source 3']) >= 2;
+      if (hasNotSupported && hasMultiple) {
+        points = 1; message = 'You correctly identified the claim as not well supported and referenced multiple sources.';
+      } else if (hasNotSupported) {
+        points = 1; message = 'You correctly identified the claim as not well supported. Strengthen your answer by referencing at least two sources explicitly.';
+      } else {
+        message = 'Your answer should conclude the claim is NOT well supported, since Source 2 shows the effect fades and Source 3 shows durable change requires repeated practice, not a single brief session.';
+      }
+    }
+
+    if (part === 'Bi') {
+      var hasEvidence = countKeywords(text, ['1.8', '3.4', 'significant']) >= 1;
+      if (hasEvidence) {
+        points = 1; message = 'You correctly cited the immediate training effect from Source 1.';
+      } else {
+        message = 'Your answer should cite the specific bias magnitude scores from Source 1 (1.8 for training vs 3.4 for control).';
+      }
+    }
+
+    if (part === 'Bii') {
+      var hasConcept = countKeywords(text, ['immediate', 'timing', 'permanent', 'measurement']) >= 1;
+      var hasFullExplain = text.length > 120;
+      if (hasConcept && hasFullExplain) {
+        points = 1; message = 'You explained the measurement-timing limitation well.';
+      } else if (hasConcept) {
+        points = 1; message = 'You identified a relevant point. Expand your explanation for full credit.';
+      } else {
+        message = 'Your answer should explain that Source 1 only measured immediate effects, which cannot establish the "permanent" change the claim requires.';
+      }
+    }
+
+    if (part === 'Ci') {
+      var hasEvidence = countKeywords(text, ['3.1', '3.3', 'not significant', 'p = .40', '2.0', '3.2']) >= 1;
+      if (hasEvidence) {
+        points = 1; message = 'You correctly cited the challenging evidence from Source 2 or Source 3.';
+      } else {
+        message = 'Your answer should cite the specific follow-up scores from Source 2 (3.1 vs 3.3, not significant) or Source 3 (2.0 vs 3.2).';
+      }
+    }
+
+    if (part === 'Cii') {
+      var hasConcept = countKeywords(text, ['spacing effect', 'distributed', 'repeated practice']) >= 1;
+      var hasFullExplain = text.length > 150;
+      var hasConnection = countKeywords(text, ['durable', 'lasting', 'requires', 'not brief']) >= 1;
+      if (hasConcept && hasFullExplain && hasConnection) {
+        points = 2; message = 'Excellent — you named the spacing effect and fully explained how it clarifies what actually produces durable change.';
+      } else if (hasConcept) {
+        points = 1; message = 'You named a relevant concept. For full credit, more fully explain how spaced repeated practice, not a single brief session, produces durable bias reduction.';
+      } else {
+        message = 'Your answer should name the spacing effect and explain how Source 3 shows durable bias reduction requires spaced, repeated practice, not a single brief training session.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','Bi','Bii','Ci','Cii'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

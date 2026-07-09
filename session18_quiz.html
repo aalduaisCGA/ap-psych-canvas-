@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 18 Quiz — Introduction to Memory</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s18quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 18</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.3: Introduction to Memory — Quiz</div>
+</div>
+
+<div id="s18-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s18-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s18-attempt-num">0</span> / 10
+</div>
+
+<div id="s18-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "The multi-store (three-box) model",
+      stem: "According to the multi-store model of memory, information must pass through which three systems, in order, to be remembered long-term?",
+      choices: [
+        "Long-term memory, short-term memory, sensory memory",
+        "Sensory memory, short-term memory, long-term memory",
+        "Working memory, sensory memory, long-term memory",
+        "Short-term memory only, with no other systems involved"
+      ],
+      correct: 1,
+      explain: "The multi-store (three-box) model proposes that information passes through sensory memory, then short-term memory, and finally into long-term memory to be remembered."
+    },
+    {
+      title: "Iconic and echoic memory",
+      stem: "A brief visual afterimage of a flashed picture lasts less than a second, while the 'echo' of a spoken word lingers slightly longer in the mind. These two examples represent",
+      choices: ["Long-term memory", "Iconic and echoic sensory memory", "Working memory", "Procedural memory"],
+      correct: 1,
+      explain: "Iconic memory holds visual information for a fraction of a second, while echoic memory holds auditory information for a few seconds — both are types of very brief sensory memory."
+    },
+    {
+      title: "Working memory components",
+      stem: "According to the working memory model, which three components interact to actively process information from short-term memory?",
+      choices: [
+        "The central executive, phonological loop, and visuospatial sketchpad",
+        "Iconic memory, echoic memory, and procedural memory",
+        "Retrograde amnesia, anterograde amnesia, and long-term potentiation",
+        "Recall, recognition, and retrieval cues"
+      ],
+      correct: 0,
+      explain: "The working memory model describes the central executive (coordinates the system), the phonological loop (handles verbal/auditory information), and the visuospatial sketchpad (handles visual/spatial information)."
+    },
+    {
+      title: "Levels of processing model",
+      stem: "According to the levels of processing model, memory is encoded at three levels, from shallowest to deepest. What are these three levels?",
+      choices: [
+        "Structural, phonemic, and semantic",
+        "Sensory, short-term, and long-term",
+        "Episodic, semantic, and procedural",
+        "Explicit, implicit, and prospective"
+      ],
+      correct: 0,
+      explain: "The levels of processing model proposes three levels of encoding: structural (shallowest, based on physical appearance), phonemic (based on sound), and semantic (deepest, based on meaning)."
+    },
+    {
+      title: "Automatic vs effortful processing",
+      stem: "Remembering what you ate for breakfast without trying, versus deliberately studying a list of vocabulary words, illustrates the difference between",
+      choices: [
+        "Automatic processing and effortful processing",
+        "Iconic memory and echoic memory",
+        "Recall and recognition",
+        "Retrograde amnesia and anterograde amnesia"
+      ],
+      correct: 0,
+      explain: "Automatic processing happens without conscious effort, like remembering routine daily events, while effortful processing requires deliberate mental effort, like studying new material."
+    },
+    {
+      title: "Explicit vs implicit memory",
+      stem: "A student consciously recalls the date of a historical event for an exam, while also unconsciously remembering how to ride a bike without thinking about it. These represent, respectively,",
+      choices: [
+        "Explicit memory and implicit memory",
+        "Sensory memory and working memory",
+        "Retrograde amnesia and anterograde amnesia",
+        "Recall and recognition"
+      ],
+      correct: 0,
+      explain: "Explicit (declarative) memories are consciously recalled facts or events. Implicit (nondeclarative) memories, like riding a bike, are unintentional and don't require conscious recall."
+    },
+    {
+      title: "Episodic, semantic, and procedural memory",
+      stem: "Remembering your last birthday party, knowing that Paris is the capital of France, and knowing how to tie your shoes are examples of which three types of long-term memory, respectively?",
+      choices: [
+        "Episodic, semantic, and procedural memory",
+        "Iconic, echoic, and working memory",
+        "Explicit, implicit, and prospective memory",
+        "Sensory, short-term, and long-term memory"
+      ],
+      correct: 0,
+      explain: "Episodic memory stores specific personal events, semantic memory stores general facts and knowledge, and procedural memory stores skills and how to perform them."
+    },
+    {
+      title: "The hippocampus and anterograde amnesia",
+      stem: "A patient with hippocampus damage can recall memories formed before the injury but cannot form any new long-term memories going forward. This condition is called",
+      choices: ["Retrograde amnesia", "Anterograde amnesia", "Infantile amnesia", "Prospective memory loss"],
+      correct: 1,
+      explain: "Anterograde amnesia is the inability to form new long-term memories after a brain injury, while memories formed before the injury typically remain intact."
+    },
+    {
+      title: "Long-term potentiation",
+      stem: "Researchers observe that repeated firing between two neurons strengthens the connection between them, making the receiving neuron more sensitive to future signals. This neurological process is called",
+      choices: ["Long-term potentiation", "The serial position effect", "Chunking", "Maintenance rehearsal"],
+      correct: 0,
+      explain: "Long-term potentiation refers to the strengthening of the connection between neurons through repeated firing, believed to be a biological basis for long-term memory formation."
+    },
+    {
+      title: "Distinguishing memory models",
+      stem: "A psychologist argues that how well information is remembered depends less on which memory 'stage' it reaches and more on how deeply and meaningfully it was thought about when first encountered. Which memory model best reflects this view?",
+      choices: [
+        "The multi-store (three-box) model",
+        "The levels of processing model",
+        "The working memory model exclusively",
+        "The serial position effect"
+      ],
+      correct: 1,
+      explain: "The levels of processing model focuses on the depth of mental processing (shallow vs. deep encoding) as the key factor in memory retention, rather than which 'store' or stage the information reaches."
+    }
+  ];
+
+  var container = document.getElementById('s18-questions');
+  var scoreNum = document.getElementById('s18-score-num');
+  var attemptNum = document.getElementById('s18-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

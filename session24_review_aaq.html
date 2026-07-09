@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 24 Review AAQ — Chunking and Working Memory Capacity</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #9a5c00;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .chart-wrap { margin-top: 14px; background: var(--bg2); border-radius: 8px; padding: 16px; }
+  .chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px; text-align: center; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
+  .bar-label { width: 190px; font-size: 12px; color: var(--text2); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill { background: var(--accent); height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .bar-value { color: #fff; font-size: 11px; font-weight: 700; }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Session 24 · Revision — Sessions 14–23</div>
+    <h1 class="page-title">Review Article Analysis Question — <em>Chunking and Working Memory Capacity</em></h1>
+    <p class="page-desc">This review AAQ combines encoding strategies from Unit 2 with research methods and statistics skills from Unit 0. Read the article carefully, then answer all six parts (A–F).</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">7 points total</span>
+      <span class="tag tag-amber">25 min recommended</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 7 points</span>
+  </div>
+
+  <!-- Article -->
+  <div class="article-box">
+    <div class="article-title">The Effect of Chunking on Working Memory Capacity for Digit Sequences</div>
+    <div class="article-meta">Research article for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">Classic research on working memory capacity suggests that people can typically hold approximately seven items, plus or minus two, in short-term memory at once. Chunking, the process of grouping individual pieces of information into larger, meaningful units, has been proposed as a strategy to effectively expand this apparent capacity limit by reducing the number of individual "items" that must be held in mind. Despite chunking's widespread use as a memory technique, few controlled experiments have directly compared recall performance for chunked versus unchunked digit sequences of equal total length within the same testing session. The researchers hypothesized that participants would correctly recall significantly more digits from sequences presented in chunked groups than from equally long sequences presented as unbroken strings of digits.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-section"></div>
+      <div class="art-text">Participants were 84 college students (44 female, 40 male) aged 18 to 23, recruited from an introductory psychology course using random sampling from the full course roster. All participants provided informed consent and were informed their performance would not affect their course grade in any way. Participants reported no known memory-related conditions on a brief background questionnaire administered prior to testing.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">Each participant completed two trials in a counterbalanced order to control for order effects: one trial presented a 12-digit sequence as an unbroken string (e.g., "483920175634"), and the other trial presented a different but equally long 12-digit sequence pre-divided into four chunks of three digits each, separated by pauses (e.g., "483 920 175 634"). Each sequence was read aloud by a research assistant at a fixed pace of one digit per second. Working memory capacity for each trial was operationally defined as the number of digits correctly recalled in the correct order immediately after each sequence was presented, out of a maximum possible score of 12.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Participants correctly recalled significantly more digits in the chunked condition (M = 10.4, SD = 1.3) than in the unchunked condition (M = 6.8, SD = 1.7), a paired-samples t-test confirming this difference was statistically significant, t(83) = 15.62, p &lt; .001, with a very large effect size (Cohen's d = 2.34).</div>
+      <div class="chart-wrap">
+        <div class="chart-title">Mean digits correctly recalled (out of 12)</div>
+        <div class="bar-row">
+          <div class="bar-label">Chunked condition</div>
+          <div class="bar-track"><div class="bar-fill" style="width:87%;"><span class="bar-value">10.4</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Unchunked condition</div>
+          <div class="bar-track"><div class="bar-fill" style="width:57%; background:#c98a2e;"><span class="bar-value">6.8</span></div></div>
+        </div>
+      </div>
+      <table class="art-table">
+        <thead><tr><th>Condition</th><th>Mean digits recalled (out of 12)</th><th>SD</th></tr></thead>
+        <tbody>
+          <tr><td>Chunked</td><td>10.4</td><td>1.3</td></tr>
+          <tr><td>Unchunked</td><td>6.8</td><td>1.7</td></tr>
+        </tbody>
+      </table>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that chunking substantially improves recall of digit sequences, consistent with the idea that grouping information into meaningful units allows more total information to be held within working memory's limited capacity. The researchers noted one limitation: the specific 3-digit chunk size used in this study may not represent the optimal chunk size for all types of material, and future research should examine whether these findings extend to non-numerical information, such as letters or words.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">Identify the research method used in this study, and justify your answer using a specific detail from the Method section.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> This is a true experiment (specifically a within-subjects design), since every participant completed both the chunked and unchunked conditions, with the researchers manipulating whether the digit sequence was presented chunked or unchunked, and counterbalancing the order to control for order effects.
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-box" id="partB">
+    <span class="part-label">Part B — 1 point</span>
+    <div class="part-prompt">State the operational definition of working memory capacity used in this study.</div>
+    <textarea id="taB" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('B')">Grade this part</button>
+      <span class="points-display" id="ptsB">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbB"></div>
+    <div class="model-answer" id="maB" style="display:none;">
+      <strong>Model answer:</strong> Working memory capacity was operationally defined as the number of digits correctly recalled in the correct order immediately after each sequence was presented, out of a maximum of 12.
+    </div>
+  </div>
+
+  <!-- PART C -->
+  <div class="part-box" id="partC">
+    <span class="part-label">Part C — 1 point</span>
+    <div class="part-prompt">Describe the meaning of the difference between the chunked condition's mean score (M = 10.4) and the unchunked condition's mean score (M = 6.8), using the chart or table provided.</div>
+    <textarea id="taC" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('C')">Grade this part</button>
+      <span class="points-display" id="ptsC">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbC"></div>
+    <div class="model-answer" id="maC" style="display:none;">
+      <strong>Model answer:</strong> Participants recalled substantially more digits when the sequence was chunked (10.4 out of 12) compared to when it was presented as an unbroken string (6.8 out of 12), suggesting that chunking meaningfully improved how much information participants could hold in working memory.
+    </div>
+  </div>
+
+  <!-- PART D -->
+  <div class="part-box" id="partD">
+    <span class="part-label">Part D — 1 point</span>
+    <div class="part-prompt">Identify at least one ethical guideline applied by the researchers in this study.</div>
+    <textarea id="taD" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('D')">Grade this part</button>
+      <span class="points-display" id="ptsD">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbD"></div>
+    <div class="model-answer" id="maD" style="display:none;">
+      <strong>Model answer:</strong> The researchers obtained informed consent from all participants and informed them that their performance would not affect their course grade in any way.
+    </div>
+  </div>
+
+  <!-- PART E -->
+  <div class="part-box" id="partE">
+    <span class="part-label">Part E — 1 point</span>
+    <div class="part-prompt">Explain the extent to which the findings of this study may or may not be generalizable, using specific evidence from the article.</div>
+    <textarea id="taE" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('E')">Grade this part</button>
+      <span class="points-display" id="ptsE">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbE"></div>
+    <div class="model-answer" id="maE" style="display:none;">
+      <strong>Model answer:</strong> The findings may have limited generalizability, since the researchers themselves noted that the specific 3-digit chunk size used may not be optimal for all material types, and the study only tested numerical digit sequences rather than letters, words, or other kinds of information.
+    </div>
+  </div>
+
+  <!-- PART F -->
+  <div class="part-box" id="partF">
+    <span class="part-label">Part F — 2 points</span>
+    <div class="part-prompt">Explain how the research findings support or refute the researchers' hypothesis, and connect the results to the concept of chunking discussed in Session 19.</div>
+    <textarea id="taF" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('F')">Grade this part</button>
+      <span class="points-display" id="ptsF">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbF"></div>
+    <div class="model-answer" id="maF" style="display:none;">
+      <strong>Model answer:</strong> The findings strongly support the hypothesis: participants recalled significantly more digits in the chunked condition (10.4) than the unchunked condition (6.8), a very large effect (d = 2.34, p &lt; .001). This directly supports the concept of chunking, which proposes that grouping individual pieces of information into larger, meaningful units allows more total information to be encoded and held in working memory. Because working memory capacity is limited to a small number of individual items, reducing 12 individual digits down to just 4 meaningful chunks effectively allowed participants to work within that same capacity limit while retaining more total information.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all six parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Session 24 Revision · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+  var maxScores = { A: 1, B: 1, C: 1, D: 1, E: 1, F: 2 };
+  var graded = { A: false, B: false, C: false, D: false, E: false, F: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasExp = countKeywords(text, ['experiment', 'within-subjects', 'within subjects']) >= 1;
+      var hasJustify = countKeywords(text, ['manipulat', 'counterbalanc', 'both condition']) >= 1;
+      if (hasExp && hasJustify) {
+        points = 1; message = 'You correctly identified this as a within-subjects experiment and justified it well.';
+      } else if (hasExp) {
+        points = 1; message = 'You correctly identified this as an experiment. For full credit, explicitly justify using the manipulation and counterbalancing detail.';
+      } else {
+        message = 'Your answer should identify this as a true experiment (within-subjects design), justified by the manipulation of chunking condition and counterbalanced order.';
+      }
+    }
+
+    if (part === 'B') {
+      var hasDigits = countKeywords(text, ['digits correctly recalled', 'correct order', '12']) >= 1;
+      if (hasDigits) {
+        points = 1; message = 'You correctly stated the operational definition.';
+      } else {
+        message = 'Your answer should state that working memory capacity was defined as the number of digits correctly recalled in order, out of 12.';
+      }
+    }
+
+    if (part === 'C') {
+      var hasNumbers = countKeywords(text, ['10.4', '6.8']) >= 1;
+      var hasMeaning = countKeywords(text, ['more', 'less', 'better', 'higher', 'improve']) >= 1;
+      if (hasNumbers && hasMeaning) {
+        points = 1; message = 'You correctly described the meaning of the difference using specific values.';
+      } else if (hasMeaning) {
+        points = 1; message = 'You described the meaning correctly. For full credit, cite the specific mean values (10.4 vs 6.8).';
+      } else {
+        message = 'Your answer should explain that the chunked condition (10.4) produced substantially better recall than the unchunked condition (6.8).';
+      }
+    }
+
+    if (part === 'D') {
+      var hasConsent = countKeywords(text, ['informed consent', 'consent', 'grade']) >= 1;
+      if (hasConsent) {
+        points = 1; message = 'You correctly identified an ethical guideline applied in this study.';
+      } else {
+        message = 'Your answer should identify informed consent and/or the assurance that performance would not affect course grade.';
+      }
+    }
+
+    if (part === 'E') {
+      var hasSample = countKeywords(text, ['3-digit', 'chunk size', 'numerical', 'digit sequence']) >= 1;
+      var hasLimit = countKeywords(text, ['limited', 'may not generalize', 'restrict']) >= 1;
+      if (hasSample && hasLimit) {
+        points = 1; message = 'You correctly explained the generalizability limitation using specific evidence.';
+      } else if (hasSample) {
+        points = 1; message = 'You referenced the right detail. For full credit, explicitly state how this limits generalizability.';
+      } else {
+        message = 'Your answer should reference the specific chunk size and numerical-only material used, and explain how this may limit generalizability to other types of information.';
+      }
+    }
+
+    if (part === 'F') {
+      var hasSupport = countKeywords(text, ['support', 'significant', 'd =', '2.34']) >= 1;
+      var hasConcept = countKeywords(text, ['chunking', 'working memory', 'capacity']) >= 1;
+      var hasFullExplain = text.length > 150;
+      if (hasSupport && hasConcept && hasFullExplain) {
+        points = 2; message = 'Excellent — you explained how the findings support the hypothesis and connected them fully to chunking and working memory capacity.';
+      } else if (hasSupport || hasConcept) {
+        points = 1; message = 'You addressed part of this well. For full credit, address BOTH how the findings support the hypothesis AND connect explicitly to chunking/working memory capacity.';
+      } else {
+        message = 'Your answer should explain that the large, significant difference supports the hypothesis, and connect this to chunking allowing more information to fit within working memory\'s limited capacity.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','B','C','D','E','F'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

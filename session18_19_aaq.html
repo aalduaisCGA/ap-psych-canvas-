@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 18-19 AAQ — Elaborative Rehearsal and Vocabulary Retention</title>
+<style>
+  :root {
+    --bg: #f9f8f6; --bg2: #f1efe9; --bg3: #e8e6de;
+    --surface: #ffffff; --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.18);
+    --text: #1a1917; --text2: #5c5a55; --text3: #908e87;
+    --sp1: #1a56a0; --sp1-bg: #e6f0fb;
+    --correct: #1a6b3c; --correct-bg: #d6f0e2; --correct-border: #7dcba0;
+    --wrong: #a02020; --wrong-bg: #fde8e8; --wrong-border: #e8a0a0;
+    --accent: #1b6b6b;
+    --amber: #9a5c00; --amber-bg: #fef0d6; --amber-border: #e0c070;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Arial, sans-serif; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 16px 40px; }
+
+  .page-header { padding: 20px 0 16px; }
+  .eyebrow { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: .10em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .page-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .page-title em { font-style: italic; color: var(--accent); }
+  .page-desc { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+  .tag { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .tag-blue { background: var(--sp1-bg); color: var(--sp1); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+
+  .article-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 24px; margin: 20px 0; box-shadow: var(--shadow); }
+  .article-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 16px; font-style: italic; }
+  .art-section { margin-bottom: 16px; }
+  .art-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 8px; }
+  .art-text { font-size: 14px; line-height: 1.7; color: var(--text); }
+  .art-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+  .art-table th { background: var(--bg2); text-align: left; padding: 8px 10px; border: 1px solid var(--border); font-weight: 700; }
+  .art-table td { padding: 8px 10px; border: 1px solid var(--border); }
+
+  .chart-wrap { margin-top: 14px; background: var(--bg2); border-radius: 8px; padding: 16px; }
+  .chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 10px; text-align: center; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 8px; gap: 10px; }
+  .bar-label { width: 190px; font-size: 12px; color: var(--text2); text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 22px; position: relative; }
+  .bar-fill { background: var(--accent); height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .bar-value { color: #fff; font-size: 11px; font-weight: 700; }
+
+  .part-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; box-shadow: var(--shadow); }
+  .part-label { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
+  .part-prompt { font-size: 14.5px; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  textarea { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 13.5px; color: var(--text); resize: vertical; }
+  textarea:focus { outline: 2px solid var(--sp1); border-color: transparent; }
+  .part-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .btn-grade { background: var(--sp1); color: #fff; border: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-grade:disabled { background: var(--text3); cursor: default; }
+  .points-display { font-size: 13px; font-weight: 600; color: var(--text2); }
+  .feedback-box { margin-top: 12px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; display: none; }
+  .feedback-box.correct { background: var(--correct-bg); border: 1px solid var(--correct-border); color: var(--correct); }
+  .feedback-box.partial { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+  .feedback-box.wrong { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: var(--wrong); }
+  .model-answer { margin-top: 10px; padding: 12px 14px; background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .model-answer strong { color: var(--text); }
+
+  .dashboard { position: sticky; top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .dashboard-score { font-weight: 700; color: var(--accent); font-size: 16px; }
+
+  .grade-all-wrap { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border-radius: 10px; padding: 16px 20px; margin: 24px 0; }
+  .grade-all-text { font-size: 13.5px; color: var(--text2); }
+  .btn-all { background: var(--accent); color: #fff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page-footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Copyright Banner -->
+  <div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-top:20px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+    <strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+  </div>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="eyebrow">AP Psychology · Sessions 18–19 · Unit 2 — Cognition</div>
+    <h1 class="page-title">Article Analysis Question — <em>Elaborative Rehearsal and Vocabulary Retention</em></h1>
+    <p class="page-desc">Read the research article carefully, then answer all six parts (A–F) in the text boxes below. Each part is graded against the official AP rubric. You may revise and resubmit any part at any time.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="tag tag-blue">7 points total</span>
+      <span class="tag tag-amber">25 min recommended (10 min reading + 15 min writing)</span>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard">
+    <span>Live score</span>
+    <span class="dashboard-score"><span id="totalScore">0</span> / 7 points</span>
+  </div>
+
+  <!-- Article -->
+  <div class="article-box">
+    <div class="article-title">The Effect of Elaborative Rehearsal on Long-Term Vocabulary Retention in High School Students</div>
+    <div class="article-meta">Research article for analysis</div>
+
+    <div class="art-section">
+      <div class="art-heading">Introduction</div>
+      <div class="art-text">A large body of memory research distinguishes between shallow encoding strategies, such as simple repetition, and deeper encoding strategies that involve actively connecting new material to existing knowledge or personal meaning. According to the levels of processing model, information that is processed more deeply — for example, by relating a new vocabulary word to a vivid personal example rather than simply repeating its definition — should be retained substantially better over time than information processed only shallowly. Despite widespread anecdotal belief among students that repeated rereading is an effective study strategy, controlled experimental evidence directly comparing rereading (a form of maintenance rehearsal) to elaborative rehearsal in an educationally realistic setting remains limited. The researchers designed this study to directly test whether high school students who use elaborative rehearsal techniques while studying new vocabulary demonstrate significantly better long-term retention than students who use maintenance rehearsal (simple repetition), one week after the initial study session. The researchers hypothesized that students in the elaborative rehearsal condition would significantly outperform students in the maintenance rehearsal condition on a delayed vocabulary recall test administered one week later.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Participants</div>
+      <div class="art-text">Participants were 96 tenth-grade students (49 female, 47 male) enrolled in introductory psychology courses across two suburban high schools within the same school district, ranging in age from 15 to 16 years (M = 15.4, SD = 0.5). Students were recruited through their psychology teachers, who distributed informed consent forms to parents and obtained informed assent directly from each student prior to participation. To ensure that neither condition began with a systematic advantage in prior vocabulary knowledge, researchers first administered a brief 10-item pretest covering unrelated vocabulary terms; no significant difference in baseline vocabulary knowledge was found between the two groups that would later be formed, t(94) = 0.87, p = .39. Following this baseline check, students were randomly assigned to one of two conditions: the maintenance rehearsal condition (n = 48) or the elaborative rehearsal condition (n = 48), using a computer-generated random number sequence to assign each student's ID number to a condition.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Method</div>
+      <div class="art-text">All participants were given an identical list of 20 unfamiliar vocabulary words along with their definitions, presented one at a time on a computer screen for 15 seconds per word during a single 30-minute study session supervised by a research assistant blind to each student's assigned condition. Students in the maintenance rehearsal condition were instructed to silently repeat each word and its definition to themselves as many times as possible during the 15-second display window, a task designed to encourage shallow, repetition-based encoding. Students in the elaborative rehearsal condition were instead instructed to generate a brief personal example or vivid mental image connecting each word's meaning to their own life experience during the same 15-second window, a task designed to encourage deeper, meaning-based encoding consistent with the levels of processing model. Long-term vocabulary retention was operationally defined as the number of words correctly defined, out of the full 20-word list, on a written free-recall test administered exactly seven days after the initial study session, with no additional study or exposure to the words permitted during the intervening week. All tests were scored by two independent raters blind to condition assignment, using a standardized scoring rubric requiring the core meaning of each definition to be present; inter-rater reliability was high, r = .94.</div>
+    </div>
+
+    <div class="art-section">
+      <div class="art-heading">Results &amp; Discussion</div>
+      <div class="art-text">Students in the elaborative rehearsal condition correctly recalled significantly more words one week later (M = 14.8, SD = 2.6) than students in the maintenance rehearsal condition (M = 8.3, SD = 3.1), an independent-samples t-test confirming this difference was statistically significant, t(94) = 11.24, p &lt; .001, with a very large effect size (Cohen's d = 2.29).</div>
+      <div class="chart-wrap">
+        <div class="chart-title">Mean words correctly recalled after one week (out of 20)</div>
+        <div class="bar-row">
+          <div class="bar-label">Elaborative rehearsal (n=48)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:74%;"><span class="bar-value">14.8</span></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Maintenance rehearsal (n=48)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:42%; background:#c98a2e;"><span class="bar-value">8.3</span></div></div>
+        </div>
+      </div>
+      <table class="art-table">
+        <thead><tr><th>Condition</th><th>Mean words recalled</th><th>SD</th><th>n</th></tr></thead>
+        <tbody>
+          <tr><td>Elaborative rehearsal</td><td>14.8</td><td>2.6</td><td>48</td></tr>
+          <tr><td>Maintenance rehearsal</td><td>8.3</td><td>3.1</td><td>48</td></tr>
+        </tbody>
+      </table>
+      <div class="art-text" style="margin-top:12px;">The researchers concluded that this large and highly significant difference provides strong support for the levels of processing model, demonstrating that deeper, meaning-based encoding produces substantially better long-term retention than shallow repetition, even when both groups spend identical amounts of time studying identical material. The researchers noted one limitation: because the study was conducted using only tenth-grade students from two schools within a single district, caution should be used before generalizing these findings to other age groups or educational contexts. The researchers also acknowledged that the specific vocabulary list used, while carefully selected to be equally unfamiliar to all participants, may not generalize to all types of academic material, such as complex quantitative or procedural content.</div>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-box" id="partA">
+    <span class="part-label">Part A — 1 point</span>
+    <div class="part-prompt">Identify the research method used in this study, and justify your answer using a specific detail from the Method section.</div>
+    <textarea id="taA" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('A')">Grade this part</button>
+      <span class="points-display" id="ptsA">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbA"></div>
+    <div class="model-answer" id="maA" style="display:none;">
+      <strong>Model answer:</strong> This is a true experiment, since students were randomly assigned to either the maintenance rehearsal or elaborative rehearsal condition using a computer-generated random sequence, and the researchers directly manipulated the independent variable (type of rehearsal strategy used).
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-box" id="partB">
+    <span class="part-label">Part B — 1 point</span>
+    <div class="part-prompt">State the operational definition of long-term vocabulary retention used in this study.</div>
+    <textarea id="taB" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('B')">Grade this part</button>
+      <span class="points-display" id="ptsB">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbB"></div>
+    <div class="model-answer" id="maB" style="display:none;">
+      <strong>Model answer:</strong> Long-term vocabulary retention was operationally defined as the number of words correctly defined, out of the full 20-word list, on a written free-recall test administered exactly seven days after the initial study session.
+    </div>
+  </div>
+
+  <!-- PART C -->
+  <div class="part-box" id="partC">
+    <span class="part-label">Part C — 1 point</span>
+    <div class="part-prompt">Describe the meaning of the difference between the elaborative rehearsal group's mean score (M = 14.8) and the maintenance rehearsal group's mean score (M = 8.3), using the chart or table provided.</div>
+    <textarea id="taC" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('C')">Grade this part</button>
+      <span class="points-display" id="ptsC">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbC"></div>
+    <div class="model-answer" id="maC" style="display:none;">
+      <strong>Model answer:</strong> Students who used elaborative rehearsal recalled nearly twice as many words on average (14.8 out of 20) one week later compared to students who used maintenance rehearsal (8.3 out of 20), suggesting that connecting new information to personal meaning produces substantially better long-term retention than simple repetition.
+    </div>
+  </div>
+
+  <!-- PART D -->
+  <div class="part-box" id="partD">
+    <span class="part-label">Part D — 1 point</span>
+    <div class="part-prompt">Identify at least one ethical guideline applied by the researchers in this study.</div>
+    <textarea id="taD" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('D')">Grade this part</button>
+      <span class="points-display" id="ptsD">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbD"></div>
+    <div class="model-answer" id="maD" style="display:none;">
+      <strong>Model answer:</strong> The researchers obtained informed consent from parents and informed assent directly from each student, since the participants were minors, before beginning the study.
+    </div>
+  </div>
+
+  <!-- PART E -->
+  <div class="part-box" id="partE">
+    <span class="part-label">Part E — 1 point</span>
+    <div class="part-prompt">Explain the extent to which the findings of this study may or may not be generalizable, using specific evidence from the article.</div>
+    <textarea id="taE" placeholder="Type your answer here..."></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('E')">Grade this part</button>
+      <span class="points-display" id="ptsE">0 / 1 pt</span>
+    </div>
+    <div class="feedback-box" id="fbE"></div>
+    <div class="model-answer" id="maE" style="display:none;">
+      <strong>Model answer:</strong> The findings may have limited generalizability, since the researchers themselves noted that participants were limited to tenth-grade students from only two schools within a single district, and the vocabulary list used may not represent all types of academic material, such as quantitative or procedural content.
+    </div>
+  </div>
+
+  <!-- PART F -->
+  <div class="part-box" id="partF">
+    <span class="part-label">Part F — 2 points</span>
+    <div class="part-prompt">Explain how the research findings support or refute the researchers' hypothesis, and connect the results to the levels of processing model discussed in this session.</div>
+    <textarea id="taF" placeholder="Type your answer here..." style="min-height:140px;"></textarea>
+    <div class="part-footer">
+      <button class="btn-grade" onclick="gradePart('F')">Grade this part</button>
+      <span class="points-display" id="ptsF">0 / 2 pts</span>
+    </div>
+    <div class="feedback-box" id="fbF"></div>
+    <div class="model-answer" id="maF" style="display:none;">
+      <strong>Model answer:</strong> The findings strongly support the hypothesis: students using elaborative rehearsal recalled significantly more words (14.8) than students using maintenance rehearsal (8.3), a very large effect (d = 2.29, p &lt; .001). This directly supports the levels of processing model, which proposes that memory strength depends on how deeply information is processed rather than simply how many times it is repeated. Because elaborative rehearsal required students to connect each word to personal meaning (deep, semantic processing), while maintenance rehearsal only required repetition (shallow processing), the large difference in one-week retention demonstrates that depth of processing, not just time spent studying, determines how well information is encoded into long-term memory.
+    </div>
+  </div>
+
+  <!-- Grade All -->
+  <div class="grade-all-wrap">
+    <div class="grade-all-text">Grade all six parts at once. Any part you've already submitted will be skipped.</div>
+    <button class="btn-all" onclick="gradeAll()">Grade all parts</button>
+  </div>
+
+  <!-- Sources -->
+  <div style="margin-top:48px;padding-top:24px;border-top:2px solid var(--border-strong);font-family:'Helvetica Neue',Arial,sans-serif;">
+    <h2 style="font-size:15px;margin-bottom:12px;color:var(--text);font-weight:700;">Sources</h2>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:8px;line-height:1.6;">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;">
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">Dr Alduais, Ahmed</strong><br>
+        Psychology, Seminar, Research and Statistics Tutor<br>
+        Humanities Department<br>
+        Crimson Global Academy, Auckland, New Zealand<br>
+        a.alduais@cga.school
+      </div>
+      <div style="flex:1;min-width:240px;font-size:13px;color:var(--text2);line-height:1.7;">
+        <strong style="color:var(--text);">The Trondheim Early Secure Study (TESS)</strong><br>
+        Department of Psychology<br>
+        Norwegian University of Science and Technology<br>
+        Trondheim, Norway<br>
+        ibnalduais@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">AP Psychology · Sessions 18–19 · For educational use only · &copy; Dr Ahmed Alduais</div>
+</div>
+
+<script>
+  var scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+  var maxScores = { A: 1, B: 1, C: 1, D: 1, E: 1, F: 2 };
+  var graded = { A: false, B: false, C: false, D: false, E: false, F: false };
+
+  function updateTotal() {
+    var total = 0;
+    for (var k in scores) total += scores[k];
+    document.getElementById('totalScore').textContent = total;
+  }
+
+  function showFeedback(part, points, max, message) {
+    var fb = document.getElementById('fb' + part);
+    fb.style.display = 'block';
+    fb.className = 'feedback-box ' + (points === max ? 'correct' : (points > 0 ? 'partial' : 'wrong'));
+    fb.innerHTML = '<strong>' + points + ' / ' + max + ' pt' + (max > 1 ? 's' : '') + '.</strong> ' + message;
+    document.getElementById('ma' + part).style.display = 'block';
+    document.getElementById('pts' + part).textContent = points + ' / ' + max + (max > 1 ? ' pts' : ' pt');
+  }
+
+  function countKeywords(text, keywords) {
+    var lower = text.toLowerCase();
+    var count = 0;
+    keywords.forEach(function(kw) {
+      if (lower.indexOf(kw) !== -1) count++;
+    });
+    return count;
+  }
+
+  function gradePart(part) {
+    if (graded[part]) return;
+    var text = document.getElementById('ta' + part).value.trim();
+    if (text.length < 10) {
+      showFeedback(part, 0, maxScores[part], 'Please write a more complete answer before grading.');
+      return;
+    }
+
+    var points = 0, message = '';
+
+    if (part === 'A') {
+      var hasExp = countKeywords(text, ['experiment', 'true experiment']) >= 1;
+      var hasJustify = countKeywords(text, ['random assign', 'manipulat']) >= 1;
+      if (hasExp && hasJustify) {
+        points = 1; message = 'You correctly identified this as a true experiment and justified it with random assignment and manipulation.';
+      } else if (hasExp) {
+        points = 1; message = 'You correctly identified this as an experiment. For full credit, explicitly justify using random assignment and manipulation of rehearsal type.';
+      } else {
+        message = 'Your answer should identify this as a true experiment, justified by random assignment to conditions and manipulation of rehearsal strategy (the independent variable).';
+      }
+    }
+
+    if (part === 'B') {
+      var hasWords = countKeywords(text, ['correctly defined', '20-word', '20 word', 'seven days', 'one week']) >= 1;
+      if (hasWords) {
+        points = 1; message = 'You correctly stated the operational definition.';
+      } else {
+        message = 'Your answer should state that retention was defined as the number of words correctly defined out of 20, on a test given seven days later.';
+      }
+    }
+
+    if (part === 'C') {
+      var hasNumbers = countKeywords(text, ['14.8', '8.3']) >= 1;
+      var hasMeaning = countKeywords(text, ['more', 'less', 'better', 'worse', 'higher', 'lower', 'nearly twice']) >= 1;
+      if (hasNumbers && hasMeaning) {
+        points = 1; message = 'You correctly described the meaning of the difference using specific values.';
+      } else if (hasMeaning) {
+        points = 1; message = 'You described the meaning correctly. For full credit, cite the specific mean values (14.8 vs 8.3).';
+      } else {
+        message = 'Your answer should explain that the elaborative rehearsal group (14.8) recalled substantially more words than the maintenance rehearsal group (8.3).';
+      }
+    }
+
+    if (part === 'D') {
+      var hasConsent = countKeywords(text, ['informed consent', 'consent', 'assent']) >= 1;
+      if (hasConsent) {
+        points = 1; message = 'You correctly identified informed consent/assent as the ethical guideline applied.';
+      } else {
+        message = 'Your answer should identify informed consent (from parents) and informed assent (from the minor students) as described in the article.';
+      }
+    }
+
+    if (part === 'E') {
+      var hasSample = countKeywords(text, ['tenth-grade', 'two schools', 'single district', 'vocabulary list']) >= 1;
+      var hasLimit = countKeywords(text, ['limited', 'may not generalize', 'restrict']) >= 1;
+      if (hasSample && hasLimit) {
+        points = 1; message = 'You correctly explained the generalizability limitation using specific evidence.';
+      } else if (hasSample) {
+        points = 1; message = 'You referenced the right sample detail. For full credit, explicitly state how this limits generalizability.';
+      } else {
+        message = 'Your answer should reference the sample (tenth-graders from two schools in one district) and the specific vocabulary list, and explain how these may limit generalizability.';
+      }
+    }
+
+    if (part === 'F') {
+      var hasSupport = countKeywords(text, ['support', 'significant', 'd =', '2.29']) >= 1;
+      var hasTheory = countKeywords(text, ['levels of processing', 'deep', 'shallow', 'semantic']) >= 1;
+      var hasFullExplain = text.length > 150;
+      if (hasSupport && hasTheory && hasFullExplain) {
+        points = 2; message = 'Excellent — you explained how the findings support the hypothesis and connected them fully to the levels of processing model.';
+      } else if (hasSupport || hasTheory) {
+        points = 1; message = 'You addressed part of this well. For full credit, address BOTH how the findings support the hypothesis AND connect explicitly to the levels of processing model (deep vs. shallow encoding).';
+      } else {
+        message = 'Your answer should explain that the large, significant difference supports the hypothesis, and connect this to the levels of processing model — elaborative rehearsal involves deeper, semantic processing than maintenance rehearsal.';
+      }
+    }
+
+    scores[part] = points;
+    graded[part] = true;
+    document.getElementById('ta' + part).disabled = true;
+    document.querySelector('#part' + part + ' .btn-grade').disabled = true;
+    showFeedback(part, points, maxScores[part], message);
+    updateTotal();
+  }
+
+  function gradeAll() {
+    ['A','B','C','D','E','F'].forEach(function(part) {
+      if (!graded[part]) gradePart(part);
+    });
+  }
+</script>
+</body>
+</html>

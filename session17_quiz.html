@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 17 Quiz — Thinking, Problem-Solving, and Decision-Making</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s17quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 17</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.2: Thinking, Problem-Solving, and Decision-Making — Quiz</div>
+</div>
+
+<div id="s17-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s17-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s17-attempt-num">0</span> / 10
+</div>
+
+<div id="s17-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Concepts and prototypes",
+      stem: "When asked to picture a 'bird,' most people imagine something like a robin or sparrow rather than a penguin or ostrich. The robin represents a",
+      choices: ["Schema", "Prototype", "Heuristic", "Algorithm"],
+      correct: 1,
+      explain: "A prototype is the best or most typical example of a given concept — for most people, a robin is a more typical example of 'bird' than a penguin."
+    },
+    {
+      title: "Assimilation vs accommodation",
+      stem: "A child who already believes all four-legged animals are 'dogs' sees a cow for the first time and calls it a dog too, without changing their thinking. This is an example of",
+      choices: ["Accommodation", "Assimilation", "An algorithm", "A heuristic"],
+      correct: 1,
+      explain: "Assimilation occurs when new information is fit into an existing schema without changing that schema — the child forced the cow into their existing 'dog' category."
+    },
+    {
+      title: "Accommodation",
+      stem: "After being corrected, the same child updates their mental category so that 'dog' only includes actual dogs, and creates a new category for cows. This is an example of",
+      choices: ["Assimilation", "Accommodation", "The availability heuristic", "Functional fixedness"],
+      correct: 1,
+      explain: "Accommodation occurs when new information causes a person to change or update their existing schema, rather than forcing the new information into an unchanged framework."
+    },
+    {
+      title: "Algorithms",
+      stem: "A person trying to unlock a combination lock tries every single possible number combination, one after another, until the lock finally opens. This problem-solving approach is called",
+      choices: ["A heuristic", "An algorithm", "The representativeness heuristic", "Functional fixedness"],
+      correct: 1,
+      explain: "An algorithm is a problem-solving strategy that involves systematically trying every possible solution until the correct one is found — slower, but guaranteed to work eventually."
+    },
+    {
+      title: "Heuristics",
+      stem: "Rather than checking every possible route, a driver uses a general rule of thumb — 'highways are usually faster than side streets' — to quickly choose a route. This mental shortcut is called",
+      choices: ["An algorithm", "A heuristic", "Assimilation", "A prototype"],
+      correct: 1,
+      explain: "A heuristic is a mental shortcut used to make judgments and decisions more quickly than a systematic algorithm would allow, though heuristics can sometimes lead to errors."
+    },
+    {
+      title: "Representativeness heuristic",
+      stem: "A person assumes a quiet, glasses-wearing stranger must be a librarian rather than a salesperson, simply because the stranger fits their mental stereotype of what librarians look like. This reflects",
+      choices: ["The availability heuristic", "The representativeness heuristic", "The sunk-cost fallacy", "Functional fixedness"],
+      correct: 1,
+      explain: "The representativeness heuristic involves judging the likelihood of something based on how well it matches a prototype or stereotype, which can lead to errors in judgment."
+    },
+    {
+      title: "Availability heuristic",
+      stem: "After seeing extensive news coverage of a plane crash, a person overestimates how common plane crashes actually are, because vivid examples come easily to mind. This reflects",
+      choices: ["The representativeness heuristic", "The availability heuristic", "Mental set", "The gambler's fallacy"],
+      correct: 1,
+      explain: "The availability heuristic involves judging the likelihood of an event based on how easily examples come to mind, which can be skewed by vivid or heavily publicized events."
+    },
+    {
+      title: "Mental set and functional fixedness",
+      stem: "A carpenter who needs to pound in a nail overlooks a heavy trophy sitting nearby that could work as a hammer, because he can only think of the trophy in terms of its usual purpose. This is called",
+      choices: ["Functional fixedness", "The gambler's fallacy", "Priming", "The sunk-cost fallacy"],
+      correct: 0,
+      explain: "Functional fixedness is the tendency to think of objects only in terms of their typical use, making it harder to see alternative, creative uses for those objects."
+    },
+    {
+      title: "Priming and framing",
+      stem: "A shopper is more likely to buy a product labeled '90% fat-free' than the identical product labeled '10% fat,' even though both statements mean the same thing. This effect is best explained by",
+      choices: ["Framing", "The gambler's fallacy", "An algorithm", "Assimilation"],
+      correct: 0,
+      explain: "Framing refers to how the way information is presented influences decisions, even when the underlying facts are identical — '90% fat-free' sounds more appealing than '10% fat.'"
+    },
+    {
+      title: "Gambler's fallacy and sunk-cost fallacy",
+      stem: "After losing money on five straight coin flips, a gambler believes they are now 'due' for a win on the next flip. This flawed reasoning is called",
+      choices: ["The sunk-cost fallacy", "The gambler's fallacy", "Functional fixedness", "The representativeness heuristic"],
+      correct: 1,
+      explain: "The gambler's fallacy is the mistaken belief that past independent random events influence the probability of future independent events — each coin flip has the same odds regardless of prior outcomes."
+    }
+  ];
+
+  var container = document.getElementById('s17-questions');
+  var scoreNum = document.getElementById('s17-score-num');
+  var attemptNum = document.getElementById('s17-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 21 Quiz — Retrieving Memories</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s21quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 21</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 2.6: Retrieving Memories — Quiz</div>
+</div>
+
+<div id="s21-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s21-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s21-attempt-num">0</span> / 10
+</div>
+
+<div id="s21-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 2 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Recall vs recognition",
+      stem: "A short-answer test question asks students to write down the definition of 'schema' entirely from memory, while a multiple-choice question simply asks students to pick the correct definition from four options. These two question types rely on, respectively,",
+      choices: ["Recognition and recall", "Recall and recognition", "Context-dependent memory and state-dependent memory", "The misinformation effect and source amnesia"],
+      correct: 1,
+      explain: "Recall involves retrieving memory without external cues (like a short-answer question), while recognition involves matching a current stimulus to something already in memory, aided by retrieval cues (like a multiple-choice question)."
+    },
+    {
+      title: "Retrieval cues",
+      stem: "A distinctive smell in a hallway suddenly triggers a vivid memory of a childhood classroom that smelled similarly. This smell functioned as a",
+      choices: ["Retrieval cue", "Constructed memory", "Source amnesia trigger", "Working memory component"],
+      correct: 0,
+      explain: "A retrieval cue is any stimulus that helps trigger the retrieval of a stored memory, in this case a smell strongly associated with a specific past experience."
+    },
+    {
+      title: "Context-dependent memory",
+      stem: "A student who studied for an exam in a specific classroom performs better when tested in that same classroom, compared to being tested in an unfamiliar room. This phenomenon is called",
+      choices: ["Mood-congruent memory", "Context-dependent memory", "State-dependent memory", "Source amnesia"],
+      correct: 1,
+      explain: "Context-dependent memory refers to improved retrieval when a person is in the same physical environment where the information was originally encoded."
+    },
+    {
+      title: "Mood-congruent memory",
+      stem: "A person feeling sad is more likely to recall other sad memories from their past than happy ones, and vice versa when feeling happy. This pattern is called",
+      choices: ["State-dependent memory", "Mood-congruent memory", "Context-dependent memory", "The misinformation effect"],
+      correct: 1,
+      explain: "Mood-congruent memory describes the tendency to more easily recall memories that match one's current emotional state."
+    },
+    {
+      title: "State-dependent memory",
+      stem: "A person who studied material while feeling extremely tired finds it easier to recall that same material later when they are tired again, compared to when they are fully alert. This illustrates",
+      choices: ["Context-dependent memory", "Mood-congruent memory", "State-dependent memory", "Retroactive interference"],
+      correct: 2,
+      explain: "State-dependent memory refers to improved retrieval when a person is in the same physical or physiological state (such as tiredness or intoxication) as when the memory was originally encoded."
+    },
+    {
+      title: "The tip-of-the-tongue phenomenon",
+      stem: "A person struggling to remember an acquaintance's name feels certain they know it and can even recall details about the person, but the name itself remains just out of reach. This frustrating experience is called",
+      choices: ["Source amnesia", "The tip-of-the-tongue phenomenon", "Retroactive interference", "The misinformation effect"],
+      correct: 1,
+      explain: "The tip-of-the-tongue phenomenon describes the temporary inability to retrieve a specific piece of information, despite a strong feeling that the information is known and retrievable."
+    },
+    {
+      title: "The misinformation effect",
+      stem: "After being repeatedly asked leading questions containing false details about a car accident they witnessed, a witness later confidently recalls those false details as if they had actually seen them. This distortion is called",
+      choices: ["Source amnesia", "The misinformation effect", "State-dependent memory", "The tip-of-the-tongue phenomenon"],
+      correct: 1,
+      explain: "The misinformation effect occurs when exposure to misleading information after an event distorts a person's memory of the original event, often through leading or suggestive questioning."
+    },
+    {
+      title: "Retroactive interference",
+      stem: "A student who studies psychology material in the afternoon finds it harder to recall material studied that same morning for a different class, because the new information disrupted the older memory. This is an example of",
+      choices: ["Retroactive interference", "Proactive interference", "The misinformation effect", "Source amnesia"],
+      correct: 0,
+      explain: "Retroactive interference occurs when newly learned information interferes with the ability to recall information learned earlier."
+    },
+    {
+      title: "Proactive interference",
+      stem: "A person who has used the same phone number for years struggles to remember their brand-new phone number, because the old, well-learned number keeps interfering. This is an example of",
+      choices: ["Retroactive interference", "Proactive interference", "Context-dependent memory", "The tip-of-the-tongue phenomenon"],
+      correct: 1,
+      explain: "Proactive interference occurs when previously learned information interferes with the ability to learn or recall new information."
+    },
+    {
+      title: "Retrieval practice and the testing effect",
+      stem: "A large research review combining results from 37 classroom studies and over 5,000 participants found that actively testing oneself on material (retrieval practice) consistently improved learning across many educational contexts. What does this type of combined analysis of many studies' results demonstrate about retrieval as a study strategy?",
+      choices: [
+        "Retrieval practice, or actively recalling information, strengthens future retrieval more effectively than passive review alone",
+        "Testing effects only apply to college students, never to younger students",
+        "Retrieval practice makes long-term memory less reliable",
+        "The testing effect has never been replicated across different classroom contexts"
+      ],
+      correct: 0,
+      explain: "The testing effect refers to the finding that actively retrieving information (such as through practice tests) strengthens memory more effectively than passively reviewing material, a pattern supported across the many studies included in this type of combined research review."
+    }
+  ];
+
+  var container = document.getElementById('s21-questions');
+  var scoreNum = document.getElementById('s21-score-num');
+  var attemptNum = document.getElementById('s21-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

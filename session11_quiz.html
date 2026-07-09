@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 11 Quiz — Sleep and States of Consciousness</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s11quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 11</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Topic 1.5: Sleep and States of Consciousness — Quiz</div>
+</div>
+
+<div id="s11-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s11-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s11-attempt-num">0</span> / 10
+</div>
+
+<div id="s11-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Defining consciousness",
+      stem: "A psychologist explains that sleep, daydreaming, and drug-induced states are all examples of different states of consciousness. What best defines consciousness in this context?",
+      choices: [
+        "Total unawareness of the internal and external world",
+        "Varying levels of awareness of thoughts, feelings, behavior, and events in one's internal and external world",
+        "Only the state of being fully awake and alert",
+        "A fixed, unchanging mental state"
+      ],
+      correct: 1,
+      explain: "Consciousness involves varying levels of awareness of thoughts, feelings, behavior, and events in a person's internal and external worlds. Sleep and wakefulness are both considered types of consciousness, not an absence of it."
+    },
+    {
+      title: "Circadian rhythm",
+      stem: "A person who regularly travels across time zones experiences jet lag, including disrupted sleep and daytime fatigue. This disruption directly affects which biological process?",
+      choices: ["The circadian rhythm", "REM rebound", "Sensory adaptation", "The all-or-none principle"],
+      correct: 0,
+      explain: "The circadian rhythm is roughly a 24-hour biological cycle that governs the sleep/wake cycle. Jet lag and shift work are both disruptions of this rhythm."
+    },
+    {
+      title: "NREM sleep",
+      stem: "According to the current AP Psychology framework, NREM (non-REM) sleep is divided into how many stages?",
+      choices: ["One stage", "Two stages", "Three stages", "Five stages"],
+      correct: 2,
+      explain: "NREM sleep occurs across three stages, decreasing in duration throughout the sleep cycle as the night progresses."
+    },
+    {
+      title: "Hypnogogic sensations",
+      stem: "As a person first begins to drift into Stage 1 sleep, they may experience brief, dreamlike sensations such as falling or floating. These sensations are called",
+      choices: ["REM rebound", "Hypnogogic sensations", "Consolidation", "Priming"],
+      correct: 1,
+      explain: "Hypnogogic sensations occur as a person enters initial Stage 1 sleep — brief, often dreamlike experiences during the transition from wakefulness to sleep."
+    },
+    {
+      title: "REM sleep as 'paradoxical sleep'",
+      stem: "REM sleep is often called 'paradoxical sleep.' Why is this term used?",
+      choices: [
+        "Because REM sleep never actually occurs",
+        "Because brain wave activity resembles wakefulness, even though the body is at its most relaxed",
+        "Because REM sleep only happens during naps",
+        "Because REM sleep eliminates the need for other sleep stages"
+      ],
+      correct: 1,
+      explain: "REM sleep is called paradoxical because it produces brain waves similar to being awake, even though the body is at its most physically relaxed state during this stage."
+    },
+    {
+      title: "REM rebound",
+      stem: "A participant is deliberately woken up every time they enter REM sleep during a study. The next night, when allowed to sleep normally, they spend significantly more time than usual in REM sleep. This phenomenon is called",
+      choices: ["Sleep apnea", "REM rebound", "Somnambulism", "Consolidation theory"],
+      correct: 1,
+      explain: "REM rebound occurs when someone deprived of REM sleep experiences a longer-than-normal period of REM sleep the next time they are allowed to sleep without interruption."
+    },
+    {
+      title: "Theories of why sleep occurs",
+      stem: "Which two theories are used to explain why sleep serves a psychological or biological purpose?",
+      choices: [
+        "Memory consolidation and restoration of resources",
+        "Psychoanalytic theory and eugenics",
+        "Natural selection and eclecticism",
+        "Reuptake and depolarization"
+      ],
+      correct: 0,
+      explain: "Current theories suggest sleep is important for organizing and consolidating memories (memory consolidation) and for restoring resources used throughout the day (restoration theory)."
+    },
+    {
+      title: "Activation-synthesis theory of dreams",
+      stem: "One theory of dreaming proposes that dreams result from the brain trying to interpret and make sense of random neural activity that occurs during sleep. This is called",
+      choices: ["Consolidation theory", "Activation-synthesis theory", "Psychoanalytic theory", "Restoration theory"],
+      correct: 1,
+      explain: "Activation-synthesis theory proposes that dreams are the brain's attempt to synthesize meaning from essentially random neural activation occurring during sleep."
+    },
+    {
+      title: "Sleep disorders",
+      stem: "A person repeatedly stops breathing for short periods during the night, waking up slightly each time to resume breathing, often without remembering it happening. This disorder is called",
+      choices: ["Insomnia", "Narcolepsy", "Sleep apnea", "Somnambulism"],
+      correct: 2,
+      explain: "Sleep apnea causes a person to stop breathing for short periods during sleep, prompting brief awakenings to resume breathing — often without the person remembering these interruptions."
+    },
+    {
+      title: "Narcolepsy",
+      stem: "A person experiences sudden, uncontrollable episodes of intense sleepiness and may abruptly fall into REM sleep at unpredictable times, even during normal daily activities. This disorder is called",
+      choices: ["Narcolepsy", "Insomnia", "Sleep apnea", "REM rebound"],
+      correct: 0,
+      explain: "Narcolepsy involves sudden, uncontrollable episodes of sleepiness, with the person sometimes falling directly into REM sleep unexpectedly, regardless of what they were doing at the time."
+    }
+  ];
+
+  var container = document.getElementById('s11-questions');
+  var scoreNum = document.getElementById('s11-score-num');
+  var attemptNum = document.getElementById('s11-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

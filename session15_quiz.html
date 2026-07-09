@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 15 Quiz — Unit 1 Synthesis</title>
+<style>
+  html, body { margin:0; padding:0; background:#ffffff; }
+  body { font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a; }
+</style>
+</head>
+<body>
+
+<div id="s15quiz" style="max-width:760px;margin:0 auto;padding:16px 14px 30px;">
+
+<div style="background:linear-gradient(90deg,#6b2d8c,#a8123e);color:#ffffff;padding:14px 18px;border-radius:6px;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;">
+<strong>Educational Use Only</strong> — This material is intended solely for educational purposes. It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<div style="background:#1b1f3b;color:#ffffff;padding:12px 18px;border-radius:6px;margin-bottom:20px;font-family:Arial,Helvetica,sans-serif;">
+<div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;">AP Psychology &middot; Session 15</div>
+<div style="font-size:18px;font-weight:bold;margin-top:2px;">Unit 1 Synthesis — Quiz</div>
+</div>
+
+<div id="s15-score" style="font-family:Arial,Helvetica,sans-serif;background:#f7f5f0;border:1px solid #e2ddd4;border-radius:6px;padding:10px 16px;margin-bottom:18px;font-size:14px;color:#3a3a3a;">
+Score: <span id="s15-score-num">0</span> / 10 answered correctly &nbsp;|&nbsp; Attempted: <span id="s15-attempt-num">0</span> / 10
+</div>
+
+<div id="s15-questions"></div>
+
+<div style="margin-top:28px;padding-top:16px;border-top:1px solid #e2ddd4;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#6a6a6a;text-align:center;">
+AP Psychology &middot; Unit 1 Synthesis &middot; For educational use only &middot; &copy; Dr Ahmed Alduais
+</div>
+
+</div>
+
+<script>
+(function(){
+  var qs = [
+    {
+      title: "Connecting heredity and the nervous system",
+      stem: "A researcher finds that identical twins show more similar patterns of sympathetic nervous system reactivity to stress than fraternal twins. Which two Unit 1 topics does this finding connect?",
+      choices: [
+        "Heredity/twin studies and the autonomic nervous system",
+        "Sleep stages and sensation",
+        "Brain lobes and neurotransmitters only",
+        "REM rebound and Weber's law"
+      ],
+      correct: 0,
+      explain: "This finding connects heredity (twin study methodology, comparing genetic similarity) with the autonomic nervous system (sympathetic stress reactivity) — two separate Unit 1 topics working together."
+    },
+    {
+      title: "Connecting neurons and the brain",
+      stem: "Damage to the frontal lobe disrupts a person's judgment and impulse control. At the cellular level, this damage ultimately disrupts the normal function of which basic units?",
+      choices: ["Neurons and their neurotransmitter signaling", "Only the skull structure", "REM sleep cycles", "The retina's rods and cones"],
+      correct: 0,
+      explain: "Brain regions like the frontal lobe are made up of networks of neurons. Damage to a brain region disrupts the neurons and neurotransmitter signaling within that specific area, connecting the neuron-level content to brain-structure content."
+    },
+    {
+      title: "Connecting the brain and sleep",
+      stem: "Which brain-related concept would be most relevant for explaining why EEG recordings look different during REM sleep compared to deep NREM sleep?",
+      choices: [
+        "Differences in brain wave activity detected by an EEG",
+        "The absolute threshold for vision",
+        "Trichromatic theory",
+        "Twin studies"
+      ],
+      correct: 0,
+      explain: "EEG (electroencephalogram) technology, introduced in the context of brain research, is the same tool used to detect and distinguish the different brain wave patterns across sleep stages."
+    },
+    {
+      title: "Connecting sleep and memory (from statistics/methods review)",
+      stem: "A study finds that sleep-deprived participants recall significantly fewer words than well-rested participants, with a large effect size. Which Unit 0 skill is required to interpret 'large effect size' correctly?",
+      choices: [
+        "Understanding statistical significance and practical significance from Session 6",
+        "Understanding the reflex arc from Session 8",
+        "Understanding rods and cones from Session 14",
+        "Understanding the sympathetic nervous system from Session 8"
+      ],
+      correct: 0,
+      explain: "Effect size, statistical significance, and p-values are Unit 0 statistics concepts (Session 6) that must be applied whenever interpreting the results of any study, including biological or sleep-related research."
+    },
+    {
+      title: "Connecting genetics and sensation",
+      stem: "A person with red-green color vision deficiency has irregularities affecting which structures discussed in the sensation topic?",
+      choices: ["Cones and opponent-process ganglion cells", "The cerebellum", "The autonomic nervous system", "REM sleep"],
+      correct: 0,
+      explain: "Color vision deficiency involves irregularities in cones or the red/green and blue/yellow opponent-process ganglion cells — concepts specifically covered under the sensation topic."
+    },
+    {
+      title: "Applying ethics across biological research (Session 5 + Unit 1)",
+      stem: "A study exposing participants to loud noises to study absolute thresholds for hearing must ensure researchers follow which ethical guideline to avoid lasting harm?",
+      choices: ["Protection from harm", "The all-or-none principle", "Weber's law", "REM rebound"],
+      correct: 0,
+      explain: "Protection from harm, a Unit 0 ethical guideline, applies directly to biological/sensory research — researchers must ensure stimuli used (like loud sounds) don't cause lasting physical harm to participants' hearing."
+    },
+    {
+      title: "Connecting perspectives and biology",
+      stem: "A psychologist who explains anxiety purely in terms of neurotransmitter imbalances and genetic predisposition is drawing primarily on which perspective from Session 1?",
+      choices: ["Humanistic perspective", "Biopsychological perspective", "Sociocultural perspective", "Psychodynamic perspective"],
+      correct: 1,
+      explain: "The biopsychological perspective explains thought and behavior strictly through biological processes such as genetics, neurotransmitters, and hormones — directly connecting Session 1's perspectives to Unit 1's biological content."
+    },
+    {
+      title: "Connecting sampling methods and biological studies",
+      stem: "A twin study recruits pairs only from one small town, potentially limiting how well the findings apply elsewhere. Which Unit 0 concept describes this limitation?",
+      choices: ["Generalizability", "Sensory adaptation", "The refractory period", "Accommodation"],
+      correct: 0,
+      explain: "Generalizability, a Unit 0 research methods concept, describes whether findings from a specific sample can be extended to a broader population — directly relevant when evaluating any Unit 1 biological study's sample."
+    },
+    {
+      title: "Connecting validity/reliability and sensation testing",
+      stem: "A hearing test gives wildly different absolute threshold results for the same person tested multiple times under identical conditions. This test has poor",
+      choices: ["Reliability", "Sensory interaction", "Trichromatic accuracy", "Opponent-process function"],
+      correct: 0,
+      explain: "Reliability, a Unit 0 concept, refers to a measurement's consistency. A hearing test producing wildly different results for the same person under the same conditions lacks reliability."
+    },
+    {
+      title: "Big-picture synthesis",
+      stem: "Which statement best summarizes how Unit 0 and Unit 1 work together on the AP exam?",
+      choices: [
+        "Unit 0 provides the research and statistical tools; Unit 1 provides biological content to which those tools can be applied",
+        "Unit 0 and Unit 1 are entirely unrelated and never appear together",
+        "Unit 1 replaces the need for Unit 0's research methods",
+        "Only Unit 1 content appears on the exam"
+      ],
+      correct: 0,
+      explain: "Unit 0's research methods, statistics, and ethics are tools used to evaluate any psychological study — including the biological studies and concepts introduced in Unit 1. Exam questions frequently combine both units."
+    }
+  ];
+
+  var container = document.getElementById('s15-questions');
+  var scoreNum = document.getElementById('s15-score-num');
+  var attemptNum = document.getElementById('s15-attempt-num');
+  var selections = new Array(qs.length).fill(null);
+  var allChoiceEls = [];
+  var allFeedbackEls = [];
+  var submitted = false;
+
+  qs.forEach(function(q, qIdx){
+    var card = document.createElement('div');
+    card.style.background = '#ffffff';
+    card.style.border = '1px solid #e2ddd4';
+    card.style.borderRadius = '8px';
+    card.style.padding = '16px 18px';
+    card.style.marginBottom = '14px';
+    card.style.fontFamily = "Georgia,'Times New Roman',serif";
+
+    var stemEl = document.createElement('div');
+    stemEl.style.fontSize = '15px';
+    stemEl.style.lineHeight = '1.5';
+    stemEl.style.marginBottom = '12px';
+    stemEl.style.color = '#1a1a1a';
+    stemEl.innerHTML = '<strong>' + (qIdx+1) + '.</strong> ' + q.stem;
+    card.appendChild(stemEl);
+
+    var choiceWrap = document.createElement('div');
+    var letters = ['A','B','C','D'];
+    var choiceEls = [];
+
+    q.choices.forEach(function(choiceText, cIdx){
+      var btn = document.createElement('div');
+      btn.style.padding = '9px 12px';
+      btn.style.marginBottom = '7px';
+      btn.style.border = '1px solid #d8d3c8';
+      btn.style.borderRadius = '6px';
+      btn.style.cursor = 'pointer';
+      btn.style.fontFamily = "Arial,Helvetica,sans-serif";
+      btn.style.fontSize = '14px';
+      btn.style.background = '#fbfaf7';
+      btn.style.color = '#1a1a1a';
+      btn.innerHTML = '<strong>' + letters[cIdx] + ')</strong> ' + choiceText;
+
+      btn.addEventListener('click', function(){
+        if (submitted) return;
+        selections[qIdx] = cIdx;
+        choiceEls.forEach(function(el, idx){
+          if (idx === cIdx){
+            el.style.background = '#e8f0fb';
+            el.style.borderColor = '#6f9bd6';
+          } else {
+            el.style.background = '#fbfaf7';
+            el.style.borderColor = '#d8d3c8';
+          }
+        });
+      });
+
+      choiceEls.push(btn);
+      choiceWrap.appendChild(btn);
+    });
+
+    card.appendChild(choiceWrap);
+
+    var feedback = document.createElement('div');
+    feedback.style.marginTop = '10px';
+    feedback.style.padding = '10px 12px';
+    feedback.style.borderRadius = '6px';
+    feedback.style.fontSize = '13px';
+    feedback.style.fontFamily = "Arial,Helvetica,sans-serif";
+    feedback.style.display = 'none';
+    card.appendChild(feedback);
+
+    allChoiceEls.push(choiceEls);
+    allFeedbackEls.push(feedback);
+    container.appendChild(card);
+  });
+
+  var submitAllWrap = document.createElement('div');
+  submitAllWrap.style.marginTop = '8px';
+  submitAllWrap.style.marginBottom = '20px';
+  submitAllWrap.style.textAlign = 'center';
+
+  var submitAllBtn = document.createElement('button');
+  submitAllBtn.textContent = 'Submit All Answers';
+  submitAllBtn.style.padding = '11px 28px';
+  submitAllBtn.style.background = '#1b1f3b';
+  submitAllBtn.style.color = '#ffffff';
+  submitAllBtn.style.border = 'none';
+  submitAllBtn.style.borderRadius = '5px';
+  submitAllBtn.style.cursor = 'pointer';
+  submitAllBtn.style.fontFamily = "Arial,Helvetica,sans-serif";
+  submitAllBtn.style.fontSize = '14px';
+  submitAllBtn.style.fontWeight = 'bold';
+
+  submitAllBtn.addEventListener('click', function(){
+    if (submitted) return;
+
+    var unanswered = selections.filter(function(s){ return s === null; }).length;
+    if (unanswered > 0) {
+      var proceed = confirm(unanswered + ' question(s) left unanswered. Submit anyway?');
+      if (!proceed) return;
+    }
+
+    submitted = true;
+    submitAllBtn.disabled = true;
+    submitAllBtn.textContent = 'Submitted';
+    submitAllBtn.style.background = '#9a948a';
+    submitAllBtn.style.cursor = 'default';
+
+    var letters = ['A','B','C','D'];
+    var correctCount = 0;
+
+    qs.forEach(function(q, qIdx){
+      var choiceEls = allChoiceEls[qIdx];
+      var feedback = allFeedbackEls[qIdx];
+      var selected = selections[qIdx];
+
+      choiceEls.forEach(function(el, idx){
+        el.style.cursor = 'default';
+        if (idx === q.correct){
+          el.style.background = '#e6f5ea';
+          el.style.borderColor = '#7dbf8e';
+        }
+        if (idx === selected && selected !== q.correct){
+          el.style.background = '#fbe7e7';
+          el.style.borderColor = '#d98c8c';
+        }
+      });
+
+      feedback.style.display = 'block';
+      if (selected === q.correct){
+        correctCount++;
+        feedback.style.background = '#e6f5ea';
+        feedback.style.color = '#1a5c2a';
+        feedback.innerHTML = '<strong>Correct.</strong> ' + q.explain;
+      } else if (selected === null) {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not answered.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      } else {
+        feedback.style.background = '#fbe7e7';
+        feedback.style.color = '#8a2020';
+        feedback.innerHTML = '<strong>Not quite.</strong> The correct answer is ' + letters[q.correct] + ') ' + q.choices[q.correct] + '. ' + q.explain;
+      }
+    });
+
+    scoreNum.textContent = correctCount;
+    attemptNum.textContent = qs.length;
+  });
+
+  submitAllWrap.appendChild(submitAllBtn);
+  container.appendChild(submitAllWrap);
+})();
+</script>
+
+</body>
+</html>

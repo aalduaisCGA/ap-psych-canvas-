@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Practices — Unit 0 Examination</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap');
+
+:root {
+  --navy:#1a2744; --navy2:#253157; --gold:#c8922a; --gold-lt:#f0c96e;
+  --cream:#fdfcf8; --offwhite:#f5f3ee; --paper:#eeeae0; --border:#ddd8cc;
+  --ink:#1c1a18; --muted:#5a5650;
+  --green:#2e6b45; --green-bg:#f0f8f3;
+  --red:#8b2c2c; --red-bg:#fdf0f0;
+  --blue:#1d4a8a; --blue-bg:#eff4fc;
+  --amber:#92600a; --amber-bg:#fef9c3;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family:'Source Sans 3', sans-serif;
+  background:var(--offwhite);
+  color:var(--ink);
+  line-height:1.6;
+  padding-bottom:90px;
+}
+
+h1,h2,h3,h4 { font-family:'Lora', serif; color:var(--navy); }
+
+/* Copyright banner */
+.copyright-bar {
+  background:linear-gradient(135deg,#6b21a8,#9b1b6a 50%,#c0392b);
+  color:#fff; text-align:center; padding:.6rem 1rem;
+  font-size:.8rem; font-weight:600; letter-spacing:.02em;
+}
+
+/* Header */
+.exam-header {
+  background:var(--navy);
+  color:#fff;
+  padding:1.6rem 1.5rem 1.4rem;
+  text-align:center;
+}
+.exam-header h1 { color:#fff; font-size:1.9rem; font-weight:700; }
+.exam-header h1 span { color:var(--gold-lt); }
+.exam-header .sub { color:#c9d0e0; font-size:.95rem; margin-top:.3rem; font-style:italic; }
+.info-pills { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:.9rem; }
+.info-pill {
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25);
+  color:#e8ebf4; font-size:.78rem; padding:.3rem .7rem; border-radius:999px;
+}
+.timer-box { margin-top:1rem; display:flex; align-items:center; justify-content:center; gap:.7rem; }
+.timer-display { font-family:'Lora',serif; font-size:1.3rem; font-weight:700; color:var(--gold-lt); background:rgba(0,0,0,.25); padding:.35rem .9rem; border-radius:8px; letter-spacing:.05em; }
+.timer-display.warn { color:#ffd76b; }
+.timer-display.danger { color:#ff8a8a; }
+.timer-btn {
+  background:var(--gold); color:var(--navy); border:none; font-weight:700;
+  padding:.4rem .9rem; border-radius:6px; cursor:pointer; font-size:.85rem;
+}
+.timer-btn:hover { background:var(--gold-lt); }
+
+/* Save bar */
+.save-bar {
+  background:var(--paper); border-bottom:1px solid var(--border);
+  padding:.55rem 1.5rem; display:flex; align-items:center; justify-content:center;
+  gap:1rem; flex-wrap:wrap; font-size:.85rem; color:var(--muted);
+}
+.save-status { display:flex; align-items:center; gap:.4rem; }
+.save-dot { width:8px; height:8px; border-radius:50%; background:var(--green); }
+.btn-sm {
+  background:#fff; border:1px solid var(--border); color:var(--ink);
+  padding:.35rem .8rem; border-radius:6px; font-size:.82rem; cursor:pointer; font-weight:600;
+}
+.btn-sm:hover { border-color:var(--navy); }
+
+/* Tab nav */
+.tab-nav {
+  position:sticky; top:0; z-index:50;
+  background:var(--navy2); display:flex; overflow-x:auto;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.tab-btn {
+  background:transparent; border:none; color:#c9d0e0; padding:.9rem 1.3rem;
+  font-size:.9rem; font-weight:600; cursor:pointer; white-space:nowrap;
+  border-bottom:3px solid transparent; font-family:'Source Sans 3',sans-serif;
+}
+.tab-btn:hover { color:#fff; background:rgba(255,255,255,.05); }
+.tab-btn.active { color:var(--gold-lt); border-bottom-color:var(--gold); }
+
+/* Content */
+.tab-content { display:none; max-width:920px; margin:0 auto; padding:1.8rem 1.5rem 2.5rem; }
+.tab-content.active { display:block; }
+
+.card {
+  background:#fff; border:1px solid var(--border); border-radius:10px;
+  padding:1.3rem 1.4rem; margin-bottom:1.2rem;
+}
+.card h3 { font-size:1.15rem; margin-bottom:.6rem; }
+.card ul, .card ol { padding-left:1.3rem; margin-top:.5rem; }
+.card li { margin-bottom:.35rem; }
+.card ul.chevron { list-style:none; padding-left:.2rem; }
+.card ul.chevron li::before { content:'\203a'; color:var(--gold); font-weight:700; margin-right:.5rem; }
+
+table.markt { width:100%; border-collapse:collapse; margin-top:.5rem; }
+table.markt th, table.markt td { border:1px solid var(--border); padding:.5rem .7rem; text-align:left; font-size:.9rem; }
+table.markt th { background:var(--offwhite); color:var(--navy); font-family:'Lora',serif; }
+
+#student-name {
+  width:100%; padding:.7rem .9rem; border:1.5px solid var(--border); border-radius:8px;
+  font-size:1rem; font-family:'Source Sans 3',sans-serif; margin-top:.5rem;
+}
+#student-name:focus { outline:none; border-color:var(--gold); }
+
+.begin-btn, .submit-btn-lg {
+  background:var(--navy); color:#fff; border:none; padding:.8rem 1.8rem;
+  border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:.5rem;
+}
+.begin-btn:hover, .submit-btn-lg:hover { background:var(--navy2); }
+
+/* MCQ */
+.progress-bar-wrap { background:var(--paper); border-radius:999px; height:10px; overflow:hidden; margin:.8rem 0 1.2rem; }
+.progress-bar-fill { background:var(--gold); height:100%; width:0%; transition:width .3s; }
+.progress-text { font-size:.85rem; color:var(--muted); text-align:center; margin-bottom:1rem; }
+
+.q-block {
+  background:#fff; border:1px solid var(--border); border-radius:10px;
+  padding:1.2rem 1.3rem; margin-bottom:1rem;
+}
+.q-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:.6rem; }
+.q-num { font-family:'Lora',serif; font-weight:700; color:var(--navy); font-size:1.02rem; }
+.q-tag { font-size:.72rem; color:var(--muted); background:var(--offwhite); padding:.15rem .5rem; border-radius:999px; }
+.q-stem { font-size:.98rem; margin-bottom:.85rem; }
+.opt-list { display:flex; flex-direction:column; gap:.55rem; }
+.opt-btn {
+  text-align:left; background:var(--cream); border:1.5px solid var(--border); border-radius:8px;
+  padding:.65rem .9rem; font-size:.92rem; cursor:pointer; font-family:'Source Sans 3',sans-serif;
+  color:var(--ink); display:flex; gap:.6rem;
+}
+.opt-btn:hover { border-color:var(--gold); }
+.opt-btn .opt-letter { font-weight:700; color:var(--navy); }
+.opt-btn.sel { border-color:var(--gold); background:var(--amber-bg); }
+.opt-btn.correct, .opt-btn.show-correct { border-color:var(--green); background:var(--green-bg); }
+.opt-btn.wrong { border-color:var(--red); background:var(--red-bg); }
+.opt-btn:disabled { cursor:default; }
+.q-feedback { display:none; margin-top:.8rem; }
+.q-feedback.show { display:block; }
+.fb-item { font-size:.85rem; padding:.5rem .7rem; border-radius:6px; margin-top:.4rem; border-left:3px solid var(--border); background:var(--offwhite); }
+.fb-item.fb-correct { border-left-color:var(--green); background:var(--green-bg); }
+.fb-item.fb-wrong { border-left-color:var(--red); background:var(--red-bg); }
+
+/* Free response */
+.fr-section { background:#fff; border-radius:10px; margin-bottom:1.4rem; overflow:hidden; border:1px solid var(--border); }
+.fr-part { padding:1.2rem 1.4rem; border-top:1px solid var(--border); border-left:4px solid var(--green); }
+.fr-part.ebq-part { border-left-color:var(--blue); }
+.fr-part:first-of-type { border-top:none; }
+.fr-part-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:.5rem; }
+.fr-part-title { font-family:'Lora',serif; font-weight:700; color:var(--navy); }
+.fr-marks { font-size:.78rem; color:var(--muted); background:var(--offwhite); padding:.15rem .55rem; border-radius:999px; }
+.fr-prompt { font-size:.92rem; margin-bottom:.7rem; }
+.fr-inp {
+  width:100%; min-height:110px; border:1.5px solid var(--border); border-radius:8px;
+  padding:.7rem .8rem; font-family:'Source Sans 3',sans-serif; font-size:.92rem; resize:vertical;
+}
+.fr-inp:focus { outline:none; border-color:var(--gold); }
+.cc { font-size:.78rem; color:var(--muted); text-align:right; margin-top:.3rem; }
+.reveal-btn {
+  margin-top:.7rem; background:var(--offwhite); border:1px solid var(--border); color:var(--navy);
+  padding:.4rem .8rem; border-radius:6px; font-size:.82rem; cursor:pointer; font-weight:600; display:none;
+}
+.reveal-btn.show { display:inline-block; }
+.model-ans { display:none; margin-top:.7rem; background:var(--green-bg); border:1px solid #cfe6d6; border-radius:8px; padding:.8rem 1rem; font-size:.88rem; }
+.model-ans.ebq-ma { background:var(--blue-bg); border-color:#c9dbf2; }
+.model-ans.show { display:block; }
+.model-ans strong { color:var(--navy); }
+
+/* Article / sources */
+.article-box { background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:1.3rem 1.4rem; margin-bottom:1.2rem; }
+.article-box h4 { font-size:1rem; margin:1rem 0 .4rem; color:var(--navy); }
+.article-box h4:first-child { margin-top:0; }
+.article-box p { font-size:.9rem; margin-bottom:.6rem; text-align:justify; }
+.article-box table { width:100%; border-collapse:collapse; margin:.5rem 0; font-size:.85rem; }
+.article-box table th, .article-box table td { border:1px solid var(--border); padding:.4rem .6rem; }
+.article-box table th { background:var(--offwhite); }
+.src-box { background:var(--cream); border:1px solid var(--border); border-radius:10px; padding:1.2rem 1.3rem; margin-bottom:1rem; }
+.src-box h4 { font-size:.98rem; color:var(--navy); margin:.9rem 0 .35rem; }
+.src-box h4:first-child { margin-top:0; }
+.src-box p { font-size:.88rem; margin-bottom:.55rem; text-align:justify; }
+.src-title { font-family:'Lora',serif; font-weight:700; color:var(--blue); font-size:1.05rem; margin-bottom:.6rem; }
+
+/* Results */
+.score-panel { display:none; }
+.score-panel.show { display:block; }
+.score-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.9rem; margin-bottom:1.2rem; }
+.score-card { background:#fff; border:1px solid var(--border); border-radius:10px; padding:1rem; text-align:center; }
+.score-card .num { font-family:'Lora',serif; font-size:1.7rem; font-weight:700; color:var(--navy); }
+.score-card .lbl { font-size:.78rem; color:var(--muted); margin-top:.2rem; }
+.score-bar-wrap { background:var(--paper); border-radius:999px; height:16px; overflow:hidden; margin:.6rem 0 1rem; }
+.score-bar-fill { background:linear-gradient(90deg,var(--gold),var(--gold-lt)); height:100%; width:0%; transition:width 1s ease; }
+.grade-band { text-align:center; font-family:'Lora',serif; font-size:1.2rem; font-weight:700; color:var(--navy); margin-bottom:1rem; }
+.results-prompt { text-align:center; color:var(--muted); padding:2rem 1rem; }
+.mcq-breakdown-table { width:100%; border-collapse:collapse; font-size:.85rem; }
+.mcq-breakdown-table th, .mcq-breakdown-table td { border:1px solid var(--border); padding:.5rem .6rem; text-align:left; }
+.mcq-breakdown-table th { background:var(--offwhite); }
+.res-ok { color:var(--green); font-weight:700; }
+.res-bad { color:var(--red); font-weight:700; }
+
+/* Teacher section */
+.teacher-section { background:#fff; border:2px dashed var(--gold); border-radius:10px; padding:1.3rem 1.4rem; margin-top:1.5rem; }
+.teacher-locked { text-align:center; color:var(--muted); padding:1rem; }
+.teacher-locked .lock-icon { font-size:1.8rem; display:block; margin-bottom:.4rem; }
+.teacher-gen-btn {
+  display:none; background:var(--green); color:#fff; border:none; padding:.7rem 1.4rem;
+  border-radius:8px; font-weight:700; cursor:pointer; font-size:.95rem;
+}
+.teacher-gen-btn:hover { background:#245939; }
+
+/* Submit bar */
+.submit-bar {
+  position:fixed; bottom:0; left:0; right:0; background:var(--navy); color:#fff;
+  padding:.7rem 1.5rem; display:flex; justify-content:center; gap:1rem; z-index:60;
+  box-shadow:0 -2px 8px rgba(0,0,0,.2); flex-wrap:wrap;
+}
+.submit-bar .btn-sm { background:transparent; border:1px solid rgba(255,255,255,.4); color:#fff; }
+.submit-bar .submit-btn { background:var(--gold); color:var(--navy); border:none; font-weight:700; padding:.5rem 1.3rem; border-radius:6px; cursor:pointer; }
+.submit-bar .submit-btn:hover { background:var(--gold-lt); }
+
+/* Sources / footer */
+.sources-section { max-width:920px; margin:0 auto; padding:2rem 1.5rem 1rem; border-top:1px solid var(--border); }
+.sources-section h3 { font-size:1.05rem; margin-bottom:.6rem; }
+.sources-section p.ref { font-size:.85rem; margin-bottom:.4rem; color:var(--muted); }
+.author-cols { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1rem; font-size:.85rem; }
+.author-cols div p { margin-bottom:.15rem; }
+.page-footer { text-align:center; font-size:.8rem; color:var(--muted); padding:1.2rem 1rem 2rem; }
+
+@media (max-width:640px) {
+  .author-cols { grid-template-columns:1fr; }
+  .exam-header h1 { font-size:1.4rem; }
+}
+
+@media print {
+  .tab-nav, .save-bar, .submit-bar, .copyright-bar { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="copyright-bar">
+&#9888; Educational Use Only — This material is intended solely for educational purposes.
+It must not be sold, distributed commercially, or exchanged for any purpose other than education.
+</div>
+
+<header class="exam-header">
+  <h1>Science <span>&amp;</span> Practices</h1>
+  <p class="sub">Unit 0 · Research Methods · Statistics · Ethics</p>
+  <div class="info-pills">
+    <span class="info-pill">Unit 0</span>
+    <span class="info-pill">25 MCQ · 25 marks</span>
+    <span class="info-pill">AAQ · 7 marks</span>
+    <span class="info-pill">EBQ · 6 marks</span>
+    <span class="info-pill">Total: 38 marks</span>
+    <span class="info-pill">Suggested: 55 min</span>
+  </div>
+  <div class="timer-box">
+    <span id="timer-display" class="timer-display">00:00:00</span>
+    <button class="timer-btn" id="timer-toggle-btn" onclick="toggleTimer()">&#9654; Start</button>
+  </div>
+</header>
+
+<div class="save-bar">
+  <span class="save-status"><span class="save-dot"></span><span id="save-status-text">Auto-save on</span></span>
+  <button class="btn-sm" onclick="downloadAnswers()">&#8595; Download Answers</button>
+  <button class="btn-sm" onclick="clearExam()">&#8635; Clear / Restart</button>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" id="tab-btn-instructions" onclick="gotoTab('instructions')">Instructions</button>
+  <button class="tab-btn" id="tab-btn-mcq" onclick="gotoTab('mcq')">Section A · MCQ</button>
+  <button class="tab-btn" id="tab-btn-aaq" onclick="gotoTab('aaq')">Section B · AAQ</button>
+  <button class="tab-btn" id="tab-btn-ebq" onclick="gotoTab('ebq')">Section C · EBQ</button>
+  <button class="tab-btn" id="tab-btn-results" onclick="gotoTab('results')">Results</button>
+</nav>
+
+<!-- ============ INSTRUCTIONS TAB ============ -->
+<section class="tab-content active" id="tab-instructions">
+  <div class="card">
+    <h3>Before You Begin</h3>
+    <label for="student-name" style="font-size:.9rem;font-weight:600;color:var(--navy);">Student Full Name</label>
+    <input type="text" id="student-name" placeholder="Enter your full name before starting…" oninput="autoSave()">
+  </div>
+
+  <div class="card">
+    <h3>General Instructions</h3>
+    <ul class="chevron">
+      <li>This examination covers Unit 0: Science Practices — research design, variables and operational definitions, statistical reasoning, research ethics, and evaluating research.</li>
+      <li>Suggested time: <strong>55 minutes</strong>. A timer is provided at the top of the page — start it when you begin working.</li>
+      <li>Section A (Multiple Choice) is auto-scored immediately after you submit.</li>
+      <li>Sections B and C are free-response. Model answers unlock only after you submit the whole exam.</li>
+      <li>Your work is saved automatically to this browser as you type. Use the Download Answers button to keep a text copy for yourself.</li>
+      <li>Once you press Submit Exam, your multiple-choice answers are locked and cannot be changed.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Mark Allocation</h3>
+    <table class="markt">
+      <tr><th>Section</th><th>Component</th><th>Marks</th></tr>
+      <tr><td>A</td><td>25 Multiple Choice Questions (Research design 6 · Variables 5 · Statistics 6 · Ethics 4 · Evaluating research 4)</td><td>25</td></tr>
+      <tr><td>B</td><td>Article Analysis Question (AAQ) — Parts A–G</td><td>7</td></tr>
+      <tr><td>C</td><td>Evidence-Based Question (EBQ) — Parts A, B(i), B(ii), C(i), C(ii)</td><td>6</td></tr>
+      <tr><th colspan="2" style="text-align:right;">Total</th><th>38</th></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Free-Response Guidance</h3>
+    <ul class="chevron">
+      <li>Write in complete sentences. Vague or one-word answers will not earn credit even if the underlying idea is correct.</li>
+      <li>For statistics questions, explain what a value <em>means in context</em> — not just what the number is.</li>
+      <li>For EBQ Parts B(ii) and C(ii), you must name a specific psychological concept and fully explain how it connects the evidence to the claim.</li>
+      <li>Refer directly to details from the article or sources (participant numbers, instrument names, statistics) to support your points.</li>
+    </ul>
+  </div>
+
+  <button class="begin-btn" onclick="gotoTab('mcq')">Begin Section A &rarr;</button>
+</section>
+
+<!-- ============ MCQ TAB ============ -->
+<section class="tab-content" id="tab-mcq">
+  <div class="card" style="margin-bottom:1rem;">
+    <h3>Section A · Multiple Choice</h3>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:.3rem;">25 questions · 1 mark each. Select the single best answer for each question.</p>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div></div>
+  <p class="progress-text" id="progress-text">Answered: 0 of 25</p>
+  <div id="mcq-list"></div>
+</section>
+<!-- ============ AAQ TAB ============ -->
+<section class="tab-content" id="tab-aaq">
+  <div class="card" style="margin-bottom:1rem;">
+    <h3>Section B · Article Analysis Question</h3>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:.3rem;">Read the article below, then respond to Parts A–G. 7 marks total.</p>
+  </div>
+
+  <div class="article-box">
+    <h3 style="margin-bottom:.5rem;">Social Media Use, Sleep Quality, and Academic Performance in Adolescents: A Correlational Survey Study</h3>
+
+    <h4>Introduction</h4>
+    <p>Adolescence is a developmental period marked by shifting sleep architecture, increasing autonomy over technology use, and mounting academic demands. Over the past decade, smartphone-based social media platforms have become a near-universal feature of adolescent daily life, with many teenagers reporting near-constant connectivity through the evening hours. Two mechanisms have been proposed to link this behaviour to poorer academic functioning. The first is a direct displacement mechanism: time spent scrolling through social media feeds substitutes for time that would otherwise be devoted to homework, studying, or rest, reducing the total hours available for academic preparation. The second is an indirect, sleep-mediated mechanism: late-evening screen exposure delays the onset of sleep through both behavioural displacement (staying awake to keep engaging with content) and physiological arousal (blue-light suppression of melatonin release and psychological stimulation from social content), producing shortened or fragmented sleep that in turn impairs next-day attention, working memory, and emotional regulation — all of which are required for classroom learning and test performance.</p>
+    <p>Existing evidence linking social media use to academic outcomes has been inconsistent, in part because many prior studies have measured only one link in this proposed chain (for example, screen time and grades, without measuring sleep) rather than testing the full pathway. Sleep researchers have separately established that adolescents who obtain fewer than the recommended eight to ten hours of sleep on school nights show measurable deficits in sustained attention and consolidation of newly learned material. The present study was designed to examine both links simultaneously within a single adolescent sample: the association between social media use and sleep quality, and the association between sleep quality and academic performance, in order to evaluate whether poorer sleep quality helps explain the relationship between heavier social media use and lower academic achievement. Because the design is correlational, the study can establish whether these variables are related and estimate the strength of that relationship, but it cannot by itself establish that social media use causes poorer sleep or that poorer sleep causes lower academic performance.</p>
+
+    <h4>Participants</h4>
+    <p>Participants were 312 students (162 female, 146 male, 4 identified as non-binary) drawn from Year 10, Year 11, and Year 12 classes at two urban public high schools in the same metropolitan district. Mean age was 16.2 years (SD = 1.1). Students were eligible for inclusion if they owned or had regular access to a personal smartphone or tablet with social media applications installed and had attended their current school for at least one full academic term. Students were excluded if they had a diagnosed sleep disorder requiring clinical treatment (e.g., diagnosed insomnia or sleep apnea under active management) or a documented learning disability that required a modified academic assessment, since either condition could independently affect sleep or performance scores in ways unrelated to social media use. Recruitment took place through school assemblies and homeroom announcements. Because participants were minors, written parental or guardian consent was obtained for every student prior to participation, followed by written student assent immediately before the survey was administered; students were told they could decline to take part even if their parent had consented. The study protocol was approved by the researchers' institutional review board prior to data collection (IRB Protocol #EDU-2025-118).</p>
+
+    <h4>Method</h4>
+    <p>Three standardised instruments were administered. Social media use was measured using a 10-item Social Media Engagement Scale (SMES; range 10–50, higher scores indicating heavier daily use across platforms, including estimated minutes per day and frequency of checking). Sleep quality was measured using the Pittsburgh Sleep Quality Index (PSQI; range 0–21, higher scores indicating worse sleep quality), a widely used self-report instrument assessing sleep duration, latency, disturbances, and daytime dysfunction over the previous month. Academic performance was measured using a standardised Academic Performance Composite (APC; range 0–100), which combined each student's most recent cumulative GPA (converted to a 100-point scale) with a standardised in-school assessment of reading and mathematics proficiency administered by the district earlier that term.</p>
+    <p>All three measures were administered in a single 40-minute survey session completed during a supervised homeroom period, with research assistants present to answer procedural questions but not to interpret item content. Students completed the SMES and PSQI on paper; APC scores were obtained from school records with student and parental consent and linked to survey responses using an anonymised participant code. Data were analysed using Pearson product-moment correlations to examine the bivariate relationships between social media use, sleep quality, and academic performance, followed by a multiple regression analysis with academic performance (APC) as the outcome variable and social media use (SMES) and sleep quality (PSQI) entered as simultaneous predictors, in order to estimate the unique contribution of each variable while controlling for the other.</p>
+
+    <h4>Results &amp; Discussion</h4>
+    <p>Descriptive statistics showed a mean SMES score of 32.4 (SD = 7.8), a mean PSQI score of 9.6 (SD = 3.2, indicating poor sleep quality overall, as PSQI scores above 5 are conventionally classified as poor sleepers), and a mean APC score of 71.3 (SD = 11.5). Social media use was positively correlated with sleep quality scores (i.e., associated with worse sleep, since higher PSQI = worse sleep), r = .47, p &lt; .001, indicating that students who reported heavier social media engagement also reported significantly more sleep disturbance. Sleep quality scores were negatively correlated with academic performance, r = −.54, p &lt; .001, indicating that students with worse sleep quality (higher PSQI) tended to have lower academic performance scores. Social media use was also directly and negatively correlated with academic performance, r = −.39, p &lt; .001.</p>
+    <p>The multiple regression model, with SMES and PSQI predicting APC simultaneously, was statistically significant, R² = .31, F(2, 309) = 69.42, p &lt; .001, indicating that social media use and sleep quality together accounted for approximately 31% of the variance in academic performance scores. In this model, PSQI remained a significant unique predictor of APC (β = −.41, p &lt; .001) even after controlling for SMES, while the unique contribution of SMES was smaller once PSQI was included (β = −.17, p = .004), consistent with the possibility that sleep disruption partially accounts for the association between social media use and academic performance. The authors note that, because the design was correlational and cross-sectional (all variables measured at a single time point), these findings describe an association consistent with the proposed sleep-mediated pathway but cannot establish that social media use causes poor sleep or that poor sleep causes lower academic performance; unmeasured variables and reverse-direction explanations remain possible.</p>
+  </div>
+
+  <div class="fr-section">
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part A</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Identify the research design used in this study and explain one limitation this design creates for establishing causation.</p>
+      <textarea class="fr-inp" id="aaq-a" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-a">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-a" onclick="revealMA('aaq-a')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-a"><strong>Model Answer:</strong> This is a correlational (survey) design — the researchers measured social media use, sleep quality, and academic performance as they naturally occurred, without manipulating any variable or randomly assigning students to conditions. The key limitation is that a correlational design cannot establish causation: because no variable was manipulated, the direction of the relationship cannot be determined (poor sleep could lower academic performance, but low academic performance could also lead students to stay up later worrying or working, and heavy social media use could be a symptom rather than a cause of a broader pattern) and a third, unmeasured variable (a confound) could be producing the observed associations between all three variables.</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part B</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Identify the independent variable(s) and the dependent variable examined in the regression analysis.</p>
+      <textarea class="fr-inp" id="aaq-b" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-b">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-b" onclick="revealMA('aaq-b')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-b"><strong>Model Answer:</strong> In the multiple regression model, the predictor (independent) variables are social media use (measured by the SMES) and sleep quality (measured by the PSQI). The dependent (outcome) variable is academic performance, measured by the Academic Performance Composite (APC). Note that because the study is correlational rather than experimental, these are more precisely called "predictor" and "outcome" variables rather than a true manipulated independent variable and measured dependent variable.</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part C</span><span class="fr-marks">2 marks</span></div>
+      <p class="fr-prompt">Interpret r = −.54, p &lt; .001 and R² = .31 from the Results section. Explain what each value means in the context of this study.</p>
+      <textarea class="fr-inp" id="aaq-c" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-c">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-c" onclick="revealMA('aaq-c')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-c"><strong>Model Answer:</strong> r = −.54 describes the strength and direction of the linear relationship between sleep quality (PSQI) and academic performance (APC). The negative sign shows an inverse relationship: as PSQI scores increase (sleep gets worse), APC scores tend to decrease (academic performance gets lower). A magnitude of .54 indicates a moderately strong relationship (on a scale from 0 to 1). The p &lt; .001 indicates that this correlation is statistically significant — the probability of observing a relationship this strong in the sample purely by chance, if there were truly no relationship in the population, is less than 0.1%, so the researchers can be confident the relationship is real rather than a random sampling fluctuation. R² = .31 comes from the regression model and means that social media use and sleep quality together statistically account for approximately 31% of the variance (individual differences) in students' academic performance scores; the remaining 69% of the variance is explained by other factors not measured in this study (e.g., prior achievement, motivation, family and school resources, or measurement error).</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part D</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Identify one potential confounding variable not controlled for in this study and explain how it could affect the results.</p>
+      <textarea class="fr-inp" id="aaq-d" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-d">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-d" onclick="revealMA('aaq-d')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-d"><strong>Model Answer:</strong> One plausible confounding variable is household stress or socioeconomic circumstances (for example, a chaotic home environment, food or housing insecurity, or a part-time job). Such conditions could independently increase both social media use (as an escape or coping behaviour), disrupt sleep (through noise, irregular schedules, or anxiety), and lower academic performance (through reduced study time, stress, or fewer academic resources at home) — meaning the observed correlations between social media use, sleep, and academic performance could be partly or wholly explained by this unmeasured third variable rather than any direct relationship between the two measured variables themselves.</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part E</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">A student concludes that reducing social media use will improve grades. Evaluate this conclusion using evidence from the study.</p>
+      <textarea class="fr-inp" id="aaq-e" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-e">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-e" onclick="revealMA('aaq-e')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-e"><strong>Model Answer:</strong> This conclusion is not fully supported by the evidence presented. The study found a significant negative correlation between social media use and academic performance (r = −.39) and, more importantly, found that once sleep quality was included in the regression model, the unique contribution of social media use to academic performance dropped substantially (β = −.17) while sleep quality remained the stronger unique predictor (β = −.41). This pattern suggests the relationship between social media use and grades may operate largely through its effect on sleep rather than through a direct effect on studying or attention. Because the design is correlational, no causal claim can be made in either direction: it is equally possible that reducing social media use would improve sleep and indirectly improve grades, that a third variable (such as stress or motivation) is driving all three variables, or that students already struggling academically turn to social media more as an avoidant coping behaviour. An experiment that manipulates social media use directly would be needed before recommending it as an intervention to "improve grades."</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part F</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Identify one ethical procedure described in the Method section and explain why it was necessary given the participants involved.</p>
+      <textarea class="fr-inp" id="aaq-f" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-f">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-f" onclick="revealMA('aaq-f')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-f"><strong>Model Answer:</strong> The study obtained both written parental/guardian consent and written student assent before any data were collected. This two-step procedure was necessary because the participants were minors: minors are not legally able to provide fully informed consent on their own, so a parent or guardian must consent on the child's behalf, but the student's own agreement (assent) is also required so that the young person is not simply compelled to participate against their own wishes. The study also secured prior institutional review board (IRB) approval (Protocol #EDU-2025-118), which is necessary to ensure an independent body confirmed that the risks to these adolescent participants were minimal and that appropriate safeguards were in place before the research began.</div>
+    </div>
+
+    <div class="fr-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part G</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Explain how this study could be redesigned as a true experiment to test a causal claim, and identify one practical or ethical challenge that redesign would face.</p>
+      <textarea class="fr-inp" id="aaq-g" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-aaq-g">0 characters</div>
+      <button class="reveal-btn" id="rv-aaq-g" onclick="revealMA('aaq-g')">Show model answer</button>
+      <div class="model-ans" id="ma-aaq-g"><strong>Model Answer:</strong> To redesign this as a true experiment, researchers would need to randomly assign students to conditions rather than simply measuring existing behaviour — for example, randomly assigning one group of students to reduce social media use to a fixed limit (e.g., 30 minutes per day) for several weeks and a control group to continue their usual habits, then measuring sleep quality (PSQI) and academic performance (APC) afterwards in both groups. Random assignment would help ensure that pre-existing differences between groups (such as stress levels or motivation) are evenly distributed, allowing any resulting difference in sleep or performance to be more confidently attributed to the social media manipulation. A major practical and ethical challenge is that researchers cannot fully control or ethically restrict adolescents' private smartphone and social media use outside a lab setting — enforcing and verifying compliance with an assigned social media limit over several weeks would be difficult, and mandating that some students reduce a normal daily activity while others do not raises questions about fairness and the right to withdraw, since students might resent or resist an assigned restriction on their personal technology use.</div>
+    </div>
+  </div>
+</section>
+<!-- ============ EBQ TAB ============ -->
+<section class="tab-content" id="tab-ebq">
+  <div class="card" style="margin-bottom:1rem;">
+    <h3>Section C · Evidence-Based Question</h3>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:.3rem;">Read the claim and the three sources below, then respond to Parts A, B(i), B(ii), C(i), C(ii). 6 marks total.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--gold);">
+    <h3 style="font-size:1.05rem;">Claim</h3>
+    <p style="font-style:italic;margin-top:.4rem;">"The conclusions drawn from psychological research are shaped by the methods used, the populations studied, and the ethical constraints that govern what researchers are permitted to do."</p>
+  </div>
+
+  <div class="src-box">
+    <div class="src-title">Source 1 — A Brief Research-Literacy Training Programme and Detection of Methodological Flaws in News Articles</div>
+    <h4>Introduction</h4>
+    <p>Adolescents encounter psychological and health claims daily through news media and social platforms, yet formal instruction in evaluating research methodology is rarely part of secondary curricula. Prior work suggests that brief, targeted instruction in research literacy — teaching students to recognise small samples, missing control groups, and correlation-causation errors — can improve critical evaluation skills. This study tested whether a single-session training programme could measurably improve adolescents' ability to identify methodological flaws in real news articles reporting psychological findings, using a controlled experimental design so that any improvement could be attributed to the training itself rather than general maturation or repeated testing.</p>
+    <h4>Participants</h4>
+    <p>Sixty-eight Year 11 students (n = 68; 35 female, 33 male) from a single co-educational secondary school volunteered to participate, with parental consent and student assent obtained for all participants prior to enrolment. Mean age was 15.9 years (SD = 0.6). Students were randomly assigned using a computer-generated randomisation sequence to either the training group (n = 34) or an active control group (n = 34) that received an unrelated study-skills session of equal length. The study received institutional review board approval (Protocol #SCI-2024-092) prior to recruitment.</p>
+    <h4>Method</h4>
+    <p>All participants completed a 20-item Research Flaw Identification Test (RFIT; range 0–20, higher scores indicating better identification of methodological flaws such as small sample size, absence of a control group, and correlation misinterpreted as causation) as a pre-test. The training group then received a 45-minute structured lesson covering sampling, control groups, confounding variables, and correlation versus causation, illustrated with annotated news examples; the control group received a 45-minute study-skills session covering note-taking strategies, with no research-methods content. Both groups completed a parallel form of the RFIT (post-test) immediately afterward. Data were analysed using an independent-samples t-test comparing post-test gain scores (post-test minus pre-test) between groups.</p>
+    <h4>Results &amp; Discussion</h4>
+    <p>Pre-test scores did not differ significantly between groups, t(66) = 0.41, p = .683, confirming baseline equivalence prior to the manipulation. Following the intervention, the training group showed a significantly larger gain in RFIT scores (M = 5.8, SD = 2.1) than the control group (M = 1.2, SD = 1.9), t(66) = 9.34, p &lt; .001, Cohen's d = 2.27, indicating a very large effect of the brief training programme on adolescents' ability to detect methodological flaws in news articles reporting psychological research. Because participants were randomly assigned to conditions and groups were equivalent at pre-test, the researchers concluded that the training itself, rather than pre-existing differences between students, caused the improvement in flaw-detection performance.</p>
+  </div>
+
+  <div class="src-box">
+    <div class="src-title">Source 2 — Ethical Scrutiny and Long-Term Replication Success Across Published Studies</div>
+    <h4>Introduction</h4>
+    <p>Replication — the ability of independent researchers to reproduce an original finding — is a cornerstone of confidence in psychological science, yet many published findings fail to replicate. One under-examined possibility is that the intensity of ethical review a study undergoes is associated with broader aspects of methodological rigor (such as clearer protocols, better-justified sample sizes, and more carefully controlled procedures), which could in turn predict whether a finding successfully replicates. This longitudinal study examined whether researchers' self-reported level of ethical scrutiny during the IRB review process was associated with the likelihood that their original findings were later confirmed in independent replication attempts.</p>
+    <h4>Participants</h4>
+    <p>The dataset comprised 84 published psychology studies (n = 84) drawn from four peer-reviewed journals, each of which had been the subject of at least one independent, pre-registered replication attempt published within five years of the original study. For each original study, the corresponding author completed a retrospective Ethical Scrutiny Questionnaire (ESQ; range 8–40, higher scores indicating a more intensive IRB review process, including number of revision rounds requested, additional safeguards imposed, and review duration). Corresponding authors were contacted by email and provided informed consent to have their responses and study data included in this research; institutional review board approval for the tracking study was obtained (Protocol #REP-2020-054).</p>
+    <h4>Method</h4>
+    <p>Studies were tracked for five years following original publication to determine whether a successful independent replication (defined as a replication study reporting an effect in the same direction and reaching statistical significance at p &lt; .05) was published. Each original study was coded as "replicated" or "not replicated" based on this criterion, and a Replication Success Score (0 = not replicated, 1 = replicated) was assigned. ESQ scores were correlated with replication outcomes using a point-biserial correlation, and a secondary analysis compared mean ESQ scores between replicated and non-replicated studies.</p>
+    <h4>Results &amp; Discussion</h4>
+    <p>Mean ESQ score across all 84 studies was 24.6 (SD = 6.3). Studies that were later successfully replicated had significantly higher ESQ scores (M = 27.9, SD = 5.4) than studies that failed to replicate (M = 20.1, SD = 5.8). ESQ score was significantly correlated with replication success, r = .41, p &lt; .001, indicating that studies which underwent more intensive ethical scrutiny during review were more likely to replicate successfully five years later. The authors suggest that the association may reflect a broader "rigor bundle": studies subjected to closer IRB scrutiny may also have undergone more careful methodological planning generally, though the study cannot establish that ethical scrutiny itself directly causes better replicability, since scrutiny level and methodological rigor were not independently manipulated.</p>
+  </div>
+
+  <div class="src-box">
+    <div class="src-title">Source 3 — Conformity Findings Compared Across WEIRD and Non-WEIRD Samples</div>
+    <h4>Introduction</h4>
+    <p>Much of the foundational research in psychology, including classic conformity studies, was conducted using participants from Western, Educated, Industrialised, Rich, and Democratic (WEIRD) societies, raising questions about whether such findings generalise to populations with different cultural values around individualism and collectivism. This quasi-experimental study compared conformity rates on a standard line-judgment task between a WEIRD sample and a non-WEIRD sample to examine whether population characteristics shape the conclusions drawn about a well-established psychological phenomenon.</p>
+    <h4>Participants</h4>
+    <p>Participants were drawn from two existing, intact university cohorts rather than being individually randomly assigned to a sample: one WEIRD sample of 96 undergraduate students (mean age = 20.4, SD = 1.5) from a large research university in the United States, and one non-WEIRD sample of 91 undergraduate students (mean age = 20.9, SD = 1.7) from a university in a collectivist East Asian society, matched as closely as possible on age range and student status. Because participants belonged to pre-existing university cohorts in their respective countries, individual random assignment to sample was not possible; the comparison is therefore between intact groups rather than randomly equivalent groups. All participants provided informed consent, and the study received ethical approval from the review boards of both participating institutions (Protocol #CRC-2023-071).</p>
+    <h4>Method</h4>
+    <p>All participants completed a computerised adaptation of a standard line-judgment conformity task, in which participants viewed a comparison line alongside three reference lines and indicated which reference line matched it in length after seeing confederate-simulated majority responses that were incorrect on critical trials. Conformity was quantified using a Conformity Rate Score (CRS; range 0–100, representing the percentage of critical trials on which the participant conformed to the incorrect majority judgment). Analysis compared mean CRS between the WEIRD and non-WEIRD samples using a one-way analysis of variance (ANOVA), with effect size reported as eta-squared (η²).</p>
+    <h4>Results &amp; Discussion</h4>
+    <p>The non-WEIRD sample showed a significantly higher mean conformity rate (M = 58.3, SD = 14.2) than the WEIRD sample (M = 36.7, SD = 13.6), F(1, 185) = 116.85, p &lt; .001, η² = .39, indicating a large effect of sample/cultural context on conformity behaviour. The authors note that because participants were drawn from pre-existing intact cohorts rather than individually randomly assigned, cultural background is confounded with numerous other uncontrolled differences between the two universities and student populations (such as institutional norms, task familiarity, or unmeasured demographic differences), so the study cannot isolate cultural individualism/collectivism as the sole cause of the conformity difference. The findings nonetheless demonstrate that a phenomenon considered a robust, generalisable finding within WEIRD samples may produce substantially different conclusions when tested in non-WEIRD populations, underscoring that the populations studied shape the conclusions researchers are able to draw.</p>
+  </div>
+
+  <div class="fr-section">
+    <div class="fr-part ebq-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part A</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Identify the research design used in Source 1 and explain one strength of this design for testing the claim.</p>
+      <textarea class="fr-inp" id="ebq-a" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-ebq-a">0 characters</div>
+      <button class="reveal-btn" id="rv-ebq-a" onclick="revealMA('ebq-a')">Show model answer</button>
+      <div class="model-ans ebq-ma" id="ma-ebq-a"><strong>Model Answer:</strong> Source 1 uses a true experimental design: participants were randomly assigned to a training group or an active control group, and the researchers manipulated whether students received the research-literacy training. A key strength of this design for testing the claim is that random assignment produces groups that are equivalent at baseline (confirmed here by the non-significant pre-test difference, t(66) = 0.41, p = .683), which allows the researchers to attribute the large post-training gain (d = 2.27) specifically to the training method used rather than to pre-existing differences between students — directly supporting the claim that the methods used shape the conclusions a study can draw, since only the experimental design allows a causal conclusion about the training's effect.</div>
+    </div>
+
+    <div class="fr-part ebq-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part B(i)</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Support the claim using evidence from at least one source.</p>
+      <textarea class="fr-inp" id="ebq-bi" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-ebq-bi">0 characters</div>
+      <button class="reveal-btn" id="rv-ebq-bi" onclick="revealMA('ebq-bi')">Show model answer</button>
+      <div class="model-ans ebq-ma" id="ma-ebq-bi"><strong>Model Answer:</strong> Source 2 supports the claim that ethical constraints shape research conclusions: studies that underwent more intensive ethical scrutiny during IRB review (higher ESQ scores) were significantly more likely to replicate successfully over the following five years, r = .41, p &lt; .001, with replicated studies averaging notably higher ESQ scores (M = 27.9) than non-replicated studies (M = 20.1). This shows that the ethical review process a study passes through — the constraint on what researchers are permitted to do without additional safeguards or revisions — is measurably linked to the long-term trustworthiness of the conclusions that study produces.</div>
+    </div>
+
+    <div class="fr-part ebq-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part B(ii)</span><span class="fr-marks">2 marks</span></div>
+      <p class="fr-prompt">Name one specific psychological concept and fully explain how it accounts for the evidence you cited in Part B(i).</p>
+      <textarea class="fr-inp" id="ebq-bii" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-ebq-bii">0 characters</div>
+      <button class="reveal-btn" id="rv-ebq-bii" onclick="revealMA('ebq-bii')">Show model answer</button>
+      <div class="model-ans ebq-ma" id="ma-ebq-bii"><strong>Model Answer:</strong> The concept of <strong>research rigor as a mediating factor</strong> (methodological quality that underlies both ethical review outcomes and replicability) explains the Source 2 evidence. Research rigor refers to the overall care, precision, and control exercised in designing and conducting a study — including clearly justified sample sizes, well-operationalised variables, and carefully controlled procedures. A study that undergoes more intensive IRB scrutiny is typically required to justify its procedures, sample, and safeguards in greater detail, which tends to surface and correct methodological weaknesses before data collection begins. This means that ethical scrutiny does not directly cause replication success on its own; instead, it functions as an indirect marker of a broader "bundle" of methodological rigor — a study built carefully enough to satisfy a demanding ethics board is also more likely to have used adequate sample sizes, appropriate controls, and precise operational definitions, all of which independently make a finding more likely to be genuine (rather than a false positive) and therefore more likely to replicate. This directly connects the ethical-constraints evidence (r = .41) to the claim: the ethical process a study passes through is intertwined with the methodological quality that ultimately shapes whether its conclusions hold up.</div>
+    </div>
+
+    <div class="fr-part ebq-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part C(i)</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Use evidence from Source 3 to identify a limitation or complication of the claim.</p>
+      <textarea class="fr-inp" id="ebq-ci" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-ebq-ci">0 characters</div>
+      <button class="reveal-btn" id="rv-ebq-ci" onclick="revealMA('ebq-ci')">Show model answer</button>
+      <div class="model-ans ebq-ma" id="ma-ebq-ci"><strong>Model Answer:</strong> Source 3 complicates the claim by showing that even when a psychological phenomenon (conformity) is studied with a fairly standard task, the conclusion drawn depends heavily on the population sampled — conformity rates were significantly higher in the non-WEIRD sample (M = 58.3) than the WEIRD sample (M = 36.7), F(1, 185) = 116.85, p &lt; .001, η² = .39. However, because participants came from pre-existing intact university cohorts rather than being individually randomly assigned, the researchers could not isolate population/cultural background as the sole explanation — the comparison is confounded with other uncontrolled institutional and demographic differences between the two universities. This complicates the claim: population differences clearly shape the conclusions researchers reach, but the quasi-experimental method used here means the specific reason for that difference cannot be pinned down with confidence.</div>
+    </div>
+
+    <div class="fr-part ebq-part">
+      <div class="fr-part-head"><span class="fr-part-title">Part C(ii)</span><span class="fr-marks">1 mark</span></div>
+      <p class="fr-prompt">Name one specific psychological concept and fully explain how it accounts for the complication identified in Part C(i).</p>
+      <textarea class="fr-inp" id="ebq-cii" oninput="autoSave();updateCC(this)" placeholder="Type your answer here…"></textarea>
+      <div class="cc" id="cc-ebq-cii">0 characters</div>
+      <button class="reveal-btn" id="rv-ebq-cii" onclick="revealMA('ebq-cii')">Show model answer</button>
+      <div class="model-ans ebq-ma" id="ma-ebq-cii"><strong>Model Answer:</strong> The concept of a <strong>confounding variable</strong> in quasi-experimental (intact-group) designs explains this complication. A confounding variable is a factor other than the one being studied that varies systematically alongside the variable of interest, making it impossible to determine which factor is responsible for an observed difference. Because Source 3 compared two pre-existing, intact university cohorts rather than randomly assigning individuals to a "WEIRD" or "non-WEIRD" condition, cultural/population background is entangled with numerous other differences between the two universities and student bodies — such as differing institutional norms around classroom participation, unmeasured demographic composition, or differences in familiarity with laboratory tasks. Any of these uncontrolled factors could plausibly account for part or all of the large conformity difference (η² = .39), not just individualism versus collectivism. This shows precisely why the claim must be qualified: population differences do shape conclusions, but without random assignment, a confounding variable can never be fully ruled out as the true explanation for a between-group difference, limiting how strongly researchers can interpret the population effect itself.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS TAB ============ -->
+<section class="tab-content" id="tab-results">
+  <div class="card">
+    <h3>Results &amp; Marking</h3>
+  </div>
+
+  <div class="results-prompt" id="results-prompt">
+    <p>Your results will appear here after you submit the exam.</p>
+  </div>
+
+  <div class="score-panel" id="score-panel">
+    <div class="score-cards">
+      <div class="score-card"><div class="num" id="score-mcq">0/25</div><div class="lbl">MCQ Score</div></div>
+      <div class="score-card"><div class="num" id="score-fr">13</div><div class="lbl">Free Response Marks Available (teacher-marked)</div></div>
+      <div class="score-card"><div class="num" id="score-pct">0%</div><div class="lbl">MCQ Percentage</div></div>
+    </div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="score-bar-fill"></div></div>
+    <div class="grade-band" id="grade-band"></div>
+
+    <h3 style="margin:1.4rem 0 .6rem;">Section A Breakdown</h3>
+    <table class="mcq-breakdown-table" id="mcq-breakdown-table">
+      <thead><tr><th>#</th><th>Topic</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr></thead>
+      <tbody id="mcq-breakdown-body"></tbody>
+    </table>
+  </div>
+
+  <div class="teacher-section">
+    <h3 style="margin-bottom:.7rem;">Teacher's Marking File</h3>
+    <div class="teacher-locked" id="teacher-locked">
+      <span class="lock-icon">&#128274;</span>
+      Available after you submit the exam.
+    </div>
+    <button class="teacher-gen-btn" id="teacher-gen-btn" onclick="generateTeacherFile()">&#8595; Generate Teacher's Marking File</button>
+  </div>
+</section>
+
+<div class="submit-bar">
+  <button class="btn-sm" onclick="downloadAnswers()">&#8595; Download Answers</button>
+  <button class="btn-sm" onclick="clearExam()">&#8635; Clear</button>
+  <button class="submit-btn" onclick="submitExam()">Submit Exam</button>
+</div>
+
+<div class="sources-section">
+  <h3>Sources</h3>
+  <p class="ref">McEntarffer, R., &amp; Weseley, A. J. (2025). <em>Barron's AP Psychology Premium 2025</em>. Barron's Educational Series.</p>
+  <p class="ref">College Board. (2024). <em>AP Psychology Course and Exam Description (CED), 2024–25</em>. College Board.</p>
+
+  <div class="author-cols">
+    <div>
+      <p><strong>Dr Alduais, Ahmed</strong></p>
+      <p>Psychology, Seminar, Research and Statistics Tutor</p>
+      <p>Humanities Department</p>
+      <p>Crimson Global Academy, Auckland, New Zealand</p>
+      <p>a.alduais@cga.school</p>
+    </div>
+    <div>
+      <p><strong>The Trondheim Early Secure Study (TESS)</strong></p>
+      <p>Department of Psychology</p>
+      <p>Norwegian University of Science and Technology</p>
+      <p>Trondheim, Norway</p>
+      <p>ibnalduais@gmail.com</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">AP Psychology · Unit 0 Examination · For educational use only · &copy; Dr Ahmed Alduais</div>
+<script>
+var STORAGE_KEY = 'u0exam_v1';
+var submitted = false;
+var timerSecs = 0, timerRunning = false, timerInterval = null;
+
+/* ============ MCQ DATA ============ */
+var MCQ = [
+{t:"0.1 Research Design", stem:`A researcher wants to test whether a new tutoring app improves exam scores. She randomly assigns half of a group of students to use the app and half to a control condition, then compares exam scores. Which research design is being used?`, opts:[`Case study`,`Naturalistic observation`,`True experiment`,`Survey`], c:2, fb:[`Incorrect — a case study is an in-depth investigation of one individual or small group, not a manipulation with random assignment.`,`Incorrect — naturalistic observation involves watching behavior in its natural setting without any manipulation.`,`Correct — manipulating a variable (app use) and randomly assigning participants to conditions is the defining feature of a true experiment.`,`Incorrect — a survey collects self-report data; it does not involve manipulating a variable or random assignment.`]},
+{t:"0.1 Research Design", stem:`A researcher records students' reported hours of sleep and their GPA, without manipulating either variable, then calculates the strength of the relationship. This is an example of:`, opts:[`Naturalistic observation`,`Correlational research`,`Case study`,`True experiment`], c:1, fb:[`Incorrect — naturalistic observation involves observing behavior directly in a natural setting, not measuring two self-reported variables statistically.`,`Correct — measuring two variables as they naturally occur and examining the strength/direction of their relationship is correlational research.`,`Incorrect — a case study is an in-depth study of a single individual or small group.`,`Incorrect — no variable was manipulated and no random assignment occurred, so this cannot be a true experiment.`]},
+{t:"0.1 Research Design", stem:`A psychologist conducts an in-depth, long-term investigation of a single patient with a rare memory disorder, using interviews, medical records, and cognitive testing. This approach is best described as:`, opts:[`Survey`,`Case study`,`Longitudinal experiment`,`Naturalistic observation`], c:1, fb:[`Incorrect — a survey involves questionnaires distributed to a sample, not an in-depth single-patient investigation.`,`Correct — an intensive, in-depth investigation of a single individual using multiple sources of information defines a case study.`,`Incorrect — there is no manipulated variable or random assignment described, so this is not an experiment.`,`Incorrect — naturalistic observation involves watching behavior in its natural setting, not clinical interviews and testing of one patient.`]},
+{t:"0.1 Research Design", stem:`Researchers distribute a questionnaire to 500 randomly selected adults asking about their attitudes toward remote work. This method is:`, opts:[`Survey research`,`Case study`,`True experiment`,`Naturalistic observation`], c:0, fb:[`Correct — administering a questionnaire to a sample to assess attitudes or behaviors is the defining feature of survey research.`,`Incorrect — a case study focuses on one individual or small group, not 500 respondents.`,`Incorrect — no variable was manipulated and no groups were compared, so this is not an experiment.`,`Incorrect — naturalistic observation involves watching behavior directly, not collecting self-report questionnaire data.`]},
+{t:"0.1 Research Design", stem:`A researcher observes and records children's play behavior on a school playground without any intervention, in their normal environment. This is:`, opts:[`Case study`,`Naturalistic observation`,`Survey`,`Quasi-experiment`], c:1, fb:[`Incorrect — a case study is an intensive investigation of a single individual or small group over time, not observation of a group in its natural setting.`,`Correct — observing and recording behavior in its natural setting without intervening is the definition of naturalistic observation.`,`Incorrect — a survey involves collecting self-report data through questionnaires or interviews, not direct observation.`,`Incorrect — a quasi-experiment compares pre-existing groups, which is not what is described here.`]},
+{t:"0.1 Research Design", stem:`What is a key limitation of using a case study to draw conclusions about behavior in the general population?`, opts:[`Case studies always violate informed consent`,`Findings from a single participant may not generalize to a broader population`,`Case studies cannot include any qualitative data`,`Case studies require random assignment, which is difficult to arrange`], c:1, fb:[`Incorrect — case studies do not inherently violate informed consent; ethical consent procedures still apply.`,`Correct — because case studies focus on one person or a small group, results may reflect that individual's unique characteristics rather than the broader population, limiting generalizability.`,`Incorrect — case studies frequently include rich qualitative data such as interviews and observations.`,`Incorrect — case studies do not use random assignment at all; that limitation applies to experiments, not case studies.`]},
+{t:"0.2 Variables", stem:`In an experiment testing whether caffeine improves reaction time, participants are randomly assigned to consume either caffeinated or decaffeinated coffee before completing a reaction-time task. What is the independent variable?`, opts:[`Reaction time`,`Type of coffee consumed (caffeinated vs. decaffeinated)`,`Participant's age`,`Time of day the test occurs`], c:1, fb:[`Incorrect — reaction time is the outcome being measured, making it the dependent variable, not the independent variable.`,`Correct — the variable the researcher manipulates (type of coffee) is the independent variable.`,`Incorrect — age is a participant characteristic, not the manipulated variable in this study.`,`Incorrect — time of day is not described as being manipulated in this study.`]},
+{t:"0.2 Variables", stem:`In the same caffeine and reaction-time experiment described above, what is the dependent variable?`, opts:[`Type of coffee consumed`,`Reaction time score`,`Random assignment method`,`Sample size`], c:1, fb:[`Incorrect — type of coffee is the variable being manipulated, which makes it the independent variable, not the dependent variable.`,`Correct — reaction time score is the outcome that is measured to see whether it is affected by the manipulation, making it the dependent variable.`,`Incorrect — random assignment is a procedural method, not a measured outcome variable.`,`Incorrect — sample size describes the number of participants, not a measured outcome.`]},
+{t:"0.2 Variables", stem:`A researcher defines "aggression" as "the number of times a child hits another child during a 10-minute observation period." This is an example of:`, opts:[`A confounding variable`,`An operational definition`,`A correlation coefficient`,`Random sampling`], c:1, fb:[`Incorrect — a confounding variable is an uncontrolled outside factor, not a precise definition of how a concept is measured.`,`Correct — specifying exactly how an abstract concept like aggression will be measured or observed is the purpose of an operational definition.`,`Incorrect — a correlation coefficient is a numerical statistic describing a relationship between two variables, not a definition.`,`Incorrect — random sampling refers to how participants are selected from a population, not how a variable is defined.`]},
+{t:"0.2 Variables", stem:`A study finds that ice cream sales and drowning rates both increase in summer. A researcher who does not account for outdoor temperature might mistakenly conclude ice cream causes drowning. Temperature in this example is best described as:`, opts:[`The dependent variable`,`A confounding variable`,`An operational definition`,`The control group`], c:1, fb:[`Incorrect — temperature was not the outcome being measured in this comparison; it is an outside factor influencing both variables.`,`Correct — temperature varies alongside both ice cream sales and drowning rates and offers an alternative explanation for their relationship, making it a confounding variable.`,`Incorrect — an operational definition specifies how a variable is measured; temperature here is a variable itself, not a definition.`,`Incorrect — no control group is described in this scenario.`]},
+{t:"0.2 Variables", stem:`A researcher randomly selects 200 participants from a national database to ensure the sample represents the population, then assigns each participant to a treatment or control group by coin flip. The coin-flip step illustrates:`, opts:[`Random sampling`,`Stratified sampling`,`Random assignment`,`Convenience sampling`], c:2, fb:[`Incorrect — random sampling refers to how participants were selected from the population (the earlier database step), not how they were placed into groups.`,`Incorrect — stratified sampling involves dividing the population into subgroups before sampling; no subgroup division is described here.`,`Correct — using a chance procedure like a coin flip to place already-selected participants into treatment or control groups is random assignment.`,`Incorrect — convenience sampling involves selecting whoever is easiest to reach, which is not described in this scenario.`]},
+{t:"0.3 Statistics", stem:`A data set of exam scores contains one extremely low outlier score. Which measure of central tendency is most affected by this outlier?`, opts:[`Mode`,`Median`,`Mean`,`Range`], c:2, fb:[`Incorrect — the mode (most frequent score) is not pulled toward extreme values.`,`Incorrect — the median (middle score) is resistant to extreme outliers because it depends on rank order, not exact values.`,`Correct — the mean is calculated using every score's exact value, so one extremely low score pulls the average down substantially.`,`Incorrect — the range is a measure of spread, not central tendency, though it would also be affected; the question asks about central tendency specifically.`]},
+{t:"0.3 Statistics", stem:`Class A has a mean test score of 80 with a standard deviation of 3. Class B has a mean test score of 80 with a standard deviation of 15. What does this indicate?`, opts:[`Class A needs more tutoring`,`Scores in Class B are more spread out around the mean than in Class A`,`Class B's mean is higher`,`The two classes have identical distributions`], c:1, fb:[`Incorrect — a smaller standard deviation reflects more consistent scores, not a need for more tutoring.`,`Correct — a larger standard deviation (15 vs. 3) means individual scores in Class B are, on average, farther from the mean, indicating greater variability.`,`Incorrect — both classes have the same mean (80); only their variability differs.`,`Incorrect — the distributions differ in spread even though the means are identical.`]},
+{t:"0.3 Statistics", stem:`Which correlation coefficient represents the strongest relationship between two variables?`, opts:[`r = +.15`,`r = -.68`,`r = +.02`,`r = -.05`], c:1, fb:[`Incorrect — .15 is a weak positive correlation, smaller in magnitude than -.68.`,`Correct — the strength of a correlation is determined by its magnitude (distance from 0) regardless of sign; -.68 has the largest magnitude of the options given.`,`Incorrect — .02 is close to zero, indicating almost no linear relationship.`,`Incorrect — -.05 is close to zero, indicating a very weak relationship, smaller in magnitude than -.68.`]},
+{t:"0.3 Statistics", stem:`A study reports p = .03 for the difference between two group means. What does this p-value indicate?`, opts:[`There is a 3% chance the null hypothesis is true`,`There is a 97% chance the effect is real`,`Assuming no true difference exists in the population, there is a 3% probability of observing a difference this large by chance`,`The effect size is very large`], c:2, fb:[`Incorrect — a p-value is not the probability that the null hypothesis is true; it is a conditional probability calculated assuming the null hypothesis is true.`,`Incorrect — a p-value does not directly state the probability that an effect is real; that is a common misinterpretation.`,`Correct — the p-value represents the probability of obtaining a result at least this extreme if the null hypothesis (no true difference) were actually true in the population.`,`Incorrect — statistical significance (p-value) is separate from effect size; a very small effect can still be statistically significant with a large enough sample.`]},
+{t:"0.3 Statistics", stem:`Two studies both report p < .001 for a treatment effect. Study 1 reports Cohen's d = 0.15; Study 2 reports Cohen's d = 0.90. What can be concluded?`, opts:[`Study 1 found a more practically meaningful effect`,`Both studies found equally large effects because both are significant`,`Study 2's effect size indicates a substantially larger magnitude of effect than Study 1, even though both are statistically significant`,`Statistical significance guarantees a large effect size`], c:2, fb:[`Incorrect — a smaller Cohen's d (0.15) indicates a smaller, not larger, practical effect.`,`Incorrect — statistical significance (p-value) does not indicate effect magnitude; the two studies' effect sizes differ substantially despite both being significant.`,`Correct — Cohen's d measures effect size in standard deviation units; 0.90 is a large effect while 0.15 is a small effect, showing that statistical significance alone does not indicate the size of an effect.`,`Incorrect — statistical significance depends heavily on sample size and does not guarantee a large effect size; small effects can be significant with large samples.`]},
+{t:"0.3 Statistics", stem:`A study with p = .06 for a hypothesized effect is generally considered:`, opts:[`Statistically significant using the conventional α = .05 threshold`,`Not statistically significant using the conventional α = .05 threshold, though close`,`Proof that no relationship exists`,`Evidence of a large effect size`], c:1, fb:[`Incorrect — .06 exceeds the conventional .05 threshold, so it would not be classified as statistically significant under that standard.`,`Correct — by the conventional α = .05 cutoff, p = .06 falls just above the threshold and would be considered not statistically significant, though researchers may note it is close.`,`Incorrect — failing to reach significance does not prove no relationship exists; it simply means the evidence did not meet the chosen threshold.`,`Incorrect — a p-value reflects significance, not the magnitude of an effect, so it says nothing directly about effect size.`]},
+{t:"0.4 Ethics", stem:`Before participating in a study, participants are told the general purpose, procedures, risks, and their right to withdraw, and they agree in writing to take part. This process is called:`, opts:[`Debriefing`,`Informed consent`,`Confidentiality`,`IRB review`], c:1, fb:[`Incorrect — debriefing occurs after a study, explaining its true purpose, not before participation begins.`,`Correct — providing participants with information about the study and obtaining their voluntary written agreement before it begins is informed consent.`,`Incorrect — confidentiality refers to protecting participants' data and identity, not the pre-study agreement process.`,`Incorrect — IRB review is conducted by an independent committee before a study begins, not something participants themselves do.`]},
+{t:"0.4 Ethics", stem:`After a study involving mild deception about its true purpose, researchers explain the actual purpose of the study and the reason deception was necessary. This step is called:`, opts:[`Informed consent`,`Debriefing`,`Random assignment`,`Protection from harm`], c:1, fb:[`Incorrect — informed consent happens before a study begins, not after deception has been used.`,`Correct — explaining the true purpose of a study and the reasons for any deception after participation is complete is debriefing.`,`Incorrect — random assignment is a procedural method for placing participants into groups, unrelated to explaining deception.`,`Incorrect — protection from harm refers broadly to minimizing risk to participants throughout a study, not specifically the post-study explanation of deception.`]},
+{t:"0.4 Ethics", stem:`Before a study can begin, a committee reviews the proposed procedures to ensure risks to participants are minimized and ethically justified. This committee is known as:`, opts:[`A peer review panel`,`An Institutional Review Board (IRB)`,`A control group`,`A replication team`], c:1, fb:[`Incorrect — a peer review panel evaluates completed research for publication, not proposed procedures before a study begins.`,`Correct — an Institutional Review Board (IRB) is the committee that reviews and approves proposed research procedures before data collection to protect participants.`,`Incorrect — a control group is a group of participants in a study, not a reviewing committee.`,`Incorrect — a replication team conducts follow-up studies to confirm findings; it does not approve studies before they begin.`]},
+{t:"0.4 Ethics", stem:`A participant decides to stop participating partway through a study, even after signing a consent form. Ethical guidelines require that researchers:`, opts:[`Require the participant to finish since they already consented`,`Allow the participant to withdraw at any time without penalty`,`Report the participant to the IRB`,`Withhold payment as a penalty`], c:1, fb:[`Incorrect — signing a consent form does not remove a participant's right to withdraw; consent can be revoked at any time.`,`Correct — ethical guidelines require that participants retain the right to withdraw from a study at any point without penalty, even after initially consenting.`,`Incorrect — withdrawing from a study is a participant's right and is not something that should be reported as a violation.`,`Incorrect — withholding payment as punishment for withdrawing would itself be an ethical violation of the right to withdraw without penalty.`]},
+{t:"0.5 Evaluating Research", stem:`A bathroom scale consistently shows the same weight every time a person steps on it, but that weight is actually 5 pounds higher than the person's true weight. This scale is:`, opts:[`Reliable but not valid`,`Valid but not reliable`,`Both reliable and valid`,`Neither reliable nor valid`], c:0, fb:[`Correct — the scale produces consistent (reliable) results each time, but it does not measure the true weight accurately, so it is not valid.`,`Incorrect — the scale is not valid, since it consistently gives an inaccurate reading rather than an accurate one.`,`Incorrect — while the scale is reliable (consistent), it is not valid, since its readings do not reflect true weight.`,`Incorrect — the scale does show reliability, since its readings are consistent each time, even though it is not valid.`]},
+{t:"0.5 Evaluating Research", stem:`A researcher wants to study the attitudes of "all US adults" but only surveys people leaving a yoga studio. This is an example of:`, opts:[`Random sampling`,`A representative sample`,`Sampling bias`,`Stratified sampling`], c:2, fb:[`Incorrect — random sampling would give every member of the population an equal chance of selection, which is not the case here.`,`Incorrect — a sample drawn only from yoga studio visitors is unlikely to represent the broader population of all US adults.`,`Correct — surveying only people from a narrow, non-representative location introduces sampling bias, since the sample systematically differs from the target population.`,`Incorrect — stratified sampling involves deliberately sampling from defined subgroups of the population, which is not what occurred here.`]},
+{t:"0.5 Evaluating Research", stem:`Why is replication important in psychological science?`, opts:[`It allows a single study to be published in more journals`,`It helps confirm whether an original finding is reliable and not due to chance or error`,`It removes the need for informed consent in follow-up studies`,`It automatically increases a study's effect size`], c:1, fb:[`Incorrect — replication involves independently repeating a study, not republishing the same study in multiple journals.`,`Correct — replication tests whether an original finding can be reproduced, helping confirm the finding is genuine rather than a result of chance or error.`,`Incorrect — informed consent is required in every new study involving human participants, including replications.`,`Incorrect — replication does not automatically increase effect size; a replication could find a smaller, larger, or similar effect, or fail to find the effect at all.`]},
+{t:"0.5 Evaluating Research", stem:`Before a study is published in a scientific journal, it is typically evaluated by other experts in the field for methodological soundness and validity. This process is called:`, opts:[`Debriefing`,`Peer review`,`Informed consent`,`Operationalization`], c:1, fb:[`Incorrect — debriefing is an ethical step involving participants after a study, not evaluation by other researchers before publication.`,`Correct — having independent experts evaluate a study's methodology and conclusions before publication is peer review.`,`Incorrect — informed consent is an ethical procedure with participants, not a step in the publication process.`,`Incorrect — operationalization refers to defining how a variable will be measured, not the journal publication review process.`]}
+];
+
+function buildMCQ() {
+  var list = document.getElementById('mcq-list');
+  var html = '';
+  for (var i = 0; i < MCQ.length; i++) {
+    var q = MCQ[i];
+    html += '<div class="q-block" id="qb-' + i + '" data-sel="">';
+    html += '<div class="q-head"><span class="q-num">Question ' + (i+1) + '</span><span class="q-tag">' + q.t + '</span></div>';
+    html += '<div class="q-stem">' + q.stem + '</div>';
+    html += '<div class="opt-list">';
+    var letters = ['A','B','C','D'];
+    for (var j = 0; j < 4; j++) {
+      html += '<button type="button" class="opt-btn" id="opt-' + i + '-' + j + '" onclick="pickOpt(' + i + ',' + j + ')"><span class="opt-letter">' + letters[j] + '.</span><span>' + q.opts[j] + '</span></button>';
+    }
+    html += '</div>';
+    html += '<div class="q-feedback" id="qf-' + i + '"></div>';
+    html += '</div>';
+  }
+  list.innerHTML = html;
+}
+
+function pickOpt(qi, oi) {
+  if (submitted) return;
+  var bl = document.getElementById('qb-' + qi);
+  for (var i = 0; i < 4; i++) {
+    var b = document.getElementById('opt-' + qi + '-' + i);
+    if (b) b.classList.remove('sel');
+  }
+  bl.dataset.sel = oi;
+  document.getElementById('opt-' + qi + '-' + oi).classList.add('sel');
+  bl.classList.add('answered');
+  updateProgress();
+  autoSave();
+}
+
+function updateProgress() {
+  var answered = 0;
+  for (var i = 0; i < MCQ.length; i++) {
+    var bl = document.getElementById('qb-' + i);
+    if (bl && bl.dataset.sel !== '') answered++;
+  }
+  document.getElementById('progress-text').textContent = 'Answered: ' + answered + ' of ' + MCQ.length;
+  document.getElementById('progress-fill').style.width = (answered / MCQ.length * 100) + '%';
+}
+
+/* ============ TABS ============ */
+function gotoTab(name) {
+  var tabs = ['instructions','mcq','aaq','ebq','results'];
+  tabs.forEach(function(t) {
+    document.getElementById('tab-' + t).classList.toggle('active', t === name);
+    document.getElementById('tab-btn-' + t).classList.toggle('active', t === name);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (name === 'results') {
+    var tl = document.getElementById('teacher-locked');
+    var tb = document.getElementById('teacher-gen-btn');
+    if (submitted) { if (tl) tl.style.display = 'none'; if (tb) tb.style.display = 'inline-block'; }
+  }
+}
+
+/* ============ CHAR COUNT ============ */
+function updateCC(el) {
+  var cc = document.getElementById('cc-' + el.id);
+  if (cc) cc.textContent = el.value.length + ' characters';
+}
+
+/* ============ REVEAL MODEL ANSWER ============ */
+function revealMA(id) {
+  var ma = document.getElementById('ma-' + id);
+  if (ma) ma.classList.add('show');
+}
+
+/* ============ TIMER ============ */
+function toggleTimer() { if (timerRunning) stopTimer(); else startTimer(); }
+function startTimer() {
+  timerRunning = true;
+  document.getElementById('timer-toggle-btn').innerHTML = '&#9208; Pause';
+  timerInterval = setInterval(function() {
+    timerSecs++; updateTimerDisplay();
+    if (timerSecs % 30 === 0) autoSave();
+  }, 1000);
+}
+function stopTimer() {
+  timerRunning = false;
+  document.getElementById('timer-toggle-btn').innerHTML = '&#9654; Start';
+  clearInterval(timerInterval);
+}
+function updateTimerDisplay() {
+  var h = Math.floor(timerSecs/3600), m = Math.floor((timerSecs%3600)/60), s = timerSecs%60;
+  var disp = document.getElementById('timer-display');
+  disp.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+  disp.className = 'timer-display' + (timerSecs >= 3900 ? ' danger' : timerSecs >= 3300 ? ' warn' : '');
+}
+function pad(n) { return n < 10 ? '0' + n : n; }
+
+/* ============ AUTO-SAVE / RESTORE ============ */
+function autoSave() {
+  var sn = document.getElementById('student-name');
+  var data = { submitted:submitted, timerSecs:timerSecs, sname: sn ? sn.value : '', mcq:{}, fr:{} };
+  for (var i = 0; i < MCQ.length; i++) {
+    var b = document.getElementById('qb-' + i);
+    if (b && b.dataset.sel !== undefined && b.dataset.sel !== '') data.mcq[i] = parseInt(b.dataset.sel);
+  }
+  var frIds = ['aaq-a','aaq-b','aaq-c','aaq-d','aaq-e','aaq-f','aaq-g',
+               'ebq-a','ebq-bi','ebq-bii','ebq-ci','ebq-cii'];
+  frIds.forEach(function(id) {
+    var el = document.getElementById(id); if (el) data.fr[id] = el.value;
+  });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  var st = document.getElementById('save-status-text');
+  if (st) { st.textContent = 'Saved ' + new Date().toLocaleTimeString(); }
+}
+
+function restoreExam() {
+  var raw;
+  try { raw = localStorage.getItem(STORAGE_KEY); } catch(e) { raw = null; }
+  if (!raw) return;
+  var data;
+  try { data = JSON.parse(raw); } catch(e) { return; }
+  var sn = document.getElementById('student-name');
+  if (sn && data.sname) sn.value = data.sname;
+  timerSecs = data.timerSecs || 0;
+  updateTimerDisplay();
+  if (data.mcq) {
+    Object.keys(data.mcq).forEach(function(qi) {
+      var oi = data.mcq[qi];
+      var bl = document.getElementById('qb-' + qi);
+      var b = document.getElementById('opt-' + qi + '-' + oi);
+      if (bl && b) { bl.dataset.sel = oi; b.classList.add('sel'); }
+    });
+    updateProgress();
+  }
+  if (data.fr) {
+    Object.keys(data.fr).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) { el.value = data.fr[id]; updateCC(el); }
+    });
+  }
+  if (data.submitted) {
+    submitted = true;
+    finalizeSubmissionUI();
+  }
+}
+
+/* ============ SUBMIT ============ */
+function submitExam() {
+  if (submitted) { gotoTab('results'); return; }
+  var ok = confirm('Submit the exam? Your multiple-choice answers will be locked.');
+  if (!ok) return;
+  submitted = true;
+  stopTimer();
+  finalizeSubmissionUI();
+  autoSave();
+  gotoTab('results');
+}
+
+function finalizeSubmissionUI() {
+  var score = 0;
+  var breakdownRows = '';
+  for (var i = 0; i < MCQ.length; i++) {
+    var q = MCQ[i];
+    var bl = document.getElementById('qb-' + i);
+    var sel = bl && bl.dataset.sel !== '' ? parseInt(bl.dataset.sel) : -1;
+    var isCorrect = sel === q.c;
+    if (isCorrect) score++;
+    for (var j = 0; j < 4; j++) {
+      var b = document.getElementById('opt-' + i + '-' + j);
+      if (!b) continue;
+      b.disabled = true;
+      if (j === q.c) b.classList.add('show-correct');
+      if (j === sel && sel !== q.c) b.classList.add('wrong');
+      if (j === sel && sel === q.c) b.classList.add('correct');
+    }
+    var fbDiv = document.getElementById('qf-' + i);
+    if (fbDiv) {
+      var fbHtml = '';
+      var letters = ['A','B','C','D'];
+      for (var k = 0; k < 4; k++) {
+        var cls = (k === q.c) ? 'fb-correct' : (k === sel ? 'fb-wrong' : '');
+        fbHtml += '<div class="fb-item ' + cls + '"><strong>' + letters[k] + '.</strong> ' + q.fb[k] + '</div>';
+      }
+      fbDiv.innerHTML = fbHtml;
+      fbDiv.classList.add('show');
+    }
+    var letters2 = ['A','B','C','D'];
+    breakdownRows += '<tr><td>' + (i+1) + '</td><td>' + q.t + '</td><td>' + (sel >= 0 ? letters2[sel] : '—') + '</td><td>' + letters2[q.c] + '</td><td>' + (isCorrect ? '<span class="res-ok">Correct</span>' : '<span class="res-bad">Incorrect</span>') + '</td></tr>';
+  }
+
+  var pct = Math.round((score / MCQ.length) * 100);
+  document.getElementById('score-mcq').textContent = score + '/' + MCQ.length;
+  document.getElementById('score-pct').textContent = pct + '%';
+  document.getElementById('mcq-breakdown-body').innerHTML = breakdownRows;
+  document.getElementById('score-panel').classList.add('show');
+  document.getElementById('results-prompt').style.display = 'none';
+  setTimeout(function() {
+    document.getElementById('score-bar-fill').style.width = pct + '%';
+  }, 100);
+  var band = document.getElementById('grade-band');
+  var bandText = pct >= 90 ? 'Excellent — 5' : pct >= 80 ? 'Strong — 4' : pct >= 70 ? 'Proficient — 3' : pct >= 60 ? 'Developing — 2' : 'Needs Review — 1';
+  band.textContent = 'Section A performance band: ' + bandText;
+
+  var revealBtns = document.querySelectorAll('.reveal-btn');
+  revealBtns.forEach(function(b) { b.classList.add('show'); });
+
+  var tl = document.getElementById('teacher-locked');
+  var tb = document.getElementById('teacher-gen-btn');
+  if (tl) tl.style.display = 'none';
+  if (tb) tb.style.display = 'inline-block';
+}
+
+/* ============ CLEAR ============ */
+function clearExam() {
+  var ok = confirm('Clear all answers and restart? This cannot be undone.');
+  if (!ok) return;
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  location.reload();
+}
+
+/* ============ DOWNLOAD ANSWERS (txt) ============ */
+function downloadAnswers() {
+  var sn = document.getElementById('student-name');
+  var name = sn ? sn.value || 'Unnamed Student' : 'Unnamed Student';
+  var lines = [];
+  lines.push('SCIENCE PRACTICES — UNIT 0 EXAMINATION');
+  lines.push('Student: ' + name);
+  lines.push('Date: ' + new Date().toLocaleString());
+  lines.push('Elapsed time: ' + document.getElementById('timer-display').textContent);
+  lines.push('Submitted: ' + (submitted ? 'Yes' : 'No'));
+  lines.push('');
+  lines.push('=== SECTION A: MULTIPLE CHOICE ===');
+  var letters = ['A','B','C','D'];
+  for (var i = 0; i < MCQ.length; i++) {
+    var bl = document.getElementById('qb-' + i);
+    var sel = bl && bl.dataset.sel !== '' ? parseInt(bl.dataset.sel) : -1;
+    lines.push('Q' + (i+1) + ' [' + MCQ[i].t + ']: ' + (sel >= 0 ? letters[sel] : 'Not answered'));
+  }
+  lines.push('');
+  lines.push('=== SECTION B: AAQ (7 marks) ===');
+  var aaqLabels = {'aaq-a':'Part A (1 mark)','aaq-b':'Part B (1 mark)','aaq-c':'Part C (2 marks)','aaq-d':'Part D (1 mark)','aaq-e':'Part E (1 mark)','aaq-f':'Part F (1 mark)','aaq-g':'Part G (1 mark)'};
+  Object.keys(aaqLabels).forEach(function(id) {
+    var el = document.getElementById(id);
+    lines.push(aaqLabels[id] + ':');
+    lines.push(el ? (el.value || '(no answer)') : '(no answer)');
+    lines.push('');
+  });
+  lines.push('=== SECTION C: EBQ (6 marks) ===');
+  var ebqLabels = {'ebq-a':'Part A (1 mark)','ebq-bi':'Part B(i) (1 mark)','ebq-bii':'Part B(ii) (2 marks)','ebq-ci':'Part C(i) (1 mark)','ebq-cii':'Part C(ii) (1 mark)'};
+  Object.keys(ebqLabels).forEach(function(id) {
+    var el = document.getElementById(id);
+    lines.push(ebqLabels[id] + ':');
+    lines.push(el ? (el.value || '(no answer)') : '(no answer)');
+    lines.push('');
+  });
+  lines.push('---');
+  lines.push('AP Psychology · Unit 0 Examination · For educational use only · © Dr Ahmed Alduais');
+
+  var blob = new Blob([lines.join('\n')], {type:'text/plain'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'Unit0_Answers_' + name.replace(/[^a-z0-9]/gi,'_') + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ============ escH ============ */
+function escH(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ============ GENERATE TEACHER FILE ============ */
+function generateTeacherFile() {
+  var sn = document.getElementById('student-name');
+  var name = sn ? sn.value || 'Unnamed Student' : 'Unnamed Student';
+  var dateStr = new Date().toLocaleDateString();
+
+  var mcqScore = 0;
+  var mcqRows = '';
+  var letters = ['A','B','C','D'];
+  for (var i = 0; i < MCQ.length; i++) {
+    var q = MCQ[i];
+    var bl = document.getElementById('qb-' + i);
+    var sel = bl && bl.dataset.sel !== '' ? parseInt(bl.dataset.sel) : -1;
+    var isCorrect = sel === q.c;
+    if (isCorrect) mcqScore++;
+    mcqRows += '<tr><td>' + (i+1) + '</td><td>' + escH(q.t) + '</td><td>' + escH(q.stem) + '</td><td>' + (sel >= 0 ? letters[sel] : '—') + '</td><td>' + letters[q.c] + '</td><td class="' + (isCorrect ? 'ok' : 'bad') + '">' + (isCorrect ? '✓' : '✗') + '</td></tr>';
+  }
+
+  var aaqParts = [
+    {id:'aaq-a', label:'AAQ Part A', max:1},
+    {id:'aaq-b', label:'AAQ Part B', max:1},
+    {id:'aaq-c', label:'AAQ Part C', max:2},
+    {id:'aaq-d', label:'AAQ Part D', max:1},
+    {id:'aaq-e', label:'AAQ Part E', max:1},
+    {id:'aaq-f', label:'AAQ Part F', max:1},
+    {id:'aaq-g', label:'AAQ Part G', max:1}
+  ];
+  var ebqParts = [
+    {id:'ebq-a', label:'EBQ Part A', max:1},
+    {id:'ebq-bi', label:'EBQ Part B(i)', max:1},
+    {id:'ebq-bii', label:'EBQ Part B(ii)', max:2},
+    {id:'ebq-ci', label:'EBQ Part C(i)', max:1},
+    {id:'ebq-cii', label:'EBQ Part C(ii)', max:1}
+  ];
+
+  function buildPartBlock(part) {
+    var el = document.getElementById(part.id);
+    var studentAns = el ? el.value : '';
+    var maEl = document.getElementById('ma-' + part.id);
+    var modelAns = maEl ? maEl.innerText : '';
+    return '<div class="part-block">' +
+      '<div class="part-head"><strong>' + escH(part.label) + '</strong> <span class="maxmark">(max ' + part.max + ' mark' + (part.max > 1 ? 's' : '') + ')</span></div>' +
+      '<div class="student-ans"><em>Student response:</em><p>' + (escH(studentAns) || '<span class="empty">(no response provided)</span>') + '</p></div>' +
+      '<details class="model-details"><summary>Show model answer</summary><p>' + escH(modelAns) + '</p></details>' +
+      '<div class="mark-row"><label>Mark awarded: <input type="number" class="mark-input" min="0" max="' + part.max + '" data-max="' + part.max + '" data-id="' + part.id + '" onchange="clampMark(this);calcTotals();" oninput="clampMark(this);calcTotals();"> / ' + part.max + '</label></div>' +
+      '</div>';
+  }
+
+  var aaqHtml = aaqParts.map(buildPartBlock).join('');
+  var ebqHtml = ebqParts.map(buildPartBlock).join('');
+
+  var doc = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">' +
+    '<title>Teacher Marking File — ' + escH(name) + '<\/title>' +
+    '<style>' +
+    'body{font-family:"Source Sans 3",Arial,sans-serif;background:#f5f3ee;color:#1c1a18;margin:0;padding:1.5rem;}' +
+    'h1,h2,h3{font-family:Georgia,serif;color:#1a2744;}' +
+    '.hdr{background:#1a2744;color:#fff;padding:1.2rem 1.5rem;border-radius:10px;margin-bottom:1rem;}' +
+    '.hdr p{margin:.2rem 0;font-size:.9rem;color:#dbe0ee;}' +
+    '.score-panel{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;}' +
+    '.score-box{background:#fff;border:1px solid #ddd8cc;border-radius:8px;padding:.8rem 1.2rem;text-align:center;flex:1;min-width:120px;}' +
+    '.score-box .n{font-size:1.5rem;font-weight:700;color:#1a2744;}' +
+    '.score-box .l{font-size:.75rem;color:#5a5650;}' +
+    'table{width:100%;border-collapse:collapse;background:#fff;margin-bottom:1.5rem;font-size:.85rem;}' +
+    'th,td{border:1px solid #ddd8cc;padding:.4rem .6rem;text-align:left;}' +
+    'th{background:#eeeae0;}' +
+    '.ok{color:#2e6b45;font-weight:700;}.bad{color:#8b2c2c;font-weight:700;}' +
+    '.part-block{background:#fff;border:1px solid #ddd8cc;border-left:4px solid #c8922a;border-radius:8px;padding:1rem 1.2rem;margin-bottom:.9rem;}' +
+    '.part-head{margin-bottom:.4rem;}' +
+    '.maxmark{color:#5a5650;font-size:.8rem;}' +
+    '.student-ans p{background:#f5f3ee;padding:.6rem .8rem;border-radius:6px;font-size:.88rem;white-space:pre-wrap;}' +
+    '.empty{color:#8b2c2c;font-style:italic;}' +
+    '.model-details{margin:.5rem 0;font-size:.85rem;}' +
+    '.model-details p{background:#f0f8f3;padding:.6rem .8rem;border-radius:6px;white-space:pre-wrap;}' +
+    '.mark-row input{width:60px;padding:.3rem;border:1px solid #ddd8cc;border-radius:5px;}' +
+    '.comments-box{width:100%;min-height:120px;padding:.7rem;border:1px solid #ddd8cc;border-radius:8px;font-family:inherit;}' +
+    '.print-btn{background:#1a2744;color:#fff;border:none;padding:.6rem 1.4rem;border-radius:6px;cursor:pointer;font-weight:700;margin-top:1rem;}' +
+    '@media print{.print-btn{display:none;}}' +
+    '<\/style><\/head><body>' +
+    '<div class="hdr"><h1>Teacher’s Marking File</h1>' +
+    '<p>Student: ' + escH(name) + '<\/p>' +
+    '<p>Exam: Science Practices — Unit 0<\/p>' +
+    '<p>Date generated: ' + dateStr + '<\/p>' +
+    '<p>Section A (MCQ) auto-score: ' + mcqScore + ' / ' + MCQ.length + '<\/p>' +
+    '<\/div>' +
+    '<div class="score-panel">' +
+    '<div class="score-box"><div class="n">' + mcqScore + '/25<\/div><div class="l">MCQ<\/div><\/div>' +
+    '<div class="score-box"><div class="n" id="aaq-total">0/7<\/div><div class="l">AAQ<\/div><\/div>' +
+    '<div class="score-box"><div class="n" id="ebq-total">0/6<\/div><div class="l">EBQ<\/div><\/div>' +
+    '<div class="score-box"><div class="n" id="grand-total">' + mcqScore + '/38<\/div><div class="l">Total<\/div><\/div>' +
+    '<div class="score-box"><div class="n" id="grand-pct">' + Math.round(mcqScore/38*100) + '%<\/div><div class="l">Percentage<\/div><\/div>' +
+    '<\/div>' +
+    '<h2>Section A — Multiple Choice (auto-scored)<\/h2>' +
+    '<table><thead><tr><th>#<\/th><th>Topic<\/th><th>Question<\/th><th>Student<\/th><th>Correct<\/th><th><\/th><\/tr><\/thead><tbody>' + mcqRows + '<\/tbody><\/table>' +
+    '<h2>Section B — AAQ<\/h2>' + aaqHtml +
+    '<h2>Section C — EBQ<\/h2>' + ebqHtml +
+    '<h2>Overall Comments<\/h2>' +
+    '<textarea class="comments-box" placeholder="Enter overall feedback for the student..."><\/textarea>' +
+    '<br><button class="print-btn" onclick="window.print()">Print / Save as PDF<\/button>' +
+    '<script>' +
+    'var MCQ_SCORE=' + mcqScore + ';' +
+    'function clampMark(el){var max=parseFloat(el.dataset.max);var v=parseFloat(el.value);if(isNaN(v)||v<0)v=0;if(v>max)v=max;el.value=v;}' +
+    'function calcTotals(){' +
+    'var aaqInputs=document.querySelectorAll(\'[data-id^="aaq-"]\');' +
+    'var ebqInputs=document.querySelectorAll(\'[data-id^="ebq-"]\');' +
+    'var aaqSum=0,aaqEntered=0;' +
+    'aaqInputs.forEach(function(i){if(i.value!==""){aaqSum+=parseFloat(i.value)||0;aaqEntered++;}});' +
+    'var ebqSum=0,ebqEntered=0;' +
+    'ebqInputs.forEach(function(i){if(i.value!==""){ebqSum+=parseFloat(i.value)||0;ebqEntered++;}});' +
+    'document.getElementById("aaq-total").textContent=aaqSum+"/7";' +
+    'document.getElementById("ebq-total").textContent=ebqSum+"/6";' +
+    'var grand=MCQ_SCORE+aaqSum+ebqSum;' +
+    'document.getElementById("grand-total").textContent=grand+"/38";' +
+    'document.getElementById("grand-pct").textContent=Math.round(grand/38*100)+"%";' +
+    '}' +
+    '<\/script>' +
+    '<\/body><\/html>';
+
+  var blob = new Blob([doc], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'Unit0_TeacherCopy_' + name.replace(/[^a-z0-9]/gi,'_') + '_' + dateStr.replace(/\//g,'-') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ============ INIT ============ */
+document.addEventListener('DOMContentLoaded', function() {
+  buildMCQ();
+  restoreExam();
+  updateProgress();
+  updateTimerDisplay();
+});
+</script>
+</body>
+</html>
